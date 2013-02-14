@@ -1,0 +1,86 @@
+--------------------------------------------------------------------------------------
+Timing Analyzer Summary
+--------------------------------------------------------------------------------------
+
+Type           : Worst-case tsu
+Slack          : N/A
+Required Time  : None
+Actual Time    : 6.615 ns
+From           : PIN_G26
+To             : MOUSE:B5_de2_hcc_371_DE2PS2MouseDriver_ps2|PACKET_CHAR1[0]
+From Clock     : --
+To Clock       : PIN_D13
+Failed Paths   : 0
+
+Type           : Worst-case tco
+Slack          : N/A
+Required Time  : None
+Actual Time    : 41.939 ns
+From           : B237_ISEProject_hcc_59_DTYPE0IR_score_bit_2_
+To             : PIN_V21
+From Clock     : PIN_N2
+To Clock       : --
+Failed Paths   : 0
+
+Type           : Worst-case tpd
+Slack          : N/A
+Required Time  : None
+Actual Time    : 5.322 ns
+From           : PIN_N2
+To             : PIN_B8
+From Clock     : --
+To Clock       : --
+Failed Paths   : 0
+
+Type           : Worst-case th
+Slack          : N/A
+Required Time  : None
+Actual Time    : -3.753 ns
+From           : PIN_AC20
+To             : B92_ISEProject_hcc_99_preLoadColourImg_DTYPE0IR_green_bit_5_
+From Clock     : --
+To Clock       : PIN_N2
+Failed Paths   : 0
+
+Type           : Clock Setup: 'PIN_N2'
+Slack          : N/A
+Required Time  : None
+Actual Time    : 27.30 MHz ( period = 36.626 ns )
+From           : B266_ISEProject_hcc_60_DTYPE0IR_gameFlowCounter_bit_3_
+To             : B14_ISEProject_hcc_49_DTYPE0IR_thirdBallOn_bit_0_
+From Clock     : PIN_N2
+To Clock       : PIN_N2
+Failed Paths   : 0
+
+Type           : Clock Setup: 'PIN_D13'
+Slack          : N/A
+Required Time  : None
+Actual Time    : 137.36 MHz ( period = 7.280 ns )
+From           : MOUSE:B5_de2_hcc_371_DE2PS2MouseDriver_ps2|SHIFTOUT[3]~latch
+To             : MOUSE:B5_de2_hcc_371_DE2PS2MouseDriver_ps2|SHIFTOUT[5]~_emulated
+From Clock     : PIN_D13
+To Clock       : PIN_D13
+Failed Paths   : 0
+
+Type           : Clock Hold: 'PIN_D13'
+Slack          : Not operational: Clock Skew > Data Delay
+Required Time  : None
+Actual Time    : N/A
+From           : MOUSE:B5_de2_hcc_371_DE2PS2MouseDriver_ps2|CHAROUT[7]
+To             : MOUSE:B5_de2_hcc_371_DE2PS2MouseDriver_ps2|SHIFTOUT[3]~latch
+From Clock     : PIN_D13
+To Clock       : PIN_D13
+Failed Paths   : 2
+
+Type           : Total number of failed paths
+Slack          : 
+Required Time  : 
+Actual Time    : 
+From           : 
+To             : 
+From Clock     : 
+To Clock       : 
+Failed Paths   : 2
+
+--------------------------------------------------------------------------------------
+

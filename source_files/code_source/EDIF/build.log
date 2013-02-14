@@ -1,0 +1,44 @@
+ ISEProject.hcc
+handelc -c -g -D__EDIF__ -DNDEBUG -IC:\EEE\DK5\PDK\Hardware\Include -IH:\de2lib -oH:\ISEProject\EDIF\ISEProject.hco -xcH:\ISEProject\ISEProject.hcc
+      0 errors, 0 warnings
+ ISEProject
+handelc -edif -g -RxH:\ISEProject\EDIF\ISEProject.report.xml -e -S-parfunc -S-parchan -S-parmem -O+high -O+cr -O-rcr -O+cp -O-rcp -O+balance -N+piperam -N+alumap -alulimitCYCLONEII_MULT=35 -lutpack -retime -fAlteraCycloneII -pep2c35f672c6 -b -rH:\ISEProject\EDIF\ISEProject.hb -xoH:\ISEProject\EDIF\ISEProject.hco -LC:\EEE\DK5\PDK\Hardware\Lib -xl..\de2lib\newlib.hcl -xlC:\EEE\DK5\PDK\Hardware\Lib\stdlib.hcl -oH:\ISEProject\EDIF\ISEProject.edf
+  NAND gates after compilation  : 394969 (2019 FFs, 0 memory bits)
+  (W0042) Breaking combinational cycle (if with no else) - may alter timing
+  (W0042) Breaking combinational cycle (if with no else) - may alter timing
+  (W0042) Breaking combinational cycle (if with no else) - may alter timing
+  (W0042) Breaking combinational cycle (if with no else) - may alter timing
+  (W0042) Breaking combinational cycle (if with no else) - may alter timing
+  (W0042) Breaking combinational cycle (if with no else) - may alter timing
+  (W0042) Breaking combinational cycle (if with no else) - may alter timing
+  (W0042) Breaking combinational cycle (if with no else) - may alter timing
+  (W0042) Breaking combinational cycle (if with no else) - may alter timing
+  (W0042) Breaking combinational cycle (if with no else) - may alter timing
+  (W0042) Breaking combinational cycle (if with no else) - may alter timing
+  (W0042) Breaking combinational cycle (if with no else) - may alter timing
+  (W0042) Breaking combinational cycle (if with no else) - may alter timing
+  (W0042) Breaking combinational cycle (if with no else) - may alter timing
+  (W0042) Breaking combinational cycle (if with no else) - may alter timing
+  (W0042) Breaking combinational cycle (if with no else) - may alter timing
+  (W0042) Breaking combinational cycle (if with no else) - may alter timing
+  (W0042) Breaking combinational cycle (if with no else) - may alter timing
+  (W0042) Breaking combinational cycle (if with no else) - may alter timing
+  (W0040) Breaking combinational cycle (while statement) - may alter timing
+  (W0040) Breaking combinational cycle (while statement) - may alter timing
+  NAND gates after optimisation : 116238 (1762 FFs, 0 memory bits)
+  NAND gates after expansion    : 231058 (1892 FFs, 53248 memory bits)
+  NAND gates after optimisation : 207593 (1738 FFs, 53248 memory bits)
+  NAND gates after optimisation : 184188 (1738 FFs, 53248 memory bits)
+  LUTs after mapping            : 6082 (1701 FFs, 53248 memory bits)
+  NAND gates after optimisation : 175732 (1691 FFs, 53248 memory bits)
+  LUTs after retiming           : 5909 (1691 FFs, 53248 memory bits)
+  (W0031) Pin 'AE20' feeds multiple sequential blocks, which may lead to unexpected behaviour.  Consider using a clocked interface
+  (W0031) Pin 'AB20' feeds multiple sequential blocks, which may lead to unexpected behaviour.  Consider using a clocked interface
+  (W0031) Pin 'AC20' feeds multiple sequential blocks, which may lead to unexpected behaviour.  Consider using a clocked interface
+  (W0031) Pin 'AF21' feeds multiple sequential blocks, which may lead to unexpected behaviour.  Consider using a clocked interface
+  (W0031) Pin 'AE21' feeds multiple sequential blocks, which may lead to unexpected behaviour.  Consider using a clocked interface
+  LUTs after post-optimisation  : 5909 (1691 FFs, 53248 memory bits)
+  (W0029) File C:\Users\Christos\Documents\ISEproject\de2lib\de2.hcc not found. No delay/area estimation for this file.
+  Estimation information generated
+      0 errors, 27 warnings
+  Created report file

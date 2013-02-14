@@ -1,0 +1,14 @@
+Analysis & Synthesis Status : Successful - Fri May 27 12:24:22 2011
+Quartus II Version : 8.0 Build 215 05/29/2008 SJ Full Version
+Revision Name : ISEProject
+Top-level Entity Name : ISEProject
+Family : Cyclone II
+Total logic elements : 6,115
+    Total combinational functions : 6,115
+    Dedicated logic registers : 1,737
+Total registers : 1737
+Total pins : 157
+Total virtual pins : 0
+Total memory bits : 42,095
+Embedded Multiplier 9-bit elements : 20
+Total PLLs : 0

@@ -1,0 +1,15 @@
+<!DOCTYPE pref>
+<settings>
+ <workspace activeProject="0" activeConfiguration="EDIF" />
+ <breakpoints/>
+ <workspaceview>
+  <item expanded="true" />
+  <item expanded="false" />
+ </workspaceview>
+ <windowlist>
+  <window filepath="ISEProject.hcc" type="SourceEdit" >
+   <size width="1294" height="781" maximised="1" />
+   <position x="-7" y="-30" />
+  </window>
+ </windowlist>
+</settings>

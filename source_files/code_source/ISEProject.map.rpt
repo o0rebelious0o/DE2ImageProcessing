@@ -1,0 +1,1842 @@
+Analysis & Synthesis report for ISEProject
+Fri May 27 12:24:22 2011
+Quartus II Version 8.0 Build 215 05/29/2008 SJ Full Version
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Analysis & Synthesis Summary
+  3. Analysis & Synthesis Settings
+  4. Analysis & Synthesis Source Files Read
+  5. Analysis & Synthesis Resource Usage Summary
+  6. Analysis & Synthesis Resource Utilization by Entity
+  7. Analysis & Synthesis RAM Summary
+  8. Analysis & Synthesis DSP Block Usage Summary
+  9. State Machine - |ISEProject|MOUSE:B5_de2_hcc_371_DE2PS2MouseDriver_ps2|mouse_state
+ 10. Registers Removed During Synthesis
+ 11. General Register Statistics
+ 12. Inverted Register Statistics
+ 13. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 14. Source assignments for ALTSYNCRAM:SDPRAM_B300_ISEProject_hcc_78_LPMMPRAM_FIFORam|altsyncram_2dq1:auto_generated
+ 15. Source assignments for ALTSYNCRAM:SDPRAM_B300_ISEProject_hcc_78_LPMMPRAM_FIFORam|altsyncram_2dq1:auto_generated|altsyncram_dhj1:altsyncram1
+ 16. Source assignments for ALTSYNCRAM:SDPRAM_B402_ISEProject_hcc_79_LPMMPRAM_FIFORam|altsyncram_2dq1:auto_generated
+ 17. Source assignments for ALTSYNCRAM:SDPRAM_B402_ISEProject_hcc_79_LPMMPRAM_FIFORam|altsyncram_2dq1:auto_generated|altsyncram_dhj1:altsyncram1
+ 18. Source assignments for ALTSYNCRAM:SDPRAM_B517_ISEProject_hcc_80_LPMMPRAM_FIFORam|altsyncram_edq1:auto_generated
+ 19. Source assignments for ALTSYNCRAM:SDPRAM_B517_ISEProject_hcc_80_LPMMPRAM_FIFORam|altsyncram_edq1:auto_generated|altsyncram_phj1:altsyncram1
+ 20. Source assignments for ALTSYNCRAM:SDPRAM_B631_ISEProject_hcc_81_LPMMPRAM_FIFORam|altsyncram_edq1:auto_generated
+ 21. Source assignments for ALTSYNCRAM:SDPRAM_B631_ISEProject_hcc_81_LPMMPRAM_FIFORam|altsyncram_edq1:auto_generated|altsyncram_phj1:altsyncram1
+ 22. Source assignments for altshift_taps:B297_ISEProject_hcc_782_VGAoutput_DTYPE0IR_colour_2_1_bit_15__rtl_0|shift_taps_8jm:auto_generated|altsyncram_fg31:altsyncram4
+ 23. Source assignments for altshift_taps:B340_ISEProject_hcc_782_VGAoutput_DTYPE0IR_colour_1_1_bit_6__rtl_1|shift_taps_6jm:auto_generated|altsyncram_a981:altsyncram2
+ 24. Parameter Settings for User Entity Instance: LPM_MULT:B1032_ISEProject_hcc_973_VGAoutput_MULT18X18U
+ 25. Parameter Settings for User Entity Instance: LPM_MULT:B1049_ISEProject_hcc_974_VGAoutput_MULT18X18U
+ 26. Parameter Settings for User Entity Instance: LPM_MULT:B1066_ISEProject_hcc_991_VGAoutput_MULT18X18U
+ 27. Parameter Settings for User Entity Instance: LPM_MULT:B1083_ISEProject_hcc_992_VGAoutput_MULT18X18U
+ 28. Parameter Settings for User Entity Instance: LPM_MULT:B1100_ISEProject_hcc_1009_VGAoutput_MULT18X18U
+ 29. Parameter Settings for User Entity Instance: LPM_MULT:B1117_ISEProject_hcc_1010_VGAoutput_MULT18X18U
+ 30. Parameter Settings for User Entity Instance: LPM_MULT:B770_ISEProject_hcc_885_VGAoutput_MULT18X18U
+ 31. Parameter Settings for User Entity Instance: LPM_MULT:B787_ISEProject_hcc_886_VGAoutput_MULT18X18U
+ 32. Parameter Settings for User Entity Instance: LPM_MULT:B804_ISEProject_hcc_903_VGAoutput_MULT18X18U
+ 33. Parameter Settings for User Entity Instance: LPM_MULT:B821_ISEProject_hcc_921_VGAoutput_MULT18X18U
+ 34. Parameter Settings for User Entity Instance: ALTSYNCRAM:SDPRAM_B300_ISEProject_hcc_78_LPMMPRAM_FIFORam
+ 35. Parameter Settings for User Entity Instance: ALTSYNCRAM:SDPRAM_B402_ISEProject_hcc_79_LPMMPRAM_FIFORam
+ 36. Parameter Settings for User Entity Instance: ALTSYNCRAM:SDPRAM_B517_ISEProject_hcc_80_LPMMPRAM_FIFORam
+ 37. Parameter Settings for User Entity Instance: ALTSYNCRAM:SDPRAM_B631_ISEProject_hcc_81_LPMMPRAM_FIFORam
+ 38. Parameter Settings for Inferred Entity Instance: altshift_taps:B297_ISEProject_hcc_782_VGAoutput_DTYPE0IR_colour_2_1_bit_15__rtl_0
+ 39. Parameter Settings for Inferred Entity Instance: altshift_taps:B340_ISEProject_hcc_782_VGAoutput_DTYPE0IR_colour_1_1_bit_6__rtl_1
+ 40. lpm_mult Parameter Settings by Entity Instance
+ 41. altshift_taps Parameter Settings by Entity Instance
+ 42. Analysis & Synthesis Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2008 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++-------------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                                  ;
++------------------------------------+------------------------------------------+
+; Analysis & Synthesis Status        ; Successful - Fri May 27 12:24:22 2011    ;
+; Quartus II Version                 ; 8.0 Build 215 05/29/2008 SJ Full Version ;
+; Revision Name                      ; ISEProject                               ;
+; Top-level Entity Name              ; ISEProject                               ;
+; Family                             ; Cyclone II                               ;
+; Total logic elements               ; 6,115                                    ;
+;     Total combinational functions  ; 6,115                                    ;
+;     Dedicated logic registers      ; 1,737                                    ;
+; Total registers                    ; 1737                                     ;
+; Total pins                         ; 157                                      ;
+; Total virtual pins                 ; 0                                        ;
+; Total memory bits                  ; 42,095                                   ;
+; Embedded Multiplier 9-bit elements ; 20                                       ;
+; Total PLLs                         ; 0                                        ;
++------------------------------------+------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Settings                                                                          ;
++--------------------------------------------------------------+--------------------+--------------------+
+; Option                                                       ; Setting            ; Default Value      ;
++--------------------------------------------------------------+--------------------+--------------------+
+; Device                                                       ; ep2c35f672c6       ;                    ;
+; Top-level entity name                                        ; ISEProject         ; ISEProject         ;
+; Family name                                                  ; CYCLONE II         ; Stratix II         ;
+; Power-Up Don't Care                                          ; Off                ; On                 ;
+; Type of Retiming Performed During Resynthesis                ; Full               ;                    ;
+; Resynthesis Optimization Effort                              ; Normal             ;                    ;
+; Physical Synthesis Level for Resynthesis                     ; Normal             ;                    ;
+; Use Generated Physical Constraints File                      ; On                 ;                    ;
+; Use smart compilation                                        ; Off                ; Off                ;
+; Maximum processors allowed for parallel compilation          ; 1                  ; 1                  ;
+; Restructure Multiplexers                                     ; Auto               ; Auto               ;
+; Create Debugging Nodes for IP Cores                          ; Off                ; Off                ;
+; Preserve fewer node names                                    ; On                 ; On                 ;
+; Disable OpenCore Plus hardware evaluation                    ; Off                ; Off                ;
+; Verilog Version                                              ; Verilog_2001       ; Verilog_2001       ;
+; VHDL Version                                                 ; VHDL93             ; VHDL93             ;
+; State Machine Processing                                     ; Auto               ; Auto               ;
+; Safe State Machine                                           ; Off                ; Off                ;
+; Extract Verilog State Machines                               ; On                 ; On                 ;
+; Extract VHDL State Machines                                  ; On                 ; On                 ;
+; Ignore Verilog initial constructs                            ; Off                ; Off                ;
+; Iteration limit for constant Verilog loops                   ; 5000               ; 5000               ;
+; Iteration limit for non-constant Verilog loops               ; 250                ; 250                ;
+; Add Pass-Through Logic to Inferred RAMs                      ; On                 ; On                 ;
+; Parallel Synthesis                                           ; Off                ; Off                ;
+; DSP Block Balancing                                          ; Auto               ; Auto               ;
+; NOT Gate Push-Back                                           ; On                 ; On                 ;
+; Remove Redundant Logic Cells                                 ; Off                ; Off                ;
+; Remove Duplicate Registers                                   ; On                 ; On                 ;
+; Ignore CARRY Buffers                                         ; Off                ; Off                ;
+; Ignore CASCADE Buffers                                       ; Off                ; Off                ;
+; Ignore GLOBAL Buffers                                        ; Off                ; Off                ;
+; Ignore ROW GLOBAL Buffers                                    ; Off                ; Off                ;
+; Ignore LCELL Buffers                                         ; Off                ; Off                ;
+; Ignore SOFT Buffers                                          ; On                 ; On                 ;
+; Limit AHDL Integers to 32 Bits                               ; Off                ; Off                ;
+; Optimization Technique                                       ; Balanced           ; Balanced           ;
+; Carry Chain Length                                           ; 70                 ; 70                 ;
+; Auto Carry Chains                                            ; On                 ; On                 ;
+; Auto Open-Drain Pins                                         ; On                 ; On                 ;
+; Perform WYSIWYG Primitive Resynthesis                        ; Off                ; Off                ;
+; Perform gate-level register retiming                         ; Off                ; Off                ;
+; Allow register retiming to trade off Tsu/Tco with Fmax       ; On                 ; On                 ;
+; Auto ROM Replacement                                         ; On                 ; On                 ;
+; Auto RAM Replacement                                         ; On                 ; On                 ;
+; Auto Shift Register Replacement                              ; Auto               ; Auto               ;
+; Auto Clock Enable Replacement                                ; On                 ; On                 ;
+; Strict RAM Replacement                                       ; Off                ; Off                ;
+; Allow Synchronous Control Signals                            ; On                 ; On                 ;
+; Force Use of Synchronous Clear Signals                       ; Off                ; Off                ;
+; Auto RAM to Logic Cell Conversion                            ; Off                ; Off                ;
+; Auto Resource Sharing                                        ; Off                ; Off                ;
+; Allow Any RAM Size For Recognition                           ; Off                ; Off                ;
+; Allow Any ROM Size For Recognition                           ; Off                ; Off                ;
+; Allow Any Shift Register Size For Recognition                ; Off                ; Off                ;
+; Ignore translate_off and synthesis_off directives            ; Off                ; Off                ;
+; Show Parameter Settings Tables in Synthesis Report           ; On                 ; On                 ;
+; Ignore Maximum Fan-Out Assignments                           ; Off                ; Off                ;
+; Synchronization Register Chain Length                        ; 2                  ; 2                  ;
+; PowerPlay Power Optimization                                 ; Normal compilation ; Normal compilation ;
+; HDL message level                                            ; Level2             ; Level2             ;
+; Suppress Register Optimization Related Messages              ; Off                ; Off                ;
+; Number of Removed Registers Reported in Synthesis Report     ; 100                ; 100                ;
+; Number of Inverted Registers Reported in Synthesis Report    ; 100                ; 100                ;
+; Clock MUX Protection                                         ; On                 ; On                 ;
+; Block Design Naming                                          ; Auto               ; Auto               ;
+; SDC constraint protection                                    ; Off                ; Off                ;
+; Synthesis Effort                                             ; Auto               ; Auto               ;
+; Shift Register Replacement - Allow Asynchronous Clear Signal ; On                 ; On                 ;
++--------------------------------------------------------------+--------------------+--------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                 ;
++----------------------------------+-----------------+------------------------------+--------------------------------------------------------------------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                       ;
++----------------------------------+-----------------+------------------------------+--------------------------------------------------------------------+
+; EDIF/ISEProject.edf              ; yes             ; User EDIF File               ; H:/ISEProject/EDIF/ISEProject.edf                                  ;
+; LPM_MULT.tdf                     ; yes             ; Megafunction                 ; c:/altera/80/quartus/libraries/megafunctions/LPM_MULT.tdf          ;
+; aglobal80.inc                    ; yes             ; Megafunction                 ; c:/altera/80/quartus/libraries/megafunctions/aglobal80.inc         ;
+; lpm_add_sub.inc                  ; yes             ; Megafunction                 ; c:/altera/80/quartus/libraries/megafunctions/lpm_add_sub.inc       ;
+; multcore.inc                     ; yes             ; Megafunction                 ; c:/altera/80/quartus/libraries/megafunctions/multcore.inc          ;
+; bypassff.inc                     ; yes             ; Megafunction                 ; c:/altera/80/quartus/libraries/megafunctions/bypassff.inc          ;
+; altshift.inc                     ; yes             ; Megafunction                 ; c:/altera/80/quartus/libraries/megafunctions/altshift.inc          ;
+; db/mult_thq.tdf                  ; yes             ; Auto-Generated Megafunction  ; H:/ISEProject/db/mult_thq.tdf                                      ;
+; DEC_7SEG.vhd                     ; yes             ; Other                        ; //icfs16.cc.ic.ac.uk/rce10/de2lib/DEC_7SEG.vhd                     ;
+; VGA_SYNC_800.vhd                 ; yes             ; Other                        ; //icfs16.cc.ic.ac.uk/rce10/de2lib/VGA_SYNC_800.vhd                 ;
+; MOUSE.vhd                        ; yes             ; Other                        ; //icfs16.cc.ic.ac.uk/rce10/de2lib/MOUSE.vhd                        ;
+; ALTSYNCRAM.tdf                   ; yes             ; Megafunction                 ; c:/altera/80/quartus/libraries/megafunctions/ALTSYNCRAM.tdf        ;
+; stratix_ram_block.inc            ; yes             ; Megafunction                 ; c:/altera/80/quartus/libraries/megafunctions/stratix_ram_block.inc ;
+; lpm_mux.inc                      ; yes             ; Megafunction                 ; c:/altera/80/quartus/libraries/megafunctions/lpm_mux.inc           ;
+; lpm_decode.inc                   ; yes             ; Megafunction                 ; c:/altera/80/quartus/libraries/megafunctions/lpm_decode.inc        ;
+; a_rdenreg.inc                    ; yes             ; Megafunction                 ; c:/altera/80/quartus/libraries/megafunctions/a_rdenreg.inc         ;
+; altrom.inc                       ; yes             ; Megafunction                 ; c:/altera/80/quartus/libraries/megafunctions/altrom.inc            ;
+; altram.inc                       ; yes             ; Megafunction                 ; c:/altera/80/quartus/libraries/megafunctions/altram.inc            ;
+; altdpram.inc                     ; yes             ; Megafunction                 ; c:/altera/80/quartus/libraries/megafunctions/altdpram.inc          ;
+; altqpram.inc                     ; yes             ; Megafunction                 ; c:/altera/80/quartus/libraries/megafunctions/altqpram.inc          ;
+; db/altsyncram_2dq1.tdf           ; yes             ; Auto-Generated Megafunction  ; H:/ISEProject/db/altsyncram_2dq1.tdf                               ;
+; db/altsyncram_dhj1.tdf           ; yes             ; Auto-Generated Megafunction  ; H:/ISEProject/db/altsyncram_dhj1.tdf                               ;
+; db/altsyncram_edq1.tdf           ; yes             ; Auto-Generated Megafunction  ; H:/ISEProject/db/altsyncram_edq1.tdf                               ;
+; db/altsyncram_phj1.tdf           ; yes             ; Auto-Generated Megafunction  ; H:/ISEProject/db/altsyncram_phj1.tdf                               ;
+; altshift_taps.tdf                ; yes             ; Megafunction                 ; c:/altera/80/quartus/libraries/megafunctions/altshift_taps.tdf     ;
+; lpm_counter.inc                  ; yes             ; Megafunction                 ; c:/altera/80/quartus/libraries/megafunctions/lpm_counter.inc       ;
+; lpm_compare.inc                  ; yes             ; Megafunction                 ; c:/altera/80/quartus/libraries/megafunctions/lpm_compare.inc       ;
+; lpm_constant.inc                 ; yes             ; Megafunction                 ; c:/altera/80/quartus/libraries/megafunctions/lpm_constant.inc      ;
+; db/shift_taps_8jm.tdf            ; yes             ; Auto-Generated Megafunction  ; H:/ISEProject/db/shift_taps_8jm.tdf                                ;
+; db/altsyncram_fg31.tdf           ; yes             ; Auto-Generated Megafunction  ; H:/ISEProject/db/altsyncram_fg31.tdf                               ;
+; db/add_sub_gvd.tdf               ; yes             ; Auto-Generated Megafunction  ; H:/ISEProject/db/add_sub_gvd.tdf                                   ;
+; db/cntr_kkf.tdf                  ; yes             ; Auto-Generated Megafunction  ; H:/ISEProject/db/cntr_kkf.tdf                                      ;
+; db/shift_taps_6jm.tdf            ; yes             ; Auto-Generated Megafunction  ; H:/ISEProject/db/shift_taps_6jm.tdf                                ;
+; db/altsyncram_a981.tdf           ; yes             ; Auto-Generated Megafunction  ; H:/ISEProject/db/altsyncram_a981.tdf                               ;
++----------------------------------+-----------------+------------------------------+--------------------------------------------------------------------+
+
+
++------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary          ;
++---------------------------------------------+--------+
+; Resource                                    ; Usage  ;
++---------------------------------------------+--------+
+; Estimated Total logic elements              ; 6,115  ;
+;                                             ;        ;
+; Total combinational functions               ; 6115   ;
+; Logic element usage by number of LUT inputs ;        ;
+;     -- 4 input functions                    ; 1299   ;
+;     -- 3 input functions                    ; 1669   ;
+;     -- <=2 input functions                  ; 3147   ;
+;                                             ;        ;
+; Logic elements by mode                      ;        ;
+;     -- normal mode                          ; 4110   ;
+;     -- arithmetic mode                      ; 2005   ;
+;                                             ;        ;
+; Total registers                             ; 1737   ;
+;     -- Dedicated logic registers            ; 1737   ;
+;     -- I/O registers                        ; 0      ;
+;                                             ;        ;
+; I/O pins                                    ; 157    ;
+; Total memory bits                           ; 42095  ;
+; Embedded Multiplier 9-bit elements          ; 20     ;
+; Maximum fan-out node                        ; PIN_N2 ;
+; Maximum fan-out                             ; 1693   ;
+; Total fan-out                               ; 22600  ;
+; Average fan-out                             ; 2.69   ;
++---------------------------------------------+--------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                                                                                                                           ;
++----------------------------------------------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------+----------------+
+; Compilation Hierarchy Node                                                             ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                                                     ; Library Name   ;
++----------------------------------------------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------+----------------+
+; |ISEProject                                                                            ; 6115 (5853)       ; 1737 (1530)  ; 42095       ; 20           ; 0       ; 10        ; 157  ; 0            ; |ISEProject                                                                                                                                             ; ISEProject_lib ;
+;    |MOUSE:B5_de2_hcc_371_DE2PS2MouseDriver_ps2|                                        ; 124 (124)         ; 123 (123)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ISEProject|MOUSE:B5_de2_hcc_371_DE2PS2MouseDriver_ps2                                                                                                  ; work           ;
+;    |VGA_SYNC_800:B3_de2_hcc_602_DE2VideoDriver800x600_vga|                             ; 84 (84)           ; 78 (78)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ISEProject|VGA_SYNC_800:B3_de2_hcc_602_DE2VideoDriver800x600_vga                                                                                       ; work           ;
+;    |altshift_taps:B297_ISEProject_hcc_782_VGAoutput_DTYPE0IR_colour_2_1_bit_15__rtl_0| ; 7 (0)             ; 4 (0)        ; 45          ; 0            ; 0       ; 0         ; 0    ; 0            ; |ISEProject|altshift_taps:B297_ISEProject_hcc_782_VGAoutput_DTYPE0IR_colour_2_1_bit_15__rtl_0                                                           ; work           ;
+;       |shift_taps_8jm:auto_generated|                                                  ; 7 (2)             ; 4 (2)        ; 45          ; 0            ; 0       ; 0         ; 0    ; 0            ; |ISEProject|altshift_taps:B297_ISEProject_hcc_782_VGAoutput_DTYPE0IR_colour_2_1_bit_15__rtl_0|shift_taps_8jm:auto_generated                             ; work           ;
+;          |altsyncram_fg31:altsyncram4|                                                 ; 0 (0)             ; 0 (0)        ; 45          ; 0            ; 0       ; 0         ; 0    ; 0            ; |ISEProject|altshift_taps:B297_ISEProject_hcc_782_VGAoutput_DTYPE0IR_colour_2_1_bit_15__rtl_0|shift_taps_8jm:auto_generated|altsyncram_fg31:altsyncram4 ; work           ;
+;          |cntr_kkf:cntr1|                                                              ; 5 (5)             ; 2 (2)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ISEProject|altshift_taps:B297_ISEProject_hcc_782_VGAoutput_DTYPE0IR_colour_2_1_bit_15__rtl_0|shift_taps_8jm:auto_generated|cntr_kkf:cntr1              ; work           ;
+;    |altshift_taps:B340_ISEProject_hcc_782_VGAoutput_DTYPE0IR_colour_1_1_bit_6__rtl_1|  ; 5 (0)             ; 2 (0)        ; 66          ; 0            ; 0       ; 0         ; 0    ; 0            ; |ISEProject|altshift_taps:B340_ISEProject_hcc_782_VGAoutput_DTYPE0IR_colour_1_1_bit_6__rtl_1                                                            ; work           ;
+;       |shift_taps_6jm:auto_generated|                                                  ; 5 (0)             ; 2 (0)        ; 66          ; 0            ; 0       ; 0         ; 0    ; 0            ; |ISEProject|altshift_taps:B340_ISEProject_hcc_782_VGAoutput_DTYPE0IR_colour_1_1_bit_6__rtl_1|shift_taps_6jm:auto_generated                              ; work           ;
+;          |altsyncram_a981:altsyncram2|                                                 ; 0 (0)             ; 0 (0)        ; 66          ; 0            ; 0       ; 0         ; 0    ; 0            ; |ISEProject|altshift_taps:B340_ISEProject_hcc_782_VGAoutput_DTYPE0IR_colour_1_1_bit_6__rtl_1|shift_taps_6jm:auto_generated|altsyncram_a981:altsyncram2  ; work           ;
+;          |cntr_kkf:cntr1|                                                              ; 5 (5)             ; 2 (2)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ISEProject|altshift_taps:B340_ISEProject_hcc_782_VGAoutput_DTYPE0IR_colour_1_1_bit_6__rtl_1|shift_taps_6jm:auto_generated|cntr_kkf:cntr1               ; work           ;
+;    |altsyncram:SDPRAM_B300_ISEProject_hcc_78_LPMMPRAM_FIFORam|                         ; 0 (0)             ; 0 (0)        ; 10240       ; 0            ; 0       ; 0         ; 0    ; 0            ; |ISEProject|altsyncram:SDPRAM_B300_ISEProject_hcc_78_LPMMPRAM_FIFORam                                                                                   ; work           ;
+;       |altsyncram_2dq1:auto_generated|                                                 ; 0 (0)             ; 0 (0)        ; 10240       ; 0            ; 0       ; 0         ; 0    ; 0            ; |ISEProject|altsyncram:SDPRAM_B300_ISEProject_hcc_78_LPMMPRAM_FIFORam|altsyncram_2dq1:auto_generated                                                    ; work           ;
+;          |altsyncram_dhj1:altsyncram1|                                                 ; 0 (0)             ; 0 (0)        ; 10240       ; 0            ; 0       ; 0         ; 0    ; 0            ; |ISEProject|altsyncram:SDPRAM_B300_ISEProject_hcc_78_LPMMPRAM_FIFORam|altsyncram_2dq1:auto_generated|altsyncram_dhj1:altsyncram1                        ; work           ;
+;    |altsyncram:SDPRAM_B402_ISEProject_hcc_79_LPMMPRAM_FIFORam|                         ; 0 (0)             ; 0 (0)        ; 10240       ; 0            ; 0       ; 0         ; 0    ; 0            ; |ISEProject|altsyncram:SDPRAM_B402_ISEProject_hcc_79_LPMMPRAM_FIFORam                                                                                   ; work           ;
+;       |altsyncram_2dq1:auto_generated|                                                 ; 0 (0)             ; 0 (0)        ; 10240       ; 0            ; 0       ; 0         ; 0    ; 0            ; |ISEProject|altsyncram:SDPRAM_B402_ISEProject_hcc_79_LPMMPRAM_FIFORam|altsyncram_2dq1:auto_generated                                                    ; work           ;
+;          |altsyncram_dhj1:altsyncram1|                                                 ; 0 (0)             ; 0 (0)        ; 10240       ; 0            ; 0       ; 0         ; 0    ; 0            ; |ISEProject|altsyncram:SDPRAM_B402_ISEProject_hcc_79_LPMMPRAM_FIFORam|altsyncram_2dq1:auto_generated|altsyncram_dhj1:altsyncram1                        ; work           ;
+;    |altsyncram:SDPRAM_B517_ISEProject_hcc_80_LPMMPRAM_FIFORam|                         ; 0 (0)             ; 0 (0)        ; 16384       ; 0            ; 0       ; 0         ; 0    ; 0            ; |ISEProject|altsyncram:SDPRAM_B517_ISEProject_hcc_80_LPMMPRAM_FIFORam                                                                                   ; work           ;
+;       |altsyncram_edq1:auto_generated|                                                 ; 0 (0)             ; 0 (0)        ; 16384       ; 0            ; 0       ; 0         ; 0    ; 0            ; |ISEProject|altsyncram:SDPRAM_B517_ISEProject_hcc_80_LPMMPRAM_FIFORam|altsyncram_edq1:auto_generated                                                    ; work           ;
+;          |altsyncram_phj1:altsyncram1|                                                 ; 0 (0)             ; 0 (0)        ; 16384       ; 0            ; 0       ; 0         ; 0    ; 0            ; |ISEProject|altsyncram:SDPRAM_B517_ISEProject_hcc_80_LPMMPRAM_FIFORam|altsyncram_edq1:auto_generated|altsyncram_phj1:altsyncram1                        ; work           ;
+;    |altsyncram:SDPRAM_B631_ISEProject_hcc_81_LPMMPRAM_FIFORam|                         ; 0 (0)             ; 0 (0)        ; 5120        ; 0            ; 0       ; 0         ; 0    ; 0            ; |ISEProject|altsyncram:SDPRAM_B631_ISEProject_hcc_81_LPMMPRAM_FIFORam                                                                                   ; work           ;
+;       |altsyncram_edq1:auto_generated|                                                 ; 0 (0)             ; 0 (0)        ; 5120        ; 0            ; 0       ; 0         ; 0    ; 0            ; |ISEProject|altsyncram:SDPRAM_B631_ISEProject_hcc_81_LPMMPRAM_FIFORam|altsyncram_edq1:auto_generated                                                    ; work           ;
+;          |altsyncram_phj1:altsyncram1|                                                 ; 0 (0)             ; 0 (0)        ; 5120        ; 0            ; 0       ; 0         ; 0    ; 0            ; |ISEProject|altsyncram:SDPRAM_B631_ISEProject_hcc_81_LPMMPRAM_FIFORam|altsyncram_edq1:auto_generated|altsyncram_phj1:altsyncram1                        ; work           ;
+;    |dec_7seg:B1_de2_hcc_495_DE2Set7SegDigit_SEG7OUT0|                                  ; 7 (7)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ISEProject|dec_7seg:B1_de2_hcc_495_DE2Set7SegDigit_SEG7OUT0                                                                                            ; work           ;
+;    |dec_7seg:B1_de2_hcc_502_DE2Set7SegDigit_1_SEG7OUT1|                                ; 7 (7)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ISEProject|dec_7seg:B1_de2_hcc_502_DE2Set7SegDigit_1_SEG7OUT1                                                                                          ; work           ;
+;    |dec_7seg:B1_de2_hcc_509_DE2Set7SegDigit_2_SEG7OUT2|                                ; 7 (7)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ISEProject|dec_7seg:B1_de2_hcc_509_DE2Set7SegDigit_2_SEG7OUT2                                                                                          ; work           ;
+;    |dec_7seg:B1_de2_hcc_516_DE2Set7SegDigit_3_SEG7OUT3|                                ; 7 (7)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ISEProject|dec_7seg:B1_de2_hcc_516_DE2Set7SegDigit_3_SEG7OUT3                                                                                          ; work           ;
+;    |dec_7seg:B1_de2_hcc_523_DE2Set7SegDigit_4_SEG7OUT4|                                ; 7 (7)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ISEProject|dec_7seg:B1_de2_hcc_523_DE2Set7SegDigit_4_SEG7OUT4                                                                                          ; work           ;
+;    |dec_7seg:B1_de2_hcc_530_DE2Set7SegDigit_5_SEG7OUT5|                                ; 7 (7)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ISEProject|dec_7seg:B1_de2_hcc_530_DE2Set7SegDigit_5_SEG7OUT5                                                                                          ; work           ;
+;    |lpm_mult:B1032_ISEProject_hcc_973_VGAoutput_MULT18X18U|                            ; 0 (0)             ; 0 (0)        ; 0           ; 2            ; 0       ; 1         ; 0    ; 0            ; |ISEProject|lpm_mult:B1032_ISEProject_hcc_973_VGAoutput_MULT18X18U                                                                                      ; work           ;
+;       |mult_thq:auto_generated|                                                        ; 0 (0)             ; 0 (0)        ; 0           ; 2            ; 0       ; 1         ; 0    ; 0            ; |ISEProject|lpm_mult:B1032_ISEProject_hcc_973_VGAoutput_MULT18X18U|mult_thq:auto_generated                                                              ; work           ;
+;    |lpm_mult:B1049_ISEProject_hcc_974_VGAoutput_MULT18X18U|                            ; 0 (0)             ; 0 (0)        ; 0           ; 2            ; 0       ; 1         ; 0    ; 0            ; |ISEProject|lpm_mult:B1049_ISEProject_hcc_974_VGAoutput_MULT18X18U                                                                                      ; work           ;
+;       |mult_thq:auto_generated|                                                        ; 0 (0)             ; 0 (0)        ; 0           ; 2            ; 0       ; 1         ; 0    ; 0            ; |ISEProject|lpm_mult:B1049_ISEProject_hcc_974_VGAoutput_MULT18X18U|mult_thq:auto_generated                                                              ; work           ;
+;    |lpm_mult:B1066_ISEProject_hcc_991_VGAoutput_MULT18X18U|                            ; 0 (0)             ; 0 (0)        ; 0           ; 2            ; 0       ; 1         ; 0    ; 0            ; |ISEProject|lpm_mult:B1066_ISEProject_hcc_991_VGAoutput_MULT18X18U                                                                                      ; work           ;
+;       |mult_thq:auto_generated|                                                        ; 0 (0)             ; 0 (0)        ; 0           ; 2            ; 0       ; 1         ; 0    ; 0            ; |ISEProject|lpm_mult:B1066_ISEProject_hcc_991_VGAoutput_MULT18X18U|mult_thq:auto_generated                                                              ; work           ;
+;    |lpm_mult:B1083_ISEProject_hcc_992_VGAoutput_MULT18X18U|                            ; 0 (0)             ; 0 (0)        ; 0           ; 2            ; 0       ; 1         ; 0    ; 0            ; |ISEProject|lpm_mult:B1083_ISEProject_hcc_992_VGAoutput_MULT18X18U                                                                                      ; work           ;
+;       |mult_thq:auto_generated|                                                        ; 0 (0)             ; 0 (0)        ; 0           ; 2            ; 0       ; 1         ; 0    ; 0            ; |ISEProject|lpm_mult:B1083_ISEProject_hcc_992_VGAoutput_MULT18X18U|mult_thq:auto_generated                                                              ; work           ;
+;    |lpm_mult:B1100_ISEProject_hcc_1009_VGAoutput_MULT18X18U|                           ; 0 (0)             ; 0 (0)        ; 0           ; 2            ; 0       ; 1         ; 0    ; 0            ; |ISEProject|lpm_mult:B1100_ISEProject_hcc_1009_VGAoutput_MULT18X18U                                                                                     ; work           ;
+;       |mult_thq:auto_generated|                                                        ; 0 (0)             ; 0 (0)        ; 0           ; 2            ; 0       ; 1         ; 0    ; 0            ; |ISEProject|lpm_mult:B1100_ISEProject_hcc_1009_VGAoutput_MULT18X18U|mult_thq:auto_generated                                                             ; work           ;
+;    |lpm_mult:B1117_ISEProject_hcc_1010_VGAoutput_MULT18X18U|                           ; 0 (0)             ; 0 (0)        ; 0           ; 2            ; 0       ; 1         ; 0    ; 0            ; |ISEProject|lpm_mult:B1117_ISEProject_hcc_1010_VGAoutput_MULT18X18U                                                                                     ; work           ;
+;       |mult_thq:auto_generated|                                                        ; 0 (0)             ; 0 (0)        ; 0           ; 2            ; 0       ; 1         ; 0    ; 0            ; |ISEProject|lpm_mult:B1117_ISEProject_hcc_1010_VGAoutput_MULT18X18U|mult_thq:auto_generated                                                             ; work           ;
+;    |lpm_mult:B770_ISEProject_hcc_885_VGAoutput_MULT18X18U|                             ; 0 (0)             ; 0 (0)        ; 0           ; 2            ; 0       ; 1         ; 0    ; 0            ; |ISEProject|lpm_mult:B770_ISEProject_hcc_885_VGAoutput_MULT18X18U                                                                                       ; work           ;
+;       |mult_thq:auto_generated|                                                        ; 0 (0)             ; 0 (0)        ; 0           ; 2            ; 0       ; 1         ; 0    ; 0            ; |ISEProject|lpm_mult:B770_ISEProject_hcc_885_VGAoutput_MULT18X18U|mult_thq:auto_generated                                                               ; work           ;
+;    |lpm_mult:B787_ISEProject_hcc_886_VGAoutput_MULT18X18U|                             ; 0 (0)             ; 0 (0)        ; 0           ; 2            ; 0       ; 1         ; 0    ; 0            ; |ISEProject|lpm_mult:B787_ISEProject_hcc_886_VGAoutput_MULT18X18U                                                                                       ; work           ;
+;       |mult_thq:auto_generated|                                                        ; 0 (0)             ; 0 (0)        ; 0           ; 2            ; 0       ; 1         ; 0    ; 0            ; |ISEProject|lpm_mult:B787_ISEProject_hcc_886_VGAoutput_MULT18X18U|mult_thq:auto_generated                                                               ; work           ;
+;    |lpm_mult:B804_ISEProject_hcc_903_VGAoutput_MULT18X18U|                             ; 0 (0)             ; 0 (0)        ; 0           ; 2            ; 0       ; 1         ; 0    ; 0            ; |ISEProject|lpm_mult:B804_ISEProject_hcc_903_VGAoutput_MULT18X18U                                                                                       ; work           ;
+;       |mult_thq:auto_generated|                                                        ; 0 (0)             ; 0 (0)        ; 0           ; 2            ; 0       ; 1         ; 0    ; 0            ; |ISEProject|lpm_mult:B804_ISEProject_hcc_903_VGAoutput_MULT18X18U|mult_thq:auto_generated                                                               ; work           ;
+;    |lpm_mult:B821_ISEProject_hcc_921_VGAoutput_MULT18X18U|                             ; 0 (0)             ; 0 (0)        ; 0           ; 2            ; 0       ; 1         ; 0    ; 0            ; |ISEProject|lpm_mult:B821_ISEProject_hcc_921_VGAoutput_MULT18X18U                                                                                       ; work           ;
+;       |mult_thq:auto_generated|                                                        ; 0 (0)             ; 0 (0)        ; 0           ; 2            ; 0       ; 1         ; 0    ; 0            ; |ISEProject|lpm_mult:B821_ISEProject_hcc_921_VGAoutput_MULT18X18U|mult_thq:auto_generated                                                               ; work           ;
++----------------------------------------------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------+----------------+
+Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis RAM Summary                                                                                                                                                                                                                            ;
++--------------------------------------------------------------------------------------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+-------+------+
+; Name                                                                                                                                                   ; Type ; Mode             ; Port A Depth ; Port A Width ; Port B Depth ; Port B Width ; Size  ; MIF  ;
++--------------------------------------------------------------------------------------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+-------+------+
+; altshift_taps:B297_ISEProject_hcc_782_VGAoutput_DTYPE0IR_colour_2_1_bit_15__rtl_0|shift_taps_8jm:auto_generated|altsyncram_fg31:altsyncram4|ALTSYNCRAM ; AUTO ; Simple Dual Port ; 3            ; 15           ; 3            ; 15           ; 45    ; None ;
+; altshift_taps:B340_ISEProject_hcc_782_VGAoutput_DTYPE0IR_colour_1_1_bit_6__rtl_1|shift_taps_6jm:auto_generated|altsyncram_a981:altsyncram2|ALTSYNCRAM  ; AUTO ; Simple Dual Port ; 3            ; 22           ; 3            ; 22           ; 66    ; None ;
+; altsyncram:SDPRAM_B300_ISEProject_hcc_78_LPMMPRAM_FIFORam|altsyncram_2dq1:auto_generated|altsyncram_dhj1:altsyncram1|ALTSYNCRAM                        ; AUTO ; True Dual Port   ; 1024         ; 10           ; 1024         ; 10           ; 10240 ; None ;
+; altsyncram:SDPRAM_B402_ISEProject_hcc_79_LPMMPRAM_FIFORam|altsyncram_2dq1:auto_generated|altsyncram_dhj1:altsyncram1|ALTSYNCRAM                        ; AUTO ; True Dual Port   ; 1024         ; 10           ; 1024         ; 10           ; 10240 ; None ;
+; altsyncram:SDPRAM_B517_ISEProject_hcc_80_LPMMPRAM_FIFORam|altsyncram_edq1:auto_generated|altsyncram_phj1:altsyncram1|ALTSYNCRAM                        ; AUTO ; True Dual Port   ; 1024         ; 16           ; 1024         ; 16           ; 16384 ; None ;
+; altsyncram:SDPRAM_B631_ISEProject_hcc_81_LPMMPRAM_FIFORam|altsyncram_edq1:auto_generated|altsyncram_phj1:altsyncram1|ALTSYNCRAM                        ; AUTO ; True Dual Port   ; 1024         ; 16           ; 1024         ; 16           ; 16384 ; None ;
++--------------------------------------------------------------------------------------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+-------+------+
+
+
++-----------------------------------------------------+
+; Analysis & Synthesis DSP Block Usage Summary        ;
++---------------------------------------+-------------+
+; Statistic                             ; Number Used ;
++---------------------------------------+-------------+
+; Simple Multipliers (9-bit)            ; 0           ;
+; Simple Multipliers (18-bit)           ; 10          ;
+; Embedded Multiplier Blocks            ; --          ;
+; Embedded Multiplier 9-bit elements    ; 20          ;
+; Signed Embedded Multipliers           ; 0           ;
+; Unsigned Embedded Multipliers         ; 10          ;
+; Mixed Sign Embedded Multipliers       ; 0           ;
+; Variable Sign Embedded Multipliers    ; 0           ;
+; Dedicated Input Shift Register Chains ; 0           ;
++---------------------------------------+-------------+
+Note: number of Embedded Multiplier Blocks used is only available after a successful fit.
+
+
+Encoding Type:  One-Hot
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |ISEProject|MOUSE:B5_de2_hcc_371_DE2PS2MouseDriver_ps2|mouse_state                                                                                                                      ;
++-------------------------------+---------------------------+--------------------------+-------------------------------+---------------------------+--------------------------+---------------------------+
+; Name                          ; mouse_state.input_packets ; mouse_state.wait_cmd_ack ; mouse_state.wait_output_ready ; mouse_state.load_command2 ; mouse_state.load_command ; mouse_state.inhibit_trans ;
++-------------------------------+---------------------------+--------------------------+-------------------------------+---------------------------+--------------------------+---------------------------+
+; mouse_state.inhibit_trans     ; 0                         ; 0                        ; 0                             ; 0                         ; 0                        ; 0                         ;
+; mouse_state.load_command      ; 0                         ; 0                        ; 0                             ; 0                         ; 1                        ; 1                         ;
+; mouse_state.load_command2     ; 0                         ; 0                        ; 0                             ; 1                         ; 0                        ; 1                         ;
+; mouse_state.wait_output_ready ; 0                         ; 0                        ; 1                             ; 0                         ; 0                        ; 1                         ;
+; mouse_state.wait_cmd_ack      ; 0                         ; 1                        ; 0                             ; 0                         ; 0                        ; 1                         ;
+; mouse_state.input_packets     ; 1                         ; 0                        ; 0                             ; 0                         ; 0                        ; 1                         ;
++-------------------------------+---------------------------+--------------------------+-------------------------------+---------------------------+--------------------------+---------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                                                                             ;
++------------------------------------------------------------+-------------------------------------------------------------------+
+; Register name                                              ; Reason for Removal                                                ;
++------------------------------------------------------------+-------------------------------------------------------------------+
+; B1295_ISEProject_hcc_206_BallUpdate_DTYPE0IR               ; Lost fanout                                                       ;
+; B299_ISEProject_hcc_577_ThirdBallUpdate_DTYPE0IR           ; Lost fanout                                                       ;
+; B307_ISEProject_hcc_439_SecondBallUpdate_DTYPE0IR          ; Lost fanout                                                       ;
+; B372_ISEProject_hcc_331_BallUpdate_DTYPE0IR                ; Lost fanout                                                       ;
+; B91_ISEProject_hcc_639_ThirdBallUpdate_DTYPE0IR            ; Lost fanout                                                       ;
+; B97_ISEProject_hcc_510_SecondBallUpdate_DTYPE0IR           ; Lost fanout                                                       ;
+; MOUSE:B5_de2_hcc_371_DE2PS2MouseDriver_ps2|CHAROUT[0..1,3] ; Stuck at GND due to stuck port data_in                            ;
+; MOUSE:B5_de2_hcc_371_DE2PS2MouseDriver_ps2|CHAROUT[2]      ; Merged with MOUSE:B5_de2_hcc_371_DE2PS2MouseDriver_ps2|CHAROUT[4] ;
+; MOUSE:B5_de2_hcc_371_DE2PS2MouseDriver_ps2|CHAROUT[4]      ; Merged with MOUSE:B5_de2_hcc_371_DE2PS2MouseDriver_ps2|CHAROUT[5] ;
+; MOUSE:B5_de2_hcc_371_DE2PS2MouseDriver_ps2|CHAROUT[5]      ; Merged with MOUSE:B5_de2_hcc_371_DE2PS2MouseDriver_ps2|CHAROUT[6] ;
+; MOUSE:B5_de2_hcc_371_DE2PS2MouseDriver_ps2|CHAROUT[6]      ; Merged with MOUSE:B5_de2_hcc_371_DE2PS2MouseDriver_ps2|CHAROUT[7] ;
+; MOUSE:B5_de2_hcc_371_DE2PS2MouseDriver_ps2|SHIFTOUT[10]    ; Stuck at GND due to stuck port data_in                            ;
+; Total Number of Removed Registers = 14                     ;                                                                   ;
++------------------------------------------------------------+-------------------------------------------------------------------+
+
+
++------------------------------------------------------+
+; General Register Statistics                          ;
++----------------------------------------------+-------+
+; Statistic                                    ; Value ;
++----------------------------------------------+-------+
+; Total registers                              ; 1737  ;
+; Number of registers using Synchronous Clear  ; 11    ;
+; Number of registers using Synchronous Load   ; 20    ;
+; Number of registers using Asynchronous Clear ; 43    ;
+; Number of registers using Asynchronous Load  ; 0     ;
+; Number of registers using Clock Enable       ; 1231  ;
+; Number of registers using Preset             ; 0     ;
++----------------------------------------------+-------+
+
+
++----------------------------------------------------------------+
+; Inverted Register Statistics                                   ;
++------------------------------------------------------+---------+
+; Inverted Register                                    ; Fan out ;
++------------------------------------------------------+---------+
+; MOUSE:B5_de2_hcc_371_DE2PS2MouseDriver_ps2|send_char ; 3       ;
+; Total number of inverted registers = 1               ;         ;
++------------------------------------------------------+---------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                                         ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                               ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------------------------+
+; 3:1                ; 20 bits   ; 40 LEs        ; 20 LEs               ; 20 LEs                 ; Yes        ; |ISEProject|MOUSE:B5_de2_hcc_371_DE2PS2MouseDriver_ps2|new_cursor_row[0] ;
+; 5:1                ; 10 bits   ; 30 LEs        ; 20 LEs               ; 10 LEs                 ; Yes        ; |ISEProject|MOUSE:B5_de2_hcc_371_DE2PS2MouseDriver_ps2|cursor_column[0]  ;
+; 5:1                ; 10 bits   ; 30 LEs        ; 20 LEs               ; 10 LEs                 ; Yes        ; |ISEProject|MOUSE:B5_de2_hcc_371_DE2PS2MouseDriver_ps2|cursor_row[9]     ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------+
+; Source assignments for ALTSYNCRAM:SDPRAM_B300_ISEProject_hcc_78_LPMMPRAM_FIFORam|altsyncram_2dq1:auto_generated ;
++---------------------------------+--------------------+------+---------------------------------------------------+
+; Assignment                      ; Value              ; From ; To                                                ;
++---------------------------------+--------------------+------+---------------------------------------------------+
+; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                                                 ;
++---------------------------------+--------------------+------+---------------------------------------------------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for ALTSYNCRAM:SDPRAM_B300_ISEProject_hcc_78_LPMMPRAM_FIFORam|altsyncram_2dq1:auto_generated|altsyncram_dhj1:altsyncram1 ;
++---------------------------------+--------------------+------+-------------------------------------------------------------------------------+
+; Assignment                      ; Value              ; From ; To                                                                            ;
++---------------------------------+--------------------+------+-------------------------------------------------------------------------------+
+; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                                                                             ;
++---------------------------------+--------------------+------+-------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------+
+; Source assignments for ALTSYNCRAM:SDPRAM_B402_ISEProject_hcc_79_LPMMPRAM_FIFORam|altsyncram_2dq1:auto_generated ;
++---------------------------------+--------------------+------+---------------------------------------------------+
+; Assignment                      ; Value              ; From ; To                                                ;
++---------------------------------+--------------------+------+---------------------------------------------------+
+; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                                                 ;
++---------------------------------+--------------------+------+---------------------------------------------------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for ALTSYNCRAM:SDPRAM_B402_ISEProject_hcc_79_LPMMPRAM_FIFORam|altsyncram_2dq1:auto_generated|altsyncram_dhj1:altsyncram1 ;
++---------------------------------+--------------------+------+-------------------------------------------------------------------------------+
+; Assignment                      ; Value              ; From ; To                                                                            ;
++---------------------------------+--------------------+------+-------------------------------------------------------------------------------+
+; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                                                                             ;
++---------------------------------+--------------------+------+-------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------+
+; Source assignments for ALTSYNCRAM:SDPRAM_B517_ISEProject_hcc_80_LPMMPRAM_FIFORam|altsyncram_edq1:auto_generated ;
++---------------------------------+--------------------+------+---------------------------------------------------+
+; Assignment                      ; Value              ; From ; To                                                ;
++---------------------------------+--------------------+------+---------------------------------------------------+
+; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                                                 ;
++---------------------------------+--------------------+------+---------------------------------------------------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for ALTSYNCRAM:SDPRAM_B517_ISEProject_hcc_80_LPMMPRAM_FIFORam|altsyncram_edq1:auto_generated|altsyncram_phj1:altsyncram1 ;
++---------------------------------+--------------------+------+-------------------------------------------------------------------------------+
+; Assignment                      ; Value              ; From ; To                                                                            ;
++---------------------------------+--------------------+------+-------------------------------------------------------------------------------+
+; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                                                                             ;
++---------------------------------+--------------------+------+-------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------+
+; Source assignments for ALTSYNCRAM:SDPRAM_B631_ISEProject_hcc_81_LPMMPRAM_FIFORam|altsyncram_edq1:auto_generated ;
++---------------------------------+--------------------+------+---------------------------------------------------+
+; Assignment                      ; Value              ; From ; To                                                ;
++---------------------------------+--------------------+------+---------------------------------------------------+
+; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                                                 ;
++---------------------------------+--------------------+------+---------------------------------------------------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for ALTSYNCRAM:SDPRAM_B631_ISEProject_hcc_81_LPMMPRAM_FIFORam|altsyncram_edq1:auto_generated|altsyncram_phj1:altsyncram1 ;
++---------------------------------+--------------------+------+-------------------------------------------------------------------------------+
+; Assignment                      ; Value              ; From ; To                                                                            ;
++---------------------------------+--------------------+------+-------------------------------------------------------------------------------+
+; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                                                                             ;
++---------------------------------+--------------------+------+-------------------------------------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for altshift_taps:B297_ISEProject_hcc_782_VGAoutput_DTYPE0IR_colour_2_1_bit_15__rtl_0|shift_taps_8jm:auto_generated|altsyncram_fg31:altsyncram4 ;
++---------------------------------+--------------------+------+------------------------------------------------------------------------------------------------------+
+; Assignment                      ; Value              ; From ; To                                                                                                   ;
++---------------------------------+--------------------+------+------------------------------------------------------------------------------------------------------+
+; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                                                                                                    ;
++---------------------------------+--------------------+------+------------------------------------------------------------------------------------------------------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for altshift_taps:B340_ISEProject_hcc_782_VGAoutput_DTYPE0IR_colour_1_1_bit_6__rtl_1|shift_taps_6jm:auto_generated|altsyncram_a981:altsyncram2 ;
++---------------------------------+--------------------+------+-----------------------------------------------------------------------------------------------------+
+; Assignment                      ; Value              ; From ; To                                                                                                  ;
++---------------------------------+--------------------+------+-----------------------------------------------------------------------------------------------------+
+; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                                                                                                   ;
++---------------------------------+--------------------+------+-----------------------------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: LPM_MULT:B1032_ISEProject_hcc_973_VGAoutput_MULT18X18U ;
++------------------------------------------------+------------+---------------------------------------+
+; Parameter Name                                 ; Value      ; Type                                  ;
++------------------------------------------------+------------+---------------------------------------+
+; AUTO_CARRY_CHAINS                              ; ON         ; AUTO_CARRY                            ;
+; IGNORE_CARRY_BUFFERS                           ; OFF        ; IGNORE_CARRY                          ;
+; AUTO_CASCADE_CHAINS                            ; ON         ; AUTO_CASCADE                          ;
+; IGNORE_CASCADE_BUFFERS                         ; OFF        ; IGNORE_CASCADE                        ;
+; LPM_WIDTHA                                     ; 18         ; Untyped                               ;
+; LPM_WIDTHB                                     ; 18         ; Untyped                               ;
+; LPM_WIDTHP                                     ; 36         ; Untyped                               ;
+; LPM_WIDTHR                                     ; 0          ; Untyped                               ;
+; LPM_WIDTHS                                     ; 1          ; Untyped                               ;
+; LPM_REPRESENTATION                             ; UNSIGNED   ; Untyped                               ;
+; LPM_PIPELINE                                   ; 0          ; Untyped                               ;
+; LATENCY                                        ; 0          ; Untyped                               ;
+; INPUT_A_IS_CONSTANT                            ; NO         ; Untyped                               ;
+; INPUT_B_IS_CONSTANT                            ; NO         ; Untyped                               ;
+; USE_EAB                                        ; OFF        ; Untyped                               ;
+; MAXIMIZE_SPEED                                 ; 5          ; Untyped                               ;
+; DEVICE_FAMILY                                  ; Cyclone II ; Untyped                               ;
+; CARRY_CHAIN                                    ; MANUAL     ; Untyped                               ;
+; APEX20K_TECHNOLOGY_MAPPER                      ; LUT        ; TECH_MAPPER_APEX20K                   ;
+; DEDICATED_MULTIPLIER_CIRCUITRY                 ; YES        ; Untyped                               ;
+; DEDICATED_MULTIPLIER_MIN_INPUT_WIDTH_FOR_AUTO  ; 0          ; Untyped                               ;
+; DEDICATED_MULTIPLIER_MIN_OUTPUT_WIDTH_FOR_AUTO ; 0          ; Untyped                               ;
+; CBXI_PARAMETER                                 ; mult_thq   ; Untyped                               ;
+; INPUT_A_FIXED_VALUE                            ; Bx         ; Untyped                               ;
+; INPUT_B_FIXED_VALUE                            ; Bx         ; Untyped                               ;
+; USE_AHDL_IMPLEMENTATION                        ; OFF        ; Untyped                               ;
++------------------------------------------------+------------+---------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: LPM_MULT:B1049_ISEProject_hcc_974_VGAoutput_MULT18X18U ;
++------------------------------------------------+------------+---------------------------------------+
+; Parameter Name                                 ; Value      ; Type                                  ;
++------------------------------------------------+------------+---------------------------------------+
+; AUTO_CARRY_CHAINS                              ; ON         ; AUTO_CARRY                            ;
+; IGNORE_CARRY_BUFFERS                           ; OFF        ; IGNORE_CARRY                          ;
+; AUTO_CASCADE_CHAINS                            ; ON         ; AUTO_CASCADE                          ;
+; IGNORE_CASCADE_BUFFERS                         ; OFF        ; IGNORE_CASCADE                        ;
+; LPM_WIDTHA                                     ; 18         ; Untyped                               ;
+; LPM_WIDTHB                                     ; 18         ; Untyped                               ;
+; LPM_WIDTHP                                     ; 36         ; Untyped                               ;
+; LPM_WIDTHR                                     ; 0          ; Untyped                               ;
+; LPM_WIDTHS                                     ; 1          ; Untyped                               ;
+; LPM_REPRESENTATION                             ; UNSIGNED   ; Untyped                               ;
+; LPM_PIPELINE                                   ; 0          ; Untyped                               ;
+; LATENCY                                        ; 0          ; Untyped                               ;
+; INPUT_A_IS_CONSTANT                            ; NO         ; Untyped                               ;
+; INPUT_B_IS_CONSTANT                            ; NO         ; Untyped                               ;
+; USE_EAB                                        ; OFF        ; Untyped                               ;
+; MAXIMIZE_SPEED                                 ; 5          ; Untyped                               ;
+; DEVICE_FAMILY                                  ; Cyclone II ; Untyped                               ;
+; CARRY_CHAIN                                    ; MANUAL     ; Untyped                               ;
+; APEX20K_TECHNOLOGY_MAPPER                      ; LUT        ; TECH_MAPPER_APEX20K                   ;
+; DEDICATED_MULTIPLIER_CIRCUITRY                 ; YES        ; Untyped                               ;
+; DEDICATED_MULTIPLIER_MIN_INPUT_WIDTH_FOR_AUTO  ; 0          ; Untyped                               ;
+; DEDICATED_MULTIPLIER_MIN_OUTPUT_WIDTH_FOR_AUTO ; 0          ; Untyped                               ;
+; CBXI_PARAMETER                                 ; mult_thq   ; Untyped                               ;
+; INPUT_A_FIXED_VALUE                            ; Bx         ; Untyped                               ;
+; INPUT_B_FIXED_VALUE                            ; Bx         ; Untyped                               ;
+; USE_AHDL_IMPLEMENTATION                        ; OFF        ; Untyped                               ;
++------------------------------------------------+------------+---------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: LPM_MULT:B1066_ISEProject_hcc_991_VGAoutput_MULT18X18U ;
++------------------------------------------------+------------+---------------------------------------+
+; Parameter Name                                 ; Value      ; Type                                  ;
++------------------------------------------------+------------+---------------------------------------+
+; AUTO_CARRY_CHAINS                              ; ON         ; AUTO_CARRY                            ;
+; IGNORE_CARRY_BUFFERS                           ; OFF        ; IGNORE_CARRY                          ;
+; AUTO_CASCADE_CHAINS                            ; ON         ; AUTO_CASCADE                          ;
+; IGNORE_CASCADE_BUFFERS                         ; OFF        ; IGNORE_CASCADE                        ;
+; LPM_WIDTHA                                     ; 18         ; Untyped                               ;
+; LPM_WIDTHB                                     ; 18         ; Untyped                               ;
+; LPM_WIDTHP                                     ; 36         ; Untyped                               ;
+; LPM_WIDTHR                                     ; 0          ; Untyped                               ;
+; LPM_WIDTHS                                     ; 1          ; Untyped                               ;
+; LPM_REPRESENTATION                             ; UNSIGNED   ; Untyped                               ;
+; LPM_PIPELINE                                   ; 0          ; Untyped                               ;
+; LATENCY                                        ; 0          ; Untyped                               ;
+; INPUT_A_IS_CONSTANT                            ; NO         ; Untyped                               ;
+; INPUT_B_IS_CONSTANT                            ; NO         ; Untyped                               ;
+; USE_EAB                                        ; OFF        ; Untyped                               ;
+; MAXIMIZE_SPEED                                 ; 5          ; Untyped                               ;
+; DEVICE_FAMILY                                  ; Cyclone II ; Untyped                               ;
+; CARRY_CHAIN                                    ; MANUAL     ; Untyped                               ;
+; APEX20K_TECHNOLOGY_MAPPER                      ; LUT        ; TECH_MAPPER_APEX20K                   ;
+; DEDICATED_MULTIPLIER_CIRCUITRY                 ; YES        ; Untyped                               ;
+; DEDICATED_MULTIPLIER_MIN_INPUT_WIDTH_FOR_AUTO  ; 0          ; Untyped                               ;
+; DEDICATED_MULTIPLIER_MIN_OUTPUT_WIDTH_FOR_AUTO ; 0          ; Untyped                               ;
+; CBXI_PARAMETER                                 ; mult_thq   ; Untyped                               ;
+; INPUT_A_FIXED_VALUE                            ; Bx         ; Untyped                               ;
+; INPUT_B_FIXED_VALUE                            ; Bx         ; Untyped                               ;
+; USE_AHDL_IMPLEMENTATION                        ; OFF        ; Untyped                               ;
++------------------------------------------------+------------+---------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: LPM_MULT:B1083_ISEProject_hcc_992_VGAoutput_MULT18X18U ;
++------------------------------------------------+------------+---------------------------------------+
+; Parameter Name                                 ; Value      ; Type                                  ;
++------------------------------------------------+------------+---------------------------------------+
+; AUTO_CARRY_CHAINS                              ; ON         ; AUTO_CARRY                            ;
+; IGNORE_CARRY_BUFFERS                           ; OFF        ; IGNORE_CARRY                          ;
+; AUTO_CASCADE_CHAINS                            ; ON         ; AUTO_CASCADE                          ;
+; IGNORE_CASCADE_BUFFERS                         ; OFF        ; IGNORE_CASCADE                        ;
+; LPM_WIDTHA                                     ; 18         ; Untyped                               ;
+; LPM_WIDTHB                                     ; 18         ; Untyped                               ;
+; LPM_WIDTHP                                     ; 36         ; Untyped                               ;
+; LPM_WIDTHR                                     ; 0          ; Untyped                               ;
+; LPM_WIDTHS                                     ; 1          ; Untyped                               ;
+; LPM_REPRESENTATION                             ; UNSIGNED   ; Untyped                               ;
+; LPM_PIPELINE                                   ; 0          ; Untyped                               ;
+; LATENCY                                        ; 0          ; Untyped                               ;
+; INPUT_A_IS_CONSTANT                            ; NO         ; Untyped                               ;
+; INPUT_B_IS_CONSTANT                            ; NO         ; Untyped                               ;
+; USE_EAB                                        ; OFF        ; Untyped                               ;
+; MAXIMIZE_SPEED                                 ; 5          ; Untyped                               ;
+; DEVICE_FAMILY                                  ; Cyclone II ; Untyped                               ;
+; CARRY_CHAIN                                    ; MANUAL     ; Untyped                               ;
+; APEX20K_TECHNOLOGY_MAPPER                      ; LUT        ; TECH_MAPPER_APEX20K                   ;
+; DEDICATED_MULTIPLIER_CIRCUITRY                 ; YES        ; Untyped                               ;
+; DEDICATED_MULTIPLIER_MIN_INPUT_WIDTH_FOR_AUTO  ; 0          ; Untyped                               ;
+; DEDICATED_MULTIPLIER_MIN_OUTPUT_WIDTH_FOR_AUTO ; 0          ; Untyped                               ;
+; CBXI_PARAMETER                                 ; mult_thq   ; Untyped                               ;
+; INPUT_A_FIXED_VALUE                            ; Bx         ; Untyped                               ;
+; INPUT_B_FIXED_VALUE                            ; Bx         ; Untyped                               ;
+; USE_AHDL_IMPLEMENTATION                        ; OFF        ; Untyped                               ;
++------------------------------------------------+------------+---------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: LPM_MULT:B1100_ISEProject_hcc_1009_VGAoutput_MULT18X18U ;
++------------------------------------------------+------------+----------------------------------------+
+; Parameter Name                                 ; Value      ; Type                                   ;
++------------------------------------------------+------------+----------------------------------------+
+; AUTO_CARRY_CHAINS                              ; ON         ; AUTO_CARRY                             ;
+; IGNORE_CARRY_BUFFERS                           ; OFF        ; IGNORE_CARRY                           ;
+; AUTO_CASCADE_CHAINS                            ; ON         ; AUTO_CASCADE                           ;
+; IGNORE_CASCADE_BUFFERS                         ; OFF        ; IGNORE_CASCADE                         ;
+; LPM_WIDTHA                                     ; 18         ; Untyped                                ;
+; LPM_WIDTHB                                     ; 18         ; Untyped                                ;
+; LPM_WIDTHP                                     ; 36         ; Untyped                                ;
+; LPM_WIDTHR                                     ; 0          ; Untyped                                ;
+; LPM_WIDTHS                                     ; 1          ; Untyped                                ;
+; LPM_REPRESENTATION                             ; UNSIGNED   ; Untyped                                ;
+; LPM_PIPELINE                                   ; 0          ; Untyped                                ;
+; LATENCY                                        ; 0          ; Untyped                                ;
+; INPUT_A_IS_CONSTANT                            ; NO         ; Untyped                                ;
+; INPUT_B_IS_CONSTANT                            ; NO         ; Untyped                                ;
+; USE_EAB                                        ; OFF        ; Untyped                                ;
+; MAXIMIZE_SPEED                                 ; 5          ; Untyped                                ;
+; DEVICE_FAMILY                                  ; Cyclone II ; Untyped                                ;
+; CARRY_CHAIN                                    ; MANUAL     ; Untyped                                ;
+; APEX20K_TECHNOLOGY_MAPPER                      ; LUT        ; TECH_MAPPER_APEX20K                    ;
+; DEDICATED_MULTIPLIER_CIRCUITRY                 ; YES        ; Untyped                                ;
+; DEDICATED_MULTIPLIER_MIN_INPUT_WIDTH_FOR_AUTO  ; 0          ; Untyped                                ;
+; DEDICATED_MULTIPLIER_MIN_OUTPUT_WIDTH_FOR_AUTO ; 0          ; Untyped                                ;
+; CBXI_PARAMETER                                 ; mult_thq   ; Untyped                                ;
+; INPUT_A_FIXED_VALUE                            ; Bx         ; Untyped                                ;
+; INPUT_B_FIXED_VALUE                            ; Bx         ; Untyped                                ;
+; USE_AHDL_IMPLEMENTATION                        ; OFF        ; Untyped                                ;
++------------------------------------------------+------------+----------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: LPM_MULT:B1117_ISEProject_hcc_1010_VGAoutput_MULT18X18U ;
++------------------------------------------------+------------+----------------------------------------+
+; Parameter Name                                 ; Value      ; Type                                   ;
++------------------------------------------------+------------+----------------------------------------+
+; AUTO_CARRY_CHAINS                              ; ON         ; AUTO_CARRY                             ;
+; IGNORE_CARRY_BUFFERS                           ; OFF        ; IGNORE_CARRY                           ;
+; AUTO_CASCADE_CHAINS                            ; ON         ; AUTO_CASCADE                           ;
+; IGNORE_CASCADE_BUFFERS                         ; OFF        ; IGNORE_CASCADE                         ;
+; LPM_WIDTHA                                     ; 18         ; Untyped                                ;
+; LPM_WIDTHB                                     ; 18         ; Untyped                                ;
+; LPM_WIDTHP                                     ; 36         ; Untyped                                ;
+; LPM_WIDTHR                                     ; 0          ; Untyped                                ;
+; LPM_WIDTHS                                     ; 1          ; Untyped                                ;
+; LPM_REPRESENTATION                             ; UNSIGNED   ; Untyped                                ;
+; LPM_PIPELINE                                   ; 0          ; Untyped                                ;
+; LATENCY                                        ; 0          ; Untyped                                ;
+; INPUT_A_IS_CONSTANT                            ; NO         ; Untyped                                ;
+; INPUT_B_IS_CONSTANT                            ; NO         ; Untyped                                ;
+; USE_EAB                                        ; OFF        ; Untyped                                ;
+; MAXIMIZE_SPEED                                 ; 5          ; Untyped                                ;
+; DEVICE_FAMILY                                  ; Cyclone II ; Untyped                                ;
+; CARRY_CHAIN                                    ; MANUAL     ; Untyped                                ;
+; APEX20K_TECHNOLOGY_MAPPER                      ; LUT        ; TECH_MAPPER_APEX20K                    ;
+; DEDICATED_MULTIPLIER_CIRCUITRY                 ; YES        ; Untyped                                ;
+; DEDICATED_MULTIPLIER_MIN_INPUT_WIDTH_FOR_AUTO  ; 0          ; Untyped                                ;
+; DEDICATED_MULTIPLIER_MIN_OUTPUT_WIDTH_FOR_AUTO ; 0          ; Untyped                                ;
+; CBXI_PARAMETER                                 ; mult_thq   ; Untyped                                ;
+; INPUT_A_FIXED_VALUE                            ; Bx         ; Untyped                                ;
+; INPUT_B_FIXED_VALUE                            ; Bx         ; Untyped                                ;
+; USE_AHDL_IMPLEMENTATION                        ; OFF        ; Untyped                                ;
++------------------------------------------------+------------+----------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: LPM_MULT:B770_ISEProject_hcc_885_VGAoutput_MULT18X18U ;
++------------------------------------------------+------------+--------------------------------------+
+; Parameter Name                                 ; Value      ; Type                                 ;
++------------------------------------------------+------------+--------------------------------------+
+; AUTO_CARRY_CHAINS                              ; ON         ; AUTO_CARRY                           ;
+; IGNORE_CARRY_BUFFERS                           ; OFF        ; IGNORE_CARRY                         ;
+; AUTO_CASCADE_CHAINS                            ; ON         ; AUTO_CASCADE                         ;
+; IGNORE_CASCADE_BUFFERS                         ; OFF        ; IGNORE_CASCADE                       ;
+; LPM_WIDTHA                                     ; 18         ; Untyped                              ;
+; LPM_WIDTHB                                     ; 18         ; Untyped                              ;
+; LPM_WIDTHP                                     ; 36         ; Untyped                              ;
+; LPM_WIDTHR                                     ; 0          ; Untyped                              ;
+; LPM_WIDTHS                                     ; 1          ; Untyped                              ;
+; LPM_REPRESENTATION                             ; UNSIGNED   ; Untyped                              ;
+; LPM_PIPELINE                                   ; 0          ; Untyped                              ;
+; LATENCY                                        ; 0          ; Untyped                              ;
+; INPUT_A_IS_CONSTANT                            ; NO         ; Untyped                              ;
+; INPUT_B_IS_CONSTANT                            ; NO         ; Untyped                              ;
+; USE_EAB                                        ; OFF        ; Untyped                              ;
+; MAXIMIZE_SPEED                                 ; 5          ; Untyped                              ;
+; DEVICE_FAMILY                                  ; Cyclone II ; Untyped                              ;
+; CARRY_CHAIN                                    ; MANUAL     ; Untyped                              ;
+; APEX20K_TECHNOLOGY_MAPPER                      ; LUT        ; TECH_MAPPER_APEX20K                  ;
+; DEDICATED_MULTIPLIER_CIRCUITRY                 ; YES        ; Untyped                              ;
+; DEDICATED_MULTIPLIER_MIN_INPUT_WIDTH_FOR_AUTO  ; 0          ; Untyped                              ;
+; DEDICATED_MULTIPLIER_MIN_OUTPUT_WIDTH_FOR_AUTO ; 0          ; Untyped                              ;
+; CBXI_PARAMETER                                 ; mult_thq   ; Untyped                              ;
+; INPUT_A_FIXED_VALUE                            ; Bx         ; Untyped                              ;
+; INPUT_B_FIXED_VALUE                            ; Bx         ; Untyped                              ;
+; USE_AHDL_IMPLEMENTATION                        ; OFF        ; Untyped                              ;
++------------------------------------------------+------------+--------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: LPM_MULT:B787_ISEProject_hcc_886_VGAoutput_MULT18X18U ;
++------------------------------------------------+------------+--------------------------------------+
+; Parameter Name                                 ; Value      ; Type                                 ;
++------------------------------------------------+------------+--------------------------------------+
+; AUTO_CARRY_CHAINS                              ; ON         ; AUTO_CARRY                           ;
+; IGNORE_CARRY_BUFFERS                           ; OFF        ; IGNORE_CARRY                         ;
+; AUTO_CASCADE_CHAINS                            ; ON         ; AUTO_CASCADE                         ;
+; IGNORE_CASCADE_BUFFERS                         ; OFF        ; IGNORE_CASCADE                       ;
+; LPM_WIDTHA                                     ; 18         ; Untyped                              ;
+; LPM_WIDTHB                                     ; 18         ; Untyped                              ;
+; LPM_WIDTHP                                     ; 36         ; Untyped                              ;
+; LPM_WIDTHR                                     ; 0          ; Untyped                              ;
+; LPM_WIDTHS                                     ; 1          ; Untyped                              ;
+; LPM_REPRESENTATION                             ; UNSIGNED   ; Untyped                              ;
+; LPM_PIPELINE                                   ; 0          ; Untyped                              ;
+; LATENCY                                        ; 0          ; Untyped                              ;
+; INPUT_A_IS_CONSTANT                            ; NO         ; Untyped                              ;
+; INPUT_B_IS_CONSTANT                            ; NO         ; Untyped                              ;
+; USE_EAB                                        ; OFF        ; Untyped                              ;
+; MAXIMIZE_SPEED                                 ; 5          ; Untyped                              ;
+; DEVICE_FAMILY                                  ; Cyclone II ; Untyped                              ;
+; CARRY_CHAIN                                    ; MANUAL     ; Untyped                              ;
+; APEX20K_TECHNOLOGY_MAPPER                      ; LUT        ; TECH_MAPPER_APEX20K                  ;
+; DEDICATED_MULTIPLIER_CIRCUITRY                 ; YES        ; Untyped                              ;
+; DEDICATED_MULTIPLIER_MIN_INPUT_WIDTH_FOR_AUTO  ; 0          ; Untyped                              ;
+; DEDICATED_MULTIPLIER_MIN_OUTPUT_WIDTH_FOR_AUTO ; 0          ; Untyped                              ;
+; CBXI_PARAMETER                                 ; mult_thq   ; Untyped                              ;
+; INPUT_A_FIXED_VALUE                            ; Bx         ; Untyped                              ;
+; INPUT_B_FIXED_VALUE                            ; Bx         ; Untyped                              ;
+; USE_AHDL_IMPLEMENTATION                        ; OFF        ; Untyped                              ;
++------------------------------------------------+------------+--------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: LPM_MULT:B804_ISEProject_hcc_903_VGAoutput_MULT18X18U ;
++------------------------------------------------+------------+--------------------------------------+
+; Parameter Name                                 ; Value      ; Type                                 ;
++------------------------------------------------+------------+--------------------------------------+
+; AUTO_CARRY_CHAINS                              ; ON         ; AUTO_CARRY                           ;
+; IGNORE_CARRY_BUFFERS                           ; OFF        ; IGNORE_CARRY                         ;
+; AUTO_CASCADE_CHAINS                            ; ON         ; AUTO_CASCADE                         ;
+; IGNORE_CASCADE_BUFFERS                         ; OFF        ; IGNORE_CASCADE                       ;
+; LPM_WIDTHA                                     ; 18         ; Untyped                              ;
+; LPM_WIDTHB                                     ; 18         ; Untyped                              ;
+; LPM_WIDTHP                                     ; 36         ; Untyped                              ;
+; LPM_WIDTHR                                     ; 0          ; Untyped                              ;
+; LPM_WIDTHS                                     ; 1          ; Untyped                              ;
+; LPM_REPRESENTATION                             ; UNSIGNED   ; Untyped                              ;
+; LPM_PIPELINE                                   ; 0          ; Untyped                              ;
+; LATENCY                                        ; 0          ; Untyped                              ;
+; INPUT_A_IS_CONSTANT                            ; NO         ; Untyped                              ;
+; INPUT_B_IS_CONSTANT                            ; NO         ; Untyped                              ;
+; USE_EAB                                        ; OFF        ; Untyped                              ;
+; MAXIMIZE_SPEED                                 ; 5          ; Untyped                              ;
+; DEVICE_FAMILY                                  ; Cyclone II ; Untyped                              ;
+; CARRY_CHAIN                                    ; MANUAL     ; Untyped                              ;
+; APEX20K_TECHNOLOGY_MAPPER                      ; LUT        ; TECH_MAPPER_APEX20K                  ;
+; DEDICATED_MULTIPLIER_CIRCUITRY                 ; YES        ; Untyped                              ;
+; DEDICATED_MULTIPLIER_MIN_INPUT_WIDTH_FOR_AUTO  ; 0          ; Untyped                              ;
+; DEDICATED_MULTIPLIER_MIN_OUTPUT_WIDTH_FOR_AUTO ; 0          ; Untyped                              ;
+; CBXI_PARAMETER                                 ; mult_thq   ; Untyped                              ;
+; INPUT_A_FIXED_VALUE                            ; Bx         ; Untyped                              ;
+; INPUT_B_FIXED_VALUE                            ; Bx         ; Untyped                              ;
+; USE_AHDL_IMPLEMENTATION                        ; OFF        ; Untyped                              ;
++------------------------------------------------+------------+--------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: LPM_MULT:B821_ISEProject_hcc_921_VGAoutput_MULT18X18U ;
++------------------------------------------------+------------+--------------------------------------+
+; Parameter Name                                 ; Value      ; Type                                 ;
++------------------------------------------------+------------+--------------------------------------+
+; AUTO_CARRY_CHAINS                              ; ON         ; AUTO_CARRY                           ;
+; IGNORE_CARRY_BUFFERS                           ; OFF        ; IGNORE_CARRY                         ;
+; AUTO_CASCADE_CHAINS                            ; ON         ; AUTO_CASCADE                         ;
+; IGNORE_CASCADE_BUFFERS                         ; OFF        ; IGNORE_CASCADE                       ;
+; LPM_WIDTHA                                     ; 18         ; Untyped                              ;
+; LPM_WIDTHB                                     ; 18         ; Untyped                              ;
+; LPM_WIDTHP                                     ; 36         ; Untyped                              ;
+; LPM_WIDTHR                                     ; 0          ; Untyped                              ;
+; LPM_WIDTHS                                     ; 1          ; Untyped                              ;
+; LPM_REPRESENTATION                             ; UNSIGNED   ; Untyped                              ;
+; LPM_PIPELINE                                   ; 0          ; Untyped                              ;
+; LATENCY                                        ; 0          ; Untyped                              ;
+; INPUT_A_IS_CONSTANT                            ; NO         ; Untyped                              ;
+; INPUT_B_IS_CONSTANT                            ; NO         ; Untyped                              ;
+; USE_EAB                                        ; OFF        ; Untyped                              ;
+; MAXIMIZE_SPEED                                 ; 5          ; Untyped                              ;
+; DEVICE_FAMILY                                  ; Cyclone II ; Untyped                              ;
+; CARRY_CHAIN                                    ; MANUAL     ; Untyped                              ;
+; APEX20K_TECHNOLOGY_MAPPER                      ; LUT        ; TECH_MAPPER_APEX20K                  ;
+; DEDICATED_MULTIPLIER_CIRCUITRY                 ; YES        ; Untyped                              ;
+; DEDICATED_MULTIPLIER_MIN_INPUT_WIDTH_FOR_AUTO  ; 0          ; Untyped                              ;
+; DEDICATED_MULTIPLIER_MIN_OUTPUT_WIDTH_FOR_AUTO ; 0          ; Untyped                              ;
+; CBXI_PARAMETER                                 ; mult_thq   ; Untyped                              ;
+; INPUT_A_FIXED_VALUE                            ; Bx         ; Untyped                              ;
+; INPUT_B_FIXED_VALUE                            ; Bx         ; Untyped                              ;
+; USE_AHDL_IMPLEMENTATION                        ; OFF        ; Untyped                              ;
++------------------------------------------------+------------+--------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: ALTSYNCRAM:SDPRAM_B300_ISEProject_hcc_78_LPMMPRAM_FIFORam ;
++------------------------------------+----------------------+--------------------------------------------+
+; Parameter Name                     ; Value                ; Type                                       ;
++------------------------------------+----------------------+--------------------------------------------+
+; BYTE_SIZE_BLOCK                    ; 8                    ; Untyped                                    ;
+; AUTO_CARRY_CHAINS                  ; ON                   ; AUTO_CARRY                                 ;
+; IGNORE_CARRY_BUFFERS               ; OFF                  ; IGNORE_CARRY                               ;
+; AUTO_CASCADE_CHAINS                ; ON                   ; AUTO_CASCADE                               ;
+; IGNORE_CASCADE_BUFFERS             ; OFF                  ; IGNORE_CASCADE                             ;
+; WIDTH_BYTEENA                      ; 1                    ; Untyped                                    ;
+; OPERATION_MODE                     ; DUAL_PORT            ; Untyped                                    ;
+; WIDTH_A                            ; 10                   ; Untyped                                    ;
+; WIDTHAD_A                          ; 10                   ; Untyped                                    ;
+; NUMWORDS_A                         ; 1024                 ; Untyped                                    ;
+; OUTDATA_REG_A                      ; UNREGISTERED         ; Untyped                                    ;
+; ADDRESS_ACLR_A                     ; NONE                 ; Untyped                                    ;
+; OUTDATA_ACLR_A                     ; NONE                 ; Untyped                                    ;
+; WRCONTROL_ACLR_A                   ; NONE                 ; Untyped                                    ;
+; INDATA_ACLR_A                      ; NONE                 ; Untyped                                    ;
+; BYTEENA_ACLR_A                     ; NONE                 ; Untyped                                    ;
+; WIDTH_B                            ; 10                   ; Untyped                                    ;
+; WIDTHAD_B                          ; 10                   ; Untyped                                    ;
+; NUMWORDS_B                         ; 1024                 ; Untyped                                    ;
+; INDATA_REG_B                       ; CLOCK1               ; Untyped                                    ;
+; WRCONTROL_WRADDRESS_REG_B          ; CLOCK1               ; Untyped                                    ;
+; RDCONTROL_REG_B                    ; CLOCK1               ; Untyped                                    ;
+; ADDRESS_REG_B                      ; CLOCK1               ; Untyped                                    ;
+; OUTDATA_REG_B                      ; UNREGISTERED         ; Untyped                                    ;
+; BYTEENA_REG_B                      ; CLOCK1               ; Untyped                                    ;
+; INDATA_ACLR_B                      ; NONE                 ; Untyped                                    ;
+; WRCONTROL_ACLR_B                   ; NONE                 ; Untyped                                    ;
+; ADDRESS_ACLR_B                     ; NONE                 ; Untyped                                    ;
+; OUTDATA_ACLR_B                     ; NONE                 ; Untyped                                    ;
+; RDCONTROL_ACLR_B                   ; NONE                 ; Untyped                                    ;
+; BYTEENA_ACLR_B                     ; NONE                 ; Untyped                                    ;
+; WIDTH_BYTEENA_A                    ; 1                    ; Untyped                                    ;
+; WIDTH_BYTEENA_B                    ; 1                    ; Untyped                                    ;
+; RAM_BLOCK_TYPE                     ; AUTO                 ; Untyped                                    ;
+; BYTE_SIZE                          ; 8                    ; Untyped                                    ;
+; READ_DURING_WRITE_MODE_MIXED_PORTS ; OLD_DATA             ; Untyped                                    ;
+; READ_DURING_WRITE_MODE_PORT_A      ; NEW_DATA_NO_NBE_READ ; Untyped                                    ;
+; READ_DURING_WRITE_MODE_PORT_B      ; NEW_DATA_NO_NBE_READ ; Untyped                                    ;
+; INIT_FILE                          ; UNUSED               ; Untyped                                    ;
+; INIT_FILE_LAYOUT                   ; PORT_A               ; Untyped                                    ;
+; MAXIMUM_DEPTH                      ; 0                    ; Untyped                                    ;
+; CLOCK_ENABLE_INPUT_A               ; NORMAL               ; Untyped                                    ;
+; CLOCK_ENABLE_INPUT_B               ; NORMAL               ; Untyped                                    ;
+; CLOCK_ENABLE_OUTPUT_A              ; NORMAL               ; Untyped                                    ;
+; CLOCK_ENABLE_OUTPUT_B              ; NORMAL               ; Untyped                                    ;
+; CLOCK_ENABLE_CORE_A                ; USE_INPUT_CLKEN      ; Untyped                                    ;
+; CLOCK_ENABLE_CORE_B                ; USE_INPUT_CLKEN      ; Untyped                                    ;
+; ENABLE_ECC                         ; FALSE                ; Untyped                                    ;
+; DEVICE_FAMILY                      ; Cyclone II           ; Untyped                                    ;
+; CBXI_PARAMETER                     ; altsyncram_2dq1      ; Untyped                                    ;
++------------------------------------+----------------------+--------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: ALTSYNCRAM:SDPRAM_B402_ISEProject_hcc_79_LPMMPRAM_FIFORam ;
++------------------------------------+----------------------+--------------------------------------------+
+; Parameter Name                     ; Value                ; Type                                       ;
++------------------------------------+----------------------+--------------------------------------------+
+; BYTE_SIZE_BLOCK                    ; 8                    ; Untyped                                    ;
+; AUTO_CARRY_CHAINS                  ; ON                   ; AUTO_CARRY                                 ;
+; IGNORE_CARRY_BUFFERS               ; OFF                  ; IGNORE_CARRY                               ;
+; AUTO_CASCADE_CHAINS                ; ON                   ; AUTO_CASCADE                               ;
+; IGNORE_CASCADE_BUFFERS             ; OFF                  ; IGNORE_CASCADE                             ;
+; WIDTH_BYTEENA                      ; 1                    ; Untyped                                    ;
+; OPERATION_MODE                     ; DUAL_PORT            ; Untyped                                    ;
+; WIDTH_A                            ; 10                   ; Untyped                                    ;
+; WIDTHAD_A                          ; 10                   ; Untyped                                    ;
+; NUMWORDS_A                         ; 1024                 ; Untyped                                    ;
+; OUTDATA_REG_A                      ; UNREGISTERED         ; Untyped                                    ;
+; ADDRESS_ACLR_A                     ; NONE                 ; Untyped                                    ;
+; OUTDATA_ACLR_A                     ; NONE                 ; Untyped                                    ;
+; WRCONTROL_ACLR_A                   ; NONE                 ; Untyped                                    ;
+; INDATA_ACLR_A                      ; NONE                 ; Untyped                                    ;
+; BYTEENA_ACLR_A                     ; NONE                 ; Untyped                                    ;
+; WIDTH_B                            ; 10                   ; Untyped                                    ;
+; WIDTHAD_B                          ; 10                   ; Untyped                                    ;
+; NUMWORDS_B                         ; 1024                 ; Untyped                                    ;
+; INDATA_REG_B                       ; CLOCK1               ; Untyped                                    ;
+; WRCONTROL_WRADDRESS_REG_B          ; CLOCK1               ; Untyped                                    ;
+; RDCONTROL_REG_B                    ; CLOCK1               ; Untyped                                    ;
+; ADDRESS_REG_B                      ; CLOCK1               ; Untyped                                    ;
+; OUTDATA_REG_B                      ; UNREGISTERED         ; Untyped                                    ;
+; BYTEENA_REG_B                      ; CLOCK1               ; Untyped                                    ;
+; INDATA_ACLR_B                      ; NONE                 ; Untyped                                    ;
+; WRCONTROL_ACLR_B                   ; NONE                 ; Untyped                                    ;
+; ADDRESS_ACLR_B                     ; NONE                 ; Untyped                                    ;
+; OUTDATA_ACLR_B                     ; NONE                 ; Untyped                                    ;
+; RDCONTROL_ACLR_B                   ; NONE                 ; Untyped                                    ;
+; BYTEENA_ACLR_B                     ; NONE                 ; Untyped                                    ;
+; WIDTH_BYTEENA_A                    ; 1                    ; Untyped                                    ;
+; WIDTH_BYTEENA_B                    ; 1                    ; Untyped                                    ;
+; RAM_BLOCK_TYPE                     ; AUTO                 ; Untyped                                    ;
+; BYTE_SIZE                          ; 8                    ; Untyped                                    ;
+; READ_DURING_WRITE_MODE_MIXED_PORTS ; OLD_DATA             ; Untyped                                    ;
+; READ_DURING_WRITE_MODE_PORT_A      ; NEW_DATA_NO_NBE_READ ; Untyped                                    ;
+; READ_DURING_WRITE_MODE_PORT_B      ; NEW_DATA_NO_NBE_READ ; Untyped                                    ;
+; INIT_FILE                          ; UNUSED               ; Untyped                                    ;
+; INIT_FILE_LAYOUT                   ; PORT_A               ; Untyped                                    ;
+; MAXIMUM_DEPTH                      ; 0                    ; Untyped                                    ;
+; CLOCK_ENABLE_INPUT_A               ; NORMAL               ; Untyped                                    ;
+; CLOCK_ENABLE_INPUT_B               ; NORMAL               ; Untyped                                    ;
+; CLOCK_ENABLE_OUTPUT_A              ; NORMAL               ; Untyped                                    ;
+; CLOCK_ENABLE_OUTPUT_B              ; NORMAL               ; Untyped                                    ;
+; CLOCK_ENABLE_CORE_A                ; USE_INPUT_CLKEN      ; Untyped                                    ;
+; CLOCK_ENABLE_CORE_B                ; USE_INPUT_CLKEN      ; Untyped                                    ;
+; ENABLE_ECC                         ; FALSE                ; Untyped                                    ;
+; DEVICE_FAMILY                      ; Cyclone II           ; Untyped                                    ;
+; CBXI_PARAMETER                     ; altsyncram_2dq1      ; Untyped                                    ;
++------------------------------------+----------------------+--------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: ALTSYNCRAM:SDPRAM_B517_ISEProject_hcc_80_LPMMPRAM_FIFORam ;
++------------------------------------+----------------------+--------------------------------------------+
+; Parameter Name                     ; Value                ; Type                                       ;
++------------------------------------+----------------------+--------------------------------------------+
+; BYTE_SIZE_BLOCK                    ; 8                    ; Untyped                                    ;
+; AUTO_CARRY_CHAINS                  ; ON                   ; AUTO_CARRY                                 ;
+; IGNORE_CARRY_BUFFERS               ; OFF                  ; IGNORE_CARRY                               ;
+; AUTO_CASCADE_CHAINS                ; ON                   ; AUTO_CASCADE                               ;
+; IGNORE_CASCADE_BUFFERS             ; OFF                  ; IGNORE_CASCADE                             ;
+; WIDTH_BYTEENA                      ; 1                    ; Untyped                                    ;
+; OPERATION_MODE                     ; DUAL_PORT            ; Untyped                                    ;
+; WIDTH_A                            ; 16                   ; Untyped                                    ;
+; WIDTHAD_A                          ; 10                   ; Untyped                                    ;
+; NUMWORDS_A                         ; 1024                 ; Untyped                                    ;
+; OUTDATA_REG_A                      ; UNREGISTERED         ; Untyped                                    ;
+; ADDRESS_ACLR_A                     ; NONE                 ; Untyped                                    ;
+; OUTDATA_ACLR_A                     ; NONE                 ; Untyped                                    ;
+; WRCONTROL_ACLR_A                   ; NONE                 ; Untyped                                    ;
+; INDATA_ACLR_A                      ; NONE                 ; Untyped                                    ;
+; BYTEENA_ACLR_A                     ; NONE                 ; Untyped                                    ;
+; WIDTH_B                            ; 16                   ; Untyped                                    ;
+; WIDTHAD_B                          ; 10                   ; Untyped                                    ;
+; NUMWORDS_B                         ; 1024                 ; Untyped                                    ;
+; INDATA_REG_B                       ; CLOCK1               ; Untyped                                    ;
+; WRCONTROL_WRADDRESS_REG_B          ; CLOCK1               ; Untyped                                    ;
+; RDCONTROL_REG_B                    ; CLOCK1               ; Untyped                                    ;
+; ADDRESS_REG_B                      ; CLOCK1               ; Untyped                                    ;
+; OUTDATA_REG_B                      ; UNREGISTERED         ; Untyped                                    ;
+; BYTEENA_REG_B                      ; CLOCK1               ; Untyped                                    ;
+; INDATA_ACLR_B                      ; NONE                 ; Untyped                                    ;
+; WRCONTROL_ACLR_B                   ; NONE                 ; Untyped                                    ;
+; ADDRESS_ACLR_B                     ; NONE                 ; Untyped                                    ;
+; OUTDATA_ACLR_B                     ; NONE                 ; Untyped                                    ;
+; RDCONTROL_ACLR_B                   ; NONE                 ; Untyped                                    ;
+; BYTEENA_ACLR_B                     ; NONE                 ; Untyped                                    ;
+; WIDTH_BYTEENA_A                    ; 1                    ; Untyped                                    ;
+; WIDTH_BYTEENA_B                    ; 1                    ; Untyped                                    ;
+; RAM_BLOCK_TYPE                     ; AUTO                 ; Untyped                                    ;
+; BYTE_SIZE                          ; 8                    ; Untyped                                    ;
+; READ_DURING_WRITE_MODE_MIXED_PORTS ; OLD_DATA             ; Untyped                                    ;
+; READ_DURING_WRITE_MODE_PORT_A      ; NEW_DATA_NO_NBE_READ ; Untyped                                    ;
+; READ_DURING_WRITE_MODE_PORT_B      ; NEW_DATA_NO_NBE_READ ; Untyped                                    ;
+; INIT_FILE                          ; UNUSED               ; Untyped                                    ;
+; INIT_FILE_LAYOUT                   ; PORT_A               ; Untyped                                    ;
+; MAXIMUM_DEPTH                      ; 0                    ; Untyped                                    ;
+; CLOCK_ENABLE_INPUT_A               ; NORMAL               ; Untyped                                    ;
+; CLOCK_ENABLE_INPUT_B               ; NORMAL               ; Untyped                                    ;
+; CLOCK_ENABLE_OUTPUT_A              ; NORMAL               ; Untyped                                    ;
+; CLOCK_ENABLE_OUTPUT_B              ; NORMAL               ; Untyped                                    ;
+; CLOCK_ENABLE_CORE_A                ; USE_INPUT_CLKEN      ; Untyped                                    ;
+; CLOCK_ENABLE_CORE_B                ; USE_INPUT_CLKEN      ; Untyped                                    ;
+; ENABLE_ECC                         ; FALSE                ; Untyped                                    ;
+; DEVICE_FAMILY                      ; Cyclone II           ; Untyped                                    ;
+; CBXI_PARAMETER                     ; altsyncram_edq1      ; Untyped                                    ;
++------------------------------------+----------------------+--------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: ALTSYNCRAM:SDPRAM_B631_ISEProject_hcc_81_LPMMPRAM_FIFORam ;
++------------------------------------+----------------------+--------------------------------------------+
+; Parameter Name                     ; Value                ; Type                                       ;
++------------------------------------+----------------------+--------------------------------------------+
+; BYTE_SIZE_BLOCK                    ; 8                    ; Untyped                                    ;
+; AUTO_CARRY_CHAINS                  ; ON                   ; AUTO_CARRY                                 ;
+; IGNORE_CARRY_BUFFERS               ; OFF                  ; IGNORE_CARRY                               ;
+; AUTO_CASCADE_CHAINS                ; ON                   ; AUTO_CASCADE                               ;
+; IGNORE_CASCADE_BUFFERS             ; OFF                  ; IGNORE_CASCADE                             ;
+; WIDTH_BYTEENA                      ; 1                    ; Untyped                                    ;
+; OPERATION_MODE                     ; DUAL_PORT            ; Untyped                                    ;
+; WIDTH_A                            ; 16                   ; Untyped                                    ;
+; WIDTHAD_A                          ; 10                   ; Untyped                                    ;
+; NUMWORDS_A                         ; 1024                 ; Untyped                                    ;
+; OUTDATA_REG_A                      ; UNREGISTERED         ; Untyped                                    ;
+; ADDRESS_ACLR_A                     ; NONE                 ; Untyped                                    ;
+; OUTDATA_ACLR_A                     ; NONE                 ; Untyped                                    ;
+; WRCONTROL_ACLR_A                   ; NONE                 ; Untyped                                    ;
+; INDATA_ACLR_A                      ; NONE                 ; Untyped                                    ;
+; BYTEENA_ACLR_A                     ; NONE                 ; Untyped                                    ;
+; WIDTH_B                            ; 16                   ; Untyped                                    ;
+; WIDTHAD_B                          ; 10                   ; Untyped                                    ;
+; NUMWORDS_B                         ; 1024                 ; Untyped                                    ;
+; INDATA_REG_B                       ; CLOCK1               ; Untyped                                    ;
+; WRCONTROL_WRADDRESS_REG_B          ; CLOCK1               ; Untyped                                    ;
+; RDCONTROL_REG_B                    ; CLOCK1               ; Untyped                                    ;
+; ADDRESS_REG_B                      ; CLOCK1               ; Untyped                                    ;
+; OUTDATA_REG_B                      ; UNREGISTERED         ; Untyped                                    ;
+; BYTEENA_REG_B                      ; CLOCK1               ; Untyped                                    ;
+; INDATA_ACLR_B                      ; NONE                 ; Untyped                                    ;
+; WRCONTROL_ACLR_B                   ; NONE                 ; Untyped                                    ;
+; ADDRESS_ACLR_B                     ; NONE                 ; Untyped                                    ;
+; OUTDATA_ACLR_B                     ; NONE                 ; Untyped                                    ;
+; RDCONTROL_ACLR_B                   ; NONE                 ; Untyped                                    ;
+; BYTEENA_ACLR_B                     ; NONE                 ; Untyped                                    ;
+; WIDTH_BYTEENA_A                    ; 1                    ; Untyped                                    ;
+; WIDTH_BYTEENA_B                    ; 1                    ; Untyped                                    ;
+; RAM_BLOCK_TYPE                     ; AUTO                 ; Untyped                                    ;
+; BYTE_SIZE                          ; 8                    ; Untyped                                    ;
+; READ_DURING_WRITE_MODE_MIXED_PORTS ; OLD_DATA             ; Untyped                                    ;
+; READ_DURING_WRITE_MODE_PORT_A      ; NEW_DATA_NO_NBE_READ ; Untyped                                    ;
+; READ_DURING_WRITE_MODE_PORT_B      ; NEW_DATA_NO_NBE_READ ; Untyped                                    ;
+; INIT_FILE                          ; UNUSED               ; Untyped                                    ;
+; INIT_FILE_LAYOUT                   ; PORT_A               ; Untyped                                    ;
+; MAXIMUM_DEPTH                      ; 0                    ; Untyped                                    ;
+; CLOCK_ENABLE_INPUT_A               ; NORMAL               ; Untyped                                    ;
+; CLOCK_ENABLE_INPUT_B               ; NORMAL               ; Untyped                                    ;
+; CLOCK_ENABLE_OUTPUT_A              ; NORMAL               ; Untyped                                    ;
+; CLOCK_ENABLE_OUTPUT_B              ; NORMAL               ; Untyped                                    ;
+; CLOCK_ENABLE_CORE_A                ; USE_INPUT_CLKEN      ; Untyped                                    ;
+; CLOCK_ENABLE_CORE_B                ; USE_INPUT_CLKEN      ; Untyped                                    ;
+; ENABLE_ECC                         ; FALSE                ; Untyped                                    ;
+; DEVICE_FAMILY                      ; Cyclone II           ; Untyped                                    ;
+; CBXI_PARAMETER                     ; altsyncram_edq1      ; Untyped                                    ;
++------------------------------------+----------------------+--------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: altshift_taps:B297_ISEProject_hcc_782_VGAoutput_DTYPE0IR_colour_2_1_bit_15__rtl_0 ;
++----------------+----------------+--------------------------------------------------------------------------------------------------+
+; Parameter Name ; Value          ; Type                                                                                             ;
++----------------+----------------+--------------------------------------------------------------------------------------------------+
+; WIDTH_BYTEENA  ; 1              ; Untyped                                                                                          ;
+; NUMBER_OF_TAPS ; 1              ; Untyped                                                                                          ;
+; TAP_DISTANCE   ; 3              ; Untyped                                                                                          ;
+; WIDTH          ; 15             ; Untyped                                                                                          ;
+; POWER_UP_STATE ; CLEARED        ; Untyped                                                                                          ;
+; CBXI_PARAMETER ; shift_taps_8jm ; Untyped                                                                                          ;
++----------------+----------------+--------------------------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: altshift_taps:B340_ISEProject_hcc_782_VGAoutput_DTYPE0IR_colour_1_1_bit_6__rtl_1 ;
++----------------+----------------+-------------------------------------------------------------------------------------------------+
+; Parameter Name ; Value          ; Type                                                                                            ;
++----------------+----------------+-------------------------------------------------------------------------------------------------+
+; WIDTH_BYTEENA  ; 1              ; Untyped                                                                                         ;
+; NUMBER_OF_TAPS ; 1              ; Untyped                                                                                         ;
+; TAP_DISTANCE   ; 5              ; Untyped                                                                                         ;
+; WIDTH          ; 22             ; Untyped                                                                                         ;
+; POWER_UP_STATE ; CLEARED        ; Untyped                                                                                         ;
+; CBXI_PARAMETER ; shift_taps_6jm ; Untyped                                                                                         ;
++----------------+----------------+-------------------------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------------------------------+
+; lpm_mult Parameter Settings by Entity Instance                                                  ;
++---------------------------------------+---------------------------------------------------------+
+; Name                                  ; Value                                                   ;
++---------------------------------------+---------------------------------------------------------+
+; Number of entity instances            ; 10                                                      ;
+; Entity Instance                       ; LPM_MULT:B1032_ISEProject_hcc_973_VGAoutput_MULT18X18U  ;
+;     -- LPM_WIDTHA                     ; 18                                                      ;
+;     -- LPM_WIDTHB                     ; 18                                                      ;
+;     -- LPM_WIDTHP                     ; 36                                                      ;
+;     -- LPM_REPRESENTATION             ; UNSIGNED                                                ;
+;     -- INPUT_A_IS_CONSTANT            ; NO                                                      ;
+;     -- INPUT_B_IS_CONSTANT            ; NO                                                      ;
+;     -- USE_EAB                        ; OFF                                                     ;
+;     -- DEDICATED_MULTIPLIER_CIRCUITRY ; YES                                                     ;
+;     -- INPUT_A_FIXED_VALUE            ; Bx                                                      ;
+;     -- INPUT_B_FIXED_VALUE            ; Bx                                                      ;
+; Entity Instance                       ; LPM_MULT:B1049_ISEProject_hcc_974_VGAoutput_MULT18X18U  ;
+;     -- LPM_WIDTHA                     ; 18                                                      ;
+;     -- LPM_WIDTHB                     ; 18                                                      ;
+;     -- LPM_WIDTHP                     ; 36                                                      ;
+;     -- LPM_REPRESENTATION             ; UNSIGNED                                                ;
+;     -- INPUT_A_IS_CONSTANT            ; NO                                                      ;
+;     -- INPUT_B_IS_CONSTANT            ; NO                                                      ;
+;     -- USE_EAB                        ; OFF                                                     ;
+;     -- DEDICATED_MULTIPLIER_CIRCUITRY ; YES                                                     ;
+;     -- INPUT_A_FIXED_VALUE            ; Bx                                                      ;
+;     -- INPUT_B_FIXED_VALUE            ; Bx                                                      ;
+; Entity Instance                       ; LPM_MULT:B1066_ISEProject_hcc_991_VGAoutput_MULT18X18U  ;
+;     -- LPM_WIDTHA                     ; 18                                                      ;
+;     -- LPM_WIDTHB                     ; 18                                                      ;
+;     -- LPM_WIDTHP                     ; 36                                                      ;
+;     -- LPM_REPRESENTATION             ; UNSIGNED                                                ;
+;     -- INPUT_A_IS_CONSTANT            ; NO                                                      ;
+;     -- INPUT_B_IS_CONSTANT            ; NO                                                      ;
+;     -- USE_EAB                        ; OFF                                                     ;
+;     -- DEDICATED_MULTIPLIER_CIRCUITRY ; YES                                                     ;
+;     -- INPUT_A_FIXED_VALUE            ; Bx                                                      ;
+;     -- INPUT_B_FIXED_VALUE            ; Bx                                                      ;
+; Entity Instance                       ; LPM_MULT:B1083_ISEProject_hcc_992_VGAoutput_MULT18X18U  ;
+;     -- LPM_WIDTHA                     ; 18                                                      ;
+;     -- LPM_WIDTHB                     ; 18                                                      ;
+;     -- LPM_WIDTHP                     ; 36                                                      ;
+;     -- LPM_REPRESENTATION             ; UNSIGNED                                                ;
+;     -- INPUT_A_IS_CONSTANT            ; NO                                                      ;
+;     -- INPUT_B_IS_CONSTANT            ; NO                                                      ;
+;     -- USE_EAB                        ; OFF                                                     ;
+;     -- DEDICATED_MULTIPLIER_CIRCUITRY ; YES                                                     ;
+;     -- INPUT_A_FIXED_VALUE            ; Bx                                                      ;
+;     -- INPUT_B_FIXED_VALUE            ; Bx                                                      ;
+; Entity Instance                       ; LPM_MULT:B1100_ISEProject_hcc_1009_VGAoutput_MULT18X18U ;
+;     -- LPM_WIDTHA                     ; 18                                                      ;
+;     -- LPM_WIDTHB                     ; 18                                                      ;
+;     -- LPM_WIDTHP                     ; 36                                                      ;
+;     -- LPM_REPRESENTATION             ; UNSIGNED                                                ;
+;     -- INPUT_A_IS_CONSTANT            ; NO                                                      ;
+;     -- INPUT_B_IS_CONSTANT            ; NO                                                      ;
+;     -- USE_EAB                        ; OFF                                                     ;
+;     -- DEDICATED_MULTIPLIER_CIRCUITRY ; YES                                                     ;
+;     -- INPUT_A_FIXED_VALUE            ; Bx                                                      ;
+;     -- INPUT_B_FIXED_VALUE            ; Bx                                                      ;
+; Entity Instance                       ; LPM_MULT:B1117_ISEProject_hcc_1010_VGAoutput_MULT18X18U ;
+;     -- LPM_WIDTHA                     ; 18                                                      ;
+;     -- LPM_WIDTHB                     ; 18                                                      ;
+;     -- LPM_WIDTHP                     ; 36                                                      ;
+;     -- LPM_REPRESENTATION             ; UNSIGNED                                                ;
+;     -- INPUT_A_IS_CONSTANT            ; NO                                                      ;
+;     -- INPUT_B_IS_CONSTANT            ; NO                                                      ;
+;     -- USE_EAB                        ; OFF                                                     ;
+;     -- DEDICATED_MULTIPLIER_CIRCUITRY ; YES                                                     ;
+;     -- INPUT_A_FIXED_VALUE            ; Bx                                                      ;
+;     -- INPUT_B_FIXED_VALUE            ; Bx                                                      ;
+; Entity Instance                       ; LPM_MULT:B770_ISEProject_hcc_885_VGAoutput_MULT18X18U   ;
+;     -- LPM_WIDTHA                     ; 18                                                      ;
+;     -- LPM_WIDTHB                     ; 18                                                      ;
+;     -- LPM_WIDTHP                     ; 36                                                      ;
+;     -- LPM_REPRESENTATION             ; UNSIGNED                                                ;
+;     -- INPUT_A_IS_CONSTANT            ; NO                                                      ;
+;     -- INPUT_B_IS_CONSTANT            ; NO                                                      ;
+;     -- USE_EAB                        ; OFF                                                     ;
+;     -- DEDICATED_MULTIPLIER_CIRCUITRY ; YES                                                     ;
+;     -- INPUT_A_FIXED_VALUE            ; Bx                                                      ;
+;     -- INPUT_B_FIXED_VALUE            ; Bx                                                      ;
+; Entity Instance                       ; LPM_MULT:B787_ISEProject_hcc_886_VGAoutput_MULT18X18U   ;
+;     -- LPM_WIDTHA                     ; 18                                                      ;
+;     -- LPM_WIDTHB                     ; 18                                                      ;
+;     -- LPM_WIDTHP                     ; 36                                                      ;
+;     -- LPM_REPRESENTATION             ; UNSIGNED                                                ;
+;     -- INPUT_A_IS_CONSTANT            ; NO                                                      ;
+;     -- INPUT_B_IS_CONSTANT            ; NO                                                      ;
+;     -- USE_EAB                        ; OFF                                                     ;
+;     -- DEDICATED_MULTIPLIER_CIRCUITRY ; YES                                                     ;
+;     -- INPUT_A_FIXED_VALUE            ; Bx                                                      ;
+;     -- INPUT_B_FIXED_VALUE            ; Bx                                                      ;
+; Entity Instance                       ; LPM_MULT:B804_ISEProject_hcc_903_VGAoutput_MULT18X18U   ;
+;     -- LPM_WIDTHA                     ; 18                                                      ;
+;     -- LPM_WIDTHB                     ; 18                                                      ;
+;     -- LPM_WIDTHP                     ; 36                                                      ;
+;     -- LPM_REPRESENTATION             ; UNSIGNED                                                ;
+;     -- INPUT_A_IS_CONSTANT            ; NO                                                      ;
+;     -- INPUT_B_IS_CONSTANT            ; NO                                                      ;
+;     -- USE_EAB                        ; OFF                                                     ;
+;     -- DEDICATED_MULTIPLIER_CIRCUITRY ; YES                                                     ;
+;     -- INPUT_A_FIXED_VALUE            ; Bx                                                      ;
+;     -- INPUT_B_FIXED_VALUE            ; Bx                                                      ;
+; Entity Instance                       ; LPM_MULT:B821_ISEProject_hcc_921_VGAoutput_MULT18X18U   ;
+;     -- LPM_WIDTHA                     ; 18                                                      ;
+;     -- LPM_WIDTHB                     ; 18                                                      ;
+;     -- LPM_WIDTHP                     ; 36                                                      ;
+;     -- LPM_REPRESENTATION             ; UNSIGNED                                                ;
+;     -- INPUT_A_IS_CONSTANT            ; NO                                                      ;
+;     -- INPUT_B_IS_CONSTANT            ; NO                                                      ;
+;     -- USE_EAB                        ; OFF                                                     ;
+;     -- DEDICATED_MULTIPLIER_CIRCUITRY ; YES                                                     ;
+;     -- INPUT_A_FIXED_VALUE            ; Bx                                                      ;
+;     -- INPUT_B_FIXED_VALUE            ; Bx                                                      ;
++---------------------------------------+---------------------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------+
+; altshift_taps Parameter Settings by Entity Instance                                                            ;
++----------------------------+-----------------------------------------------------------------------------------+
+; Name                       ; Value                                                                             ;
++----------------------------+-----------------------------------------------------------------------------------+
+; Number of entity instances ; 2                                                                                 ;
+; Entity Instance            ; altshift_taps:B297_ISEProject_hcc_782_VGAoutput_DTYPE0IR_colour_2_1_bit_15__rtl_0 ;
+;     -- NUMBER_OF_TAPS      ; 1                                                                                 ;
+;     -- TAP_DISTANCE        ; 3                                                                                 ;
+;     -- WIDTH               ; 15                                                                                ;
+; Entity Instance            ; altshift_taps:B340_ISEProject_hcc_782_VGAoutput_DTYPE0IR_colour_1_1_bit_6__rtl_1  ;
+;     -- NUMBER_OF_TAPS      ; 1                                                                                 ;
+;     -- TAP_DISTANCE        ; 5                                                                                 ;
+;     -- WIDTH               ; 22                                                                                ;
++----------------------------+-----------------------------------------------------------------------------------+
+
+
++-------------------------------+
+; Analysis & Synthesis Messages ;
++-------------------------------+
+Info: *******************************************************************
+Info: Running Quartus II Analysis & Synthesis
+    Info: Version 8.0 Build 215 05/29/2008 SJ Full Version
+    Info: Processing started: Fri May 27 12:23:56 2011
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off ISEProject -c ISEProject
+Info: Found 1 design units, including 1 entities, in source file EDIF/ISEProject.edf
+    Info: Found entity 1: ISEProject
+Info: Elaborating entity "ISEProject" for the top level hierarchy
+Info: Elaborating entity "LPM_MULT" for hierarchy "LPM_MULT:B1032_ISEProject_hcc_973_VGAoutput_MULT18X18U"
+Info: Elaborated megafunction instantiation "LPM_MULT:B1032_ISEProject_hcc_973_VGAoutput_MULT18X18U"
+Info: Instantiated megafunction "LPM_MULT:B1032_ISEProject_hcc_973_VGAoutput_MULT18X18U" with the following parameter:
+    Info: Parameter "DEDICATED_MULTIPLIER_CIRCUITRY" = "YES"
+    Info: Parameter "LPM_WIDTHB" = "18"
+    Info: Parameter "LPM_WIDTHP" = "36"
+    Info: Parameter "LPM_REPRESENTATION" = "UNSIGNED"
+    Info: Parameter "LPM_WIDTHA" = "18"
+    Info: Parameter "LPM_WIDTHS" = "1"
+Info: Found 1 design units, including 1 entities, in source file db/mult_thq.tdf
+    Info: Found entity 1: mult_thq
+Info: Elaborating entity "mult_thq" for hierarchy "LPM_MULT:B1032_ISEProject_hcc_973_VGAoutput_MULT18X18U|mult_thq:auto_generated"
+Warning: Using design file ../de2lib/DEC_7SEG.vhd, which is not specified as a design file for the current project, but contains definitions for 2 design units and 1 entities in project
+    Info: Found design unit 1: dec_7seg-a
+    Info: Found entity 1: dec_7seg
+Info: Elaborating entity "DEC_7SEG" for hierarchy "DEC_7SEG:B1_de2_hcc_495_DE2Set7SegDigit_SEG7OUT0"
+Warning: Using design file ../de2lib/VGA_SYNC_800.vhd, which is not specified as a design file for the current project, but contains definitions for 2 design units and 1 entities in project
+    Info: Found design unit 1: VGA_SYNC_800-a
+    Info: Found entity 1: VGA_SYNC_800
+Info: Elaborating entity "VGA_SYNC_800" for hierarchy "VGA_SYNC_800:B3_de2_hcc_602_DE2VideoDriver800x600_vga"
+Warning: Using design file ../de2lib/MOUSE.vhd, which is not specified as a design file for the current project, but contains definitions for 2 design units and 1 entities in project
+    Info: Found design unit 1: MOUSE-behavior
+    Info: Found entity 1: MOUSE
+Info: Elaborating entity "MOUSE" for hierarchy "MOUSE:B5_de2_hcc_371_DE2PS2MouseDriver_ps2"
+Warning (10036): Verilog HDL or VHDL warning at MOUSE.vhd(36): object "CHARIN" assigned a value but never read
+Info: Elaborating entity "ALTSYNCRAM" for hierarchy "ALTSYNCRAM:SDPRAM_B300_ISEProject_hcc_78_LPMMPRAM_FIFORam"
+Info: Elaborated megafunction instantiation "ALTSYNCRAM:SDPRAM_B300_ISEProject_hcc_78_LPMMPRAM_FIFORam"
+Info: Instantiated megafunction "ALTSYNCRAM:SDPRAM_B300_ISEProject_hcc_78_LPMMPRAM_FIFORam" with the following parameter:
+    Info: Parameter "address_aclr_b" = "NONE"
+    Info: Parameter "numwords_b" = "1024"
+    Info: Parameter "outdata_reg_b" = "UNREGISTERED"
+    Info: Parameter "width_a" = "10"
+    Info: Parameter "operation_mode" = "DUAL_PORT"
+    Info: Parameter "width_b" = "10"
+    Info: Parameter "widthad_a" = "10"
+    Info: Parameter "indata_aclr_a" = "NONE"
+    Info: Parameter "widthad_b" = "10"
+    Info: Parameter "address_aclr_a" = "NONE"
+    Info: Parameter "indata_aclr_b" = "NONE"
+    Info: Parameter "intended_device_family" = "CYCLONE II"
+    Info: Parameter "numwords_a" = "1024"
+    Info: Parameter "outdata_aclr_a" = "NONE"
+    Info: Parameter "ram_block_type" = "AUTO"
+    Info: Parameter "read_during_write_mode_mixed_ports" = "OLD_DATA"
+    Info: Parameter "wrcontrol_aclr_a" = "NONE"
+    Info: Parameter "address_reg_b" = "CLOCK1"
+    Info: Parameter "outdata_aclr_b" = "NONE"
+    Info: Parameter "wrcontrol_aclr_b" = "NONE"
+Info: Found 1 design units, including 1 entities, in source file db/altsyncram_2dq1.tdf
+    Info: Found entity 1: altsyncram_2dq1
+Info: Elaborating entity "altsyncram_2dq1" for hierarchy "ALTSYNCRAM:SDPRAM_B300_ISEProject_hcc_78_LPMMPRAM_FIFORam|altsyncram_2dq1:auto_generated"
+Info: Found 1 design units, including 1 entities, in source file db/altsyncram_dhj1.tdf
+    Info: Found entity 1: altsyncram_dhj1
+Info: Elaborating entity "altsyncram_dhj1" for hierarchy "ALTSYNCRAM:SDPRAM_B300_ISEProject_hcc_78_LPMMPRAM_FIFORam|altsyncram_2dq1:auto_generated|altsyncram_dhj1:altsyncram1"
+Info: Elaborating entity "ALTSYNCRAM" for hierarchy "ALTSYNCRAM:SDPRAM_B517_ISEProject_hcc_80_LPMMPRAM_FIFORam"
+Info: Elaborated megafunction instantiation "ALTSYNCRAM:SDPRAM_B517_ISEProject_hcc_80_LPMMPRAM_FIFORam"
+Info: Instantiated megafunction "ALTSYNCRAM:SDPRAM_B517_ISEProject_hcc_80_LPMMPRAM_FIFORam" with the following parameter:
+    Info: Parameter "address_aclr_b" = "NONE"
+    Info: Parameter "numwords_b" = "1024"
+    Info: Parameter "outdata_reg_b" = "UNREGISTERED"
+    Info: Parameter "width_a" = "16"
+    Info: Parameter "operation_mode" = "DUAL_PORT"
+    Info: Parameter "width_b" = "16"
+    Info: Parameter "widthad_a" = "10"
+    Info: Parameter "indata_aclr_a" = "NONE"
+    Info: Parameter "widthad_b" = "10"
+    Info: Parameter "address_aclr_a" = "NONE"
+    Info: Parameter "indata_aclr_b" = "NONE"
+    Info: Parameter "intended_device_family" = "CYCLONE II"
+    Info: Parameter "numwords_a" = "1024"
+    Info: Parameter "outdata_aclr_a" = "NONE"
+    Info: Parameter "ram_block_type" = "AUTO"
+    Info: Parameter "read_during_write_mode_mixed_ports" = "OLD_DATA"
+    Info: Parameter "wrcontrol_aclr_a" = "NONE"
+    Info: Parameter "address_reg_b" = "CLOCK1"
+    Info: Parameter "outdata_aclr_b" = "NONE"
+    Info: Parameter "wrcontrol_aclr_b" = "NONE"
+Info: Found 1 design units, including 1 entities, in source file db/altsyncram_edq1.tdf
+    Info: Found entity 1: altsyncram_edq1
+Info: Elaborating entity "altsyncram_edq1" for hierarchy "ALTSYNCRAM:SDPRAM_B517_ISEProject_hcc_80_LPMMPRAM_FIFORam|altsyncram_edq1:auto_generated"
+Info: Found 1 design units, including 1 entities, in source file db/altsyncram_phj1.tdf
+    Info: Found entity 1: altsyncram_phj1
+Info: Elaborating entity "altsyncram_phj1" for hierarchy "ALTSYNCRAM:SDPRAM_B517_ISEProject_hcc_80_LPMMPRAM_FIFORam|altsyncram_edq1:auto_generated|altsyncram_phj1:altsyncram1"
+Info: Elaborating entity "ALTSYNCRAM" for hierarchy "ALTSYNCRAM:SDPRAM_B631_ISEProject_hcc_81_LPMMPRAM_FIFORam"
+Info: Elaborated megafunction instantiation "ALTSYNCRAM:SDPRAM_B631_ISEProject_hcc_81_LPMMPRAM_FIFORam"
+Info: Instantiated megafunction "ALTSYNCRAM:SDPRAM_B631_ISEProject_hcc_81_LPMMPRAM_FIFORam" with the following parameter:
+    Info: Parameter "address_aclr_b" = "NONE"
+    Info: Parameter "numwords_b" = "1024"
+    Info: Parameter "outdata_reg_b" = "UNREGISTERED"
+    Info: Parameter "width_a" = "16"
+    Info: Parameter "operation_mode" = "DUAL_PORT"
+    Info: Parameter "width_b" = "16"
+    Info: Parameter "widthad_a" = "10"
+    Info: Parameter "indata_aclr_a" = "NONE"
+    Info: Parameter "widthad_b" = "10"
+    Info: Parameter "address_aclr_a" = "NONE"
+    Info: Parameter "indata_aclr_b" = "NONE"
+    Info: Parameter "intended_device_family" = "CYCLONE II"
+    Info: Parameter "numwords_a" = "1024"
+    Info: Parameter "outdata_aclr_a" = "NONE"
+    Info: Parameter "ram_block_type" = "AUTO"
+    Info: Parameter "read_during_write_mode_mixed_ports" = "OLD_DATA"
+    Info: Parameter "wrcontrol_aclr_a" = "NONE"
+    Info: Parameter "address_reg_b" = "CLOCK1"
+    Info: Parameter "outdata_aclr_b" = "NONE"
+    Info: Parameter "wrcontrol_aclr_b" = "NONE"
+Warning: Synthesized away the following node(s):
+    Warning: Synthesized away the following RAM node(s):
+        Warning (14320): Synthesized away node "altsyncram:SDPRAM_B631_ISEProject_hcc_81_LPMMPRAM_FIFORam|altsyncram_edq1:auto_generated|altsyncram_phj1:altsyncram1|q_a[0]"
+        Warning (14320): Synthesized away node "altsyncram:SDPRAM_B631_ISEProject_hcc_81_LPMMPRAM_FIFORam|altsyncram_edq1:auto_generated|altsyncram_phj1:altsyncram1|q_a[1]"
+        Warning (14320): Synthesized away node "altsyncram:SDPRAM_B631_ISEProject_hcc_81_LPMMPRAM_FIFORam|altsyncram_edq1:auto_generated|altsyncram_phj1:altsyncram1|q_a[2]"
+        Warning (14320): Synthesized away node "altsyncram:SDPRAM_B631_ISEProject_hcc_81_LPMMPRAM_FIFORam|altsyncram_edq1:auto_generated|altsyncram_phj1:altsyncram1|q_a[3]"
+        Warning (14320): Synthesized away node "altsyncram:SDPRAM_B631_ISEProject_hcc_81_LPMMPRAM_FIFORam|altsyncram_edq1:auto_generated|altsyncram_phj1:altsyncram1|q_a[4]"
+        Warning (14320): Synthesized away node "altsyncram:SDPRAM_B631_ISEProject_hcc_81_LPMMPRAM_FIFORam|altsyncram_edq1:auto_generated|altsyncram_phj1:altsyncram1|q_a[5]"
+        Warning (14320): Synthesized away node "altsyncram:SDPRAM_B631_ISEProject_hcc_81_LPMMPRAM_FIFORam|altsyncram_edq1:auto_generated|altsyncram_phj1:altsyncram1|q_a[6]"
+        Warning (14320): Synthesized away node "altsyncram:SDPRAM_B631_ISEProject_hcc_81_LPMMPRAM_FIFORam|altsyncram_edq1:auto_generated|altsyncram_phj1:altsyncram1|q_a[7]"
+        Warning (14320): Synthesized away node "altsyncram:SDPRAM_B631_ISEProject_hcc_81_LPMMPRAM_FIFORam|altsyncram_edq1:auto_generated|altsyncram_phj1:altsyncram1|q_a[8]"
+        Warning (14320): Synthesized away node "altsyncram:SDPRAM_B631_ISEProject_hcc_81_LPMMPRAM_FIFORam|altsyncram_edq1:auto_generated|altsyncram_phj1:altsyncram1|q_a[9]"
+        Warning (14320): Synthesized away node "altsyncram:SDPRAM_B631_ISEProject_hcc_81_LPMMPRAM_FIFORam|altsyncram_edq1:auto_generated|altsyncram_phj1:altsyncram1|q_a[10]"
+Info: Ignored 145 buffer(s)
+    Info: Ignored 145 SOFT buffer(s)
+Warning (14130): Reduced register "MOUSE:B5_de2_hcc_371_DE2PS2MouseDriver_ps2|CHAROUT[3]" with stuck data_in port to stuck value GND
+Warning (14130): Reduced register "MOUSE:B5_de2_hcc_371_DE2PS2MouseDriver_ps2|CHAROUT[1]" with stuck data_in port to stuck value GND
+Warning (14130): Reduced register "MOUSE:B5_de2_hcc_371_DE2PS2MouseDriver_ps2|CHAROUT[0]" with stuck data_in port to stuck value GND
+Info: Duplicate registers merged to single register
+    Info (13350): Duplicate register "MOUSE:B5_de2_hcc_371_DE2PS2MouseDriver_ps2|CHAROUT[2]" merged to single register "MOUSE:B5_de2_hcc_371_DE2PS2MouseDriver_ps2|CHAROUT[4]"
+    Info (13350): Duplicate register "MOUSE:B5_de2_hcc_371_DE2PS2MouseDriver_ps2|CHAROUT[4]" merged to single register "MOUSE:B5_de2_hcc_371_DE2PS2MouseDriver_ps2|CHAROUT[5]"
+    Info (13350): Duplicate register "MOUSE:B5_de2_hcc_371_DE2PS2MouseDriver_ps2|CHAROUT[5]" merged to single register "MOUSE:B5_de2_hcc_371_DE2PS2MouseDriver_ps2|CHAROUT[6]"
+    Info (13350): Duplicate register "MOUSE:B5_de2_hcc_371_DE2PS2MouseDriver_ps2|CHAROUT[6]" merged to single register "MOUSE:B5_de2_hcc_371_DE2PS2MouseDriver_ps2|CHAROUT[7]"
+Info: State machine "|ISEProject|MOUSE:B5_de2_hcc_371_DE2PS2MouseDriver_ps2|mouse_state" contains 6 states
+Info: Selected Auto state machine encoding method for state machine "|ISEProject|MOUSE:B5_de2_hcc_371_DE2PS2MouseDriver_ps2|mouse_state"
+Info: Encoding result for state machine "|ISEProject|MOUSE:B5_de2_hcc_371_DE2PS2MouseDriver_ps2|mouse_state"
+    Info: Completed encoding using 6 state bits
+        Info: Encoded state bit "MOUSE:B5_de2_hcc_371_DE2PS2MouseDriver_ps2|mouse_state.input_packets"
+        Info: Encoded state bit "MOUSE:B5_de2_hcc_371_DE2PS2MouseDriver_ps2|mouse_state.wait_cmd_ack"
+        Info: Encoded state bit "MOUSE:B5_de2_hcc_371_DE2PS2MouseDriver_ps2|mouse_state.wait_output_ready"
+        Info: Encoded state bit "MOUSE:B5_de2_hcc_371_DE2PS2MouseDriver_ps2|mouse_state.load_command2"
+        Info: Encoded state bit "MOUSE:B5_de2_hcc_371_DE2PS2MouseDriver_ps2|mouse_state.load_command"
+        Info: Encoded state bit "MOUSE:B5_de2_hcc_371_DE2PS2MouseDriver_ps2|mouse_state.inhibit_trans"
+    Info: State "|ISEProject|MOUSE:B5_de2_hcc_371_DE2PS2MouseDriver_ps2|mouse_state.inhibit_trans" uses code string "000000"
+    Info: State "|ISEProject|MOUSE:B5_de2_hcc_371_DE2PS2MouseDriver_ps2|mouse_state.load_command" uses code string "000011"
+    Info: State "|ISEProject|MOUSE:B5_de2_hcc_371_DE2PS2MouseDriver_ps2|mouse_state.load_command2" uses code string "000101"
+    Info: State "|ISEProject|MOUSE:B5_de2_hcc_371_DE2PS2MouseDriver_ps2|mouse_state.wait_output_ready" uses code string "001001"
+    Info: State "|ISEProject|MOUSE:B5_de2_hcc_371_DE2PS2MouseDriver_ps2|mouse_state.wait_cmd_ack" uses code string "010001"
+    Info: State "|ISEProject|MOUSE:B5_de2_hcc_371_DE2PS2MouseDriver_ps2|mouse_state.input_packets" uses code string "100001"
+Info: Inferred 2 megafunctions from design logic
+    Info: Inferred altshift_taps megafunction from the following design logic: "B297_ISEProject_hcc_782_VGAoutput_DTYPE0IR_colour_2_1_bit_15_~1"
+        Info: Parameter NUMBER_OF_TAPS set to 1
+        Info: Parameter TAP_DISTANCE set to 3
+        Info: Parameter WIDTH set to 15
+    Info: Inferred altshift_taps megafunction from the following design logic: "B340_ISEProject_hcc_782_VGAoutput_DTYPE0IR_colour_1_1_bit_6_~1"
+        Info: Parameter NUMBER_OF_TAPS set to 1
+        Info: Parameter TAP_DISTANCE set to 5
+        Info: Parameter WIDTH set to 22
+Info: Elaborated megafunction instantiation "altshift_taps:B297_ISEProject_hcc_782_VGAoutput_DTYPE0IR_colour_2_1_bit_15__rtl_0"
+Info: Instantiated megafunction "altshift_taps:B297_ISEProject_hcc_782_VGAoutput_DTYPE0IR_colour_2_1_bit_15__rtl_0" with the following parameter:
+    Info: Parameter "NUMBER_OF_TAPS" = "1"
+    Info: Parameter "TAP_DISTANCE" = "3"
+    Info: Parameter "WIDTH" = "15"
+Info: Found 1 design units, including 1 entities, in source file db/shift_taps_8jm.tdf
+    Info: Found entity 1: shift_taps_8jm
+Info: Found 1 design units, including 1 entities, in source file db/altsyncram_fg31.tdf
+    Info: Found entity 1: altsyncram_fg31
+Info: Found 1 design units, including 1 entities, in source file db/add_sub_gvd.tdf
+    Info: Found entity 1: add_sub_gvd
+Info: Found 1 design units, including 1 entities, in source file db/cntr_kkf.tdf
+    Info: Found entity 1: cntr_kkf
+Info: Elaborated megafunction instantiation "altshift_taps:B340_ISEProject_hcc_782_VGAoutput_DTYPE0IR_colour_1_1_bit_6__rtl_1"
+Info: Instantiated megafunction "altshift_taps:B340_ISEProject_hcc_782_VGAoutput_DTYPE0IR_colour_1_1_bit_6__rtl_1" with the following parameter:
+    Info: Parameter "NUMBER_OF_TAPS" = "1"
+    Info: Parameter "TAP_DISTANCE" = "5"
+    Info: Parameter "WIDTH" = "22"
+Info: Found 1 design units, including 1 entities, in source file db/shift_taps_6jm.tdf
+    Info: Found entity 1: shift_taps_6jm
+Info: Found 1 design units, including 1 entities, in source file db/altsyncram_a981.tdf
+    Info: Found entity 1: altsyncram_a981
+Info: Registers with preset signals will power-up high
+Info: DEV_CLRn pin will set, and not reset, register with preset signal due to NOT Gate Push-Back
+Warning: Presettable and clearable registers converted to equivalent circuits with latches. Registers power-up to an undefined state, and DEVCLRn places the registers in an undefined state.
+    Warning (13310): Register "MOUSE:B5_de2_hcc_371_DE2PS2MouseDriver_ps2|SHIFTOUT[3]" is converted into an equivalent circuit using register "MOUSE:B5_de2_hcc_371_DE2PS2MouseDriver_ps2|SHIFTOUT[3]~_emulated" and latch "MOUSE:B5_de2_hcc_371_DE2PS2MouseDriver_ps2|SHIFTOUT[3]~latch"
+    Warning (13310): Register "MOUSE:B5_de2_hcc_371_DE2PS2MouseDriver_ps2|SHIFTOUT[5]" is converted into an equivalent circuit using register "MOUSE:B5_de2_hcc_371_DE2PS2MouseDriver_ps2|SHIFTOUT[5]~_emulated" and latch "MOUSE:B5_de2_hcc_371_DE2PS2MouseDriver_ps2|SHIFTOUT[3]~latch"
+    Warning (13310): Register "MOUSE:B5_de2_hcc_371_DE2PS2MouseDriver_ps2|SHIFTOUT[6]" is converted into an equivalent circuit using register "MOUSE:B5_de2_hcc_371_DE2PS2MouseDriver_ps2|SHIFTOUT[6]~_emulated" and latch "MOUSE:B5_de2_hcc_371_DE2PS2MouseDriver_ps2|SHIFTOUT[3]~latch"
+    Warning (13310): Register "MOUSE:B5_de2_hcc_371_DE2PS2MouseDriver_ps2|SHIFTOUT[7]" is converted into an equivalent circuit using register "MOUSE:B5_de2_hcc_371_DE2PS2MouseDriver_ps2|SHIFTOUT[7]~_emulated" and latch "MOUSE:B5_de2_hcc_371_DE2PS2MouseDriver_ps2|SHIFTOUT[3]~latch"
+    Warning (13310): Register "MOUSE:B5_de2_hcc_371_DE2PS2MouseDriver_ps2|SHIFTOUT[8]" is converted into an equivalent circuit using register "MOUSE:B5_de2_hcc_371_DE2PS2MouseDriver_ps2|SHIFTOUT[8]~_emulated" and latch "MOUSE:B5_de2_hcc_371_DE2PS2MouseDriver_ps2|SHIFTOUT[3]~latch"
+    Warning (13310): Register "MOUSE:B5_de2_hcc_371_DE2PS2MouseDriver_ps2|SHIFTOUT[9]" is converted into an equivalent circuit using register "MOUSE:B5_de2_hcc_371_DE2PS2MouseDriver_ps2|SHIFTOUT[9]~_emulated" and latch "MOUSE:B5_de2_hcc_371_DE2PS2MouseDriver_ps2|SHIFTOUT[9]~latch"
+Warning: Output pins are stuck at VCC or GND
+    Warning (13410): Pin "PIN_AA17" is stuck at VCC
+    Warning (13410): Pin "PIN_AA18" is stuck at VCC
+    Warning (13410): Pin "PIN_AC11" is stuck at GND
+    Warning (13410): Pin "PIN_AE9" is stuck at GND
+    Warning (13410): Pin "PIN_AF9" is stuck at GND
+    Warning (13410): Pin "PIN_V17" is stuck at GND
+    Warning (13410): Pin "PIN_W17" is stuck at GND
+Warning (14130): Reduced register "MOUSE:B5_de2_hcc_371_DE2PS2MouseDriver_ps2|SHIFTOUT[10]" with stuck data_in port to stuck value GND
+Info: 6 registers lost all their fanouts during netlist optimizations. The first 6 are displayed below.
+    Info: Register "B1295_ISEProject_hcc_206_BallUpdate_DTYPE0IR" lost all its fanouts during netlist optimizations.
+    Info: Register "B299_ISEProject_hcc_577_ThirdBallUpdate_DTYPE0IR" lost all its fanouts during netlist optimizations.
+    Info: Register "B307_ISEProject_hcc_439_SecondBallUpdate_DTYPE0IR" lost all its fanouts during netlist optimizations.
+    Info: Register "B372_ISEProject_hcc_331_BallUpdate_DTYPE0IR" lost all its fanouts during netlist optimizations.
+    Info: Register "B91_ISEProject_hcc_639_ThirdBallUpdate_DTYPE0IR" lost all its fanouts during netlist optimizations.
+    Info: Register "B97_ISEProject_hcc_510_SecondBallUpdate_DTYPE0IR" lost all its fanouts during netlist optimizations.
+Info: Found the following redundant logic cells in design
+    Info (17048): Logic cell "W73_ISEProject_hcc_394_DE2Set7SegDigit_1_combout"
+    Info (17048): Logic cell "W130_ISEProject_hcc_394_DE2Set7SegDigit_1_combout"
+    Info (17048): Logic cell "W129_ISEProject_hcc_394_DE2Set7SegDigit_1_combout"
+    Info (17048): Logic cell "W128_ISEProject_hcc_394_DE2Set7SegDigit_1_combout"
+    Info (17048): Logic cell "W127_ISEProject_hcc_394_DE2Set7SegDigit_1_combout"
+    Info (17048): Logic cell "W71_ISEProject_hcc_394_DE2Set7SegDigit_1_combout"
+    Info (17048): Logic cell "W1_ISEProject_hcc_394_DE2Set7SegDigit_1_combout"
+    Info (17048): Logic cell "W8_ISEProject_hcc_394_DE2Set7SegDigit_1_combout"
+    Info (17048): Logic cell "W48_ISEProject_hcc_394_DE2Set7SegDigit_1_combout"
+    Info (17048): Logic cell "W107_ISEProject_hcc_394_DE2Set7SegDigit_1_combout"
+    Info (17048): Logic cell "W43_ISEProject_hcc_394_DE2Set7SegDigit_1_combout"
+    Info (17048): Logic cell "W52_ISEProject_hcc_394_DE2Set7SegDigit_1_combout"
+    Info (17048): Logic cell "W51_ISEProject_hcc_394_DE2Set7SegDigit_1_combout"
+    Info (17048): Logic cell "W50_ISEProject_hcc_394_DE2Set7SegDigit_1_combout"
+    Info (17048): Logic cell "W49_ISEProject_hcc_394_DE2Set7SegDigit_1_combout"
+    Info (17048): Logic cell "W53_ISEProject_hcc_394_DE2Set7SegDigit_1_combout"
+    Info (17048): Logic cell "W62_ISEProject_hcc_394_DE2Set7SegDigit_1_combout"
+    Info (17048): Logic cell "W2_ISEProject_hcc_394_DE2Set7SegDigit_1_combout"
+    Info (17048): Logic cell "W72_ISEProject_hcc_394_DE2Set7SegDigit_1_combout"
+    Info (17048): Logic cell "W28_ISEProject_hcc_394_DE2Set7SegDigit_1_combout"
+    Info (17048): Logic cell "W29_ISEProject_hcc_394_DE2Set7SegDigit_1_combout"
+    Info (17048): Logic cell "W14_ISEProject_hcc_394_DE2Set7SegDigit_1_combout"
+    Info (17048): Logic cell "W15_ISEProject_hcc_394_DE2Set7SegDigit_1_combout"
+    Info (17048): Logic cell "W16_ISEProject_hcc_394_DE2Set7SegDigit_1_combout"
+    Info (17048): Logic cell "W65_ISEProject_hcc_392_DE2Set7SegDigit_3_combout"
+    Info (17048): Logic cell "W78_ISEProject_hcc_392_DE2Set7SegDigit_3_combout"
+    Info (17048): Logic cell "W77_ISEProject_hcc_392_DE2Set7SegDigit_3_combout"
+    Info (17048): Logic cell "W76_ISEProject_hcc_392_DE2Set7SegDigit_3_combout"
+    Info (17048): Logic cell "W75_ISEProject_hcc_392_DE2Set7SegDigit_3_combout"
+    Info (17048): Logic cell "W74_ISEProject_hcc_392_DE2Set7SegDigit_3_combout"
+    Info (17048): Logic cell "W42_ISEProject_hcc_392_DE2Set7SegDigit_3_combout"
+    Info (17048): Logic cell "W44_ISEProject_hcc_392_DE2Set7SegDigit_3_combout"
+    Info (17048): Logic cell "W7_ISEProject_hcc_392_DE2Set7SegDigit_3_combout"
+    Info (17048): Logic cell "W47_ISEProject_hcc_392_DE2Set7SegDigit_3_combout"
+    Info (17048): Logic cell "W52_ISEProject_hcc_392_DE2Set7SegDigit_3_combout"
+    Info (17048): Logic cell "W58_ISEProject_hcc_392_DE2Set7SegDigit_3_combout"
+    Info (17048): Logic cell "W63_ISEProject_hcc_392_DE2Set7SegDigit_3_combout"
+    Info (17048): Logic cell "W1_ISEProject_hcc_392_DE2Set7SegDigit_3_combout"
+    Info (17048): Logic cell "W43_ISEProject_hcc_392_DE2Set7SegDigit_3_combout"
+    Info (17048): Logic cell "W45_ISEProject_hcc_392_DE2Set7SegDigit_3_combout"
+    Info (17048): Logic cell "W50_ISEProject_hcc_392_DE2Set7SegDigit_3_combout"
+    Info (17048): Logic cell "W54_ISEProject_hcc_392_DE2Set7SegDigit_3_combout"
+    Info (17048): Logic cell "W57_ISEProject_hcc_392_DE2Set7SegDigit_3_combout"
+    Info (17048): Logic cell "W62_ISEProject_hcc_392_DE2Set7SegDigit_3_combout"
+    Info (17048): Logic cell "W64_ISEProject_hcc_392_DE2Set7SegDigit_3_combout"
+    Info (17048): Logic cell "W27_ISEProject_hcc_392_DE2Set7SegDigit_3_combout"
+    Info (17048): Logic cell "W28_ISEProject_hcc_392_DE2Set7SegDigit_3_combout"
+    Info (17048): Logic cell "W13_ISEProject_hcc_392_DE2Set7SegDigit_3_combout"
+    Info (17048): Logic cell "W14_ISEProject_hcc_392_DE2Set7SegDigit_3_combout"
+    Info (17048): Logic cell "W15_ISEProject_hcc_392_DE2Set7SegDigit_3_combout"
+    Info (17048): Logic cell "W72_ISEProject_hcc_395_DE2Set7SegDigit_combout"
+    Info (17048): Logic cell "W1_ISEProject_hcc_395_DE2Set7SegDigit_combout"
+    Info (17048): Logic cell "W8_ISEProject_hcc_395_DE2Set7SegDigit_combout"
+    Info (17048): Logic cell "W43_ISEProject_hcc_395_DE2Set7SegDigit_combout"
+    Info (17048): Logic cell "W48_ISEProject_hcc_395_DE2Set7SegDigit_combout"
+    Info (17048): Logic cell "W54_ISEProject_hcc_395_DE2Set7SegDigit_combout"
+    Info (17048): Logic cell "W63_ISEProject_hcc_395_DE2Set7SegDigit_combout"
+    Info (17048): Logic cell "W2_ISEProject_hcc_395_DE2Set7SegDigit_combout"
+    Info (17048): Logic cell "W73_ISEProject_hcc_395_DE2Set7SegDigit_combout"
+    Info (17048): Logic cell "W28_ISEProject_hcc_395_DE2Set7SegDigit_combout"
+    Info (17048): Logic cell "W29_ISEProject_hcc_395_DE2Set7SegDigit_combout"
+    Info (17048): Logic cell "W14_ISEProject_hcc_395_DE2Set7SegDigit_combout"
+    Info (17048): Logic cell "W15_ISEProject_hcc_395_DE2Set7SegDigit_combout"
+    Info (17048): Logic cell "W16_ISEProject_hcc_395_DE2Set7SegDigit_combout"
+    Info (17048): Logic cell "W93_ISEProject_hcc_393_DE2Set7SegDigit_2_combout"
+    Info (17048): Logic cell "W92_ISEProject_hcc_393_DE2Set7SegDigit_2_combout"
+    Info (17048): Logic cell "W71_ISEProject_hcc_393_DE2Set7SegDigit_2_combout"
+    Info (17048): Logic cell "W1_ISEProject_hcc_393_DE2Set7SegDigit_2_combout"
+    Info (17048): Logic cell "W8_ISEProject_hcc_393_DE2Set7SegDigit_2_combout"
+    Info (17048): Logic cell "W91_ISEProject_hcc_393_DE2Set7SegDigit_2_combout"
+    Info (17048): Logic cell "W48_ISEProject_hcc_393_DE2Set7SegDigit_2_combout"
+    Info (17048): Logic cell "W43_ISEProject_hcc_393_DE2Set7SegDigit_2_combout"
+    Info (17048): Logic cell "W52_ISEProject_hcc_393_DE2Set7SegDigit_2_combout"
+    Info (17048): Logic cell "W51_ISEProject_hcc_393_DE2Set7SegDigit_2_combout"
+    Info (17048): Logic cell "W50_ISEProject_hcc_393_DE2Set7SegDigit_2_combout"
+    Info (17048): Logic cell "W49_ISEProject_hcc_393_DE2Set7SegDigit_2_combout"
+    Info (17048): Logic cell "W53_ISEProject_hcc_393_DE2Set7SegDigit_2_combout"
+    Info (17048): Logic cell "W62_ISEProject_hcc_393_DE2Set7SegDigit_2_combout"
+    Info (17048): Logic cell "W2_ISEProject_hcc_393_DE2Set7SegDigit_2_combout"
+    Info (17048): Logic cell "W72_ISEProject_hcc_393_DE2Set7SegDigit_2_combout"
+    Info (17048): Logic cell "W28_ISEProject_hcc_393_DE2Set7SegDigit_2_combout"
+    Info (17048): Logic cell "W29_ISEProject_hcc_393_DE2Set7SegDigit_2_combout"
+    Info (17048): Logic cell "W14_ISEProject_hcc_393_DE2Set7SegDigit_2_combout"
+    Info (17048): Logic cell "W15_ISEProject_hcc_393_DE2Set7SegDigit_2_combout"
+    Info (17048): Logic cell "W16_ISEProject_hcc_393_DE2Set7SegDigit_2_combout"
+    Info (17048): Logic cell "W772_ISEProject_hcc_305_BallUpdate_combout"
+    Info (17048): Logic cell "W758_ISEProject_hcc_305_BallUpdate_combout"
+    Info (17048): Logic cell "WG751_ISEProject_hcc_305_BallUpdate_combout"
+    Info (17048): Logic cell "W29_ISEProject_hcc_390_DE2Set7SegDigit_4_combout"
+    Info (17048): Logic cell "W18_ISEProject_hcc_390_DE2Set7SegDigit_4_combout"
+    Info (17048): Logic cell "W25_ISEProject_hcc_390_DE2Set7SegDigit_4_combout"
+    Info (17048): Logic cell "W19_ISEProject_hcc_390_DE2Set7SegDigit_4_combout"
+    Info (17048): Logic cell "W30_ISEProject_hcc_390_DE2Set7SegDigit_4_combout"
+    Info (17048): Logic cell "W24_ISEProject_hcc_390_DE2Set7SegDigit_4_combout"
+    Info (17048): Logic cell "W27_ISEProject_hcc_390_DE2Set7SegDigit_4_combout"
+    Info (17048): Logic cell "W26_ISEProject_hcc_390_DE2Set7SegDigit_4_combout"
+    Info (17048): Logic cell "W28_ISEProject_hcc_390_DE2Set7SegDigit_4_combout"
+    Info (17048): Logic cell "W10_ISEProject_hcc_390_DE2Set7SegDigit_4_combout"
+    Info (17048): Logic cell "W9_ISEProject_hcc_390_DE2Set7SegDigit_4_combout"
+    Info (17048): Logic cell "WG1044_ISEProject_hcc_264_BallUpdate_combout"
+    Info (17048): Logic cell "W752_ISEProject_hcc_305_BallUpdate_combout"
+    Info (17048): Logic cell "W1972_ISEProject_hcc_938_VGAoutput_combout"
+    Info (17048): Logic cell "W1713_ISEProject_hcc_1100_VGAoutput_combout"
+    Info (17048): Logic cell "WG445_ISEProject_hcc_320_BallUpdate_combout"
+    Info (17048): Logic cell "W15_stdlib_hcl_BallUpdate_combout"
+    Info (17048): Logic cell "W16_stdlib_hcl_BallUpdate_combout"
+    Info (17048): Logic cell "W701_ISEProject_hcc_305_BallUpdate_combout"
+    Info (17048): Logic cell "W702_ISEProject_hcc_305_BallUpdate_combout"
+    Info (17048): Logic cell "W700_ISEProject_hcc_305_BallUpdate_combout"
+    Info (17048): Logic cell "W1072_ISEProject_hcc_256_BallUpdate_combout"
+    Info (17048): Logic cell "W1081_ISEProject_hcc_256_BallUpdate_combout"
+    Info (17048): Logic cell "W474_ISEProject_hcc_246_BallUpdate_combout"
+    Info (17048): Logic cell "W538_ISEProject_hcc_246_BallUpdate_combout"
+    Info (17048): Logic cell "W553_ISEProject_hcc_246_BallUpdate_combout"
+    Info (17048): Logic cell "W552_ISEProject_hcc_246_BallUpdate_combout"
+    Info (17048): Logic cell "W625_ISEProject_hcc_246_BallUpdate_combout"
+    Info (17048): Logic cell "W624_ISEProject_hcc_246_BallUpdate_combout"
+    Info (17048): Logic cell "W623_ISEProject_hcc_246_BallUpdate_combout"
+    Info (17048): Logic cell "W621_ISEProject_hcc_246_BallUpdate_combout"
+    Info (17048): Logic cell "W622_ISEProject_hcc_246_BallUpdate_combout"
+    Info (17048): Logic cell "W511_ISEProject_hcc_246_BallUpdate_combout"
+    Info (17048): Logic cell "W476_ISEProject_hcc_246_BallUpdate_combout"
+    Info (17048): Logic cell "W475_ISEProject_hcc_246_BallUpdate_combout"
+    Info (17048): Logic cell "W615_ISEProject_hcc_246_BallUpdate_combout"
+    Info (17048): Logic cell "W616_ISEProject_hcc_246_BallUpdate_combout"
+    Info (17048): Logic cell "W617_ISEProject_hcc_246_BallUpdate_combout"
+    Info (17048): Logic cell "W618_ISEProject_hcc_246_BallUpdate_combout"
+    Info (17048): Logic cell "W619_ISEProject_hcc_246_BallUpdate_combout"
+    Info (17048): Logic cell "W513_ISEProject_hcc_246_BallUpdate_combout"
+    Info (17048): Logic cell "W512_ISEProject_hcc_246_BallUpdate_combout"
+    Info (17048): Logic cell "W524_ISEProject_hcc_246_BallUpdate_combout"
+    Info (17048): Logic cell "W923_ISEProject_hcc_277_BallUpdate_combout"
+    Info (17048): Logic cell "W925_ISEProject_hcc_277_BallUpdate_combout"
+    Info (17048): Logic cell "W928_ISEProject_hcc_277_BallUpdate_combout"
+    Info (17048): Logic cell "W926_ISEProject_hcc_277_BallUpdate_combout"
+    Info (17048): Logic cell "W924_ISEProject_hcc_277_BallUpdate_combout"
+    Info (17048): Logic cell "W936_ISEProject_hcc_277_BallUpdate_combout"
+    Info (17048): Logic cell "W937_ISEProject_hcc_277_BallUpdate_combout"
+    Info (17048): Logic cell "W935_ISEProject_hcc_277_BallUpdate_combout"
+    Info (17048): Logic cell "W927_ISEProject_hcc_277_BallUpdate_combout"
+    Info (17048): Logic cell "W929_ISEProject_hcc_277_BallUpdate_combout"
+    Info (17048): Logic cell "W808_ISEProject_hcc_291_BallUpdate_combout"
+    Info (17048): Logic cell "W809_ISEProject_hcc_291_BallUpdate_combout"
+    Info (17048): Logic cell "W807_ISEProject_hcc_291_BallUpdate_combout"
+    Info (17048): Logic cell "W835_ISEProject_hcc_291_BallUpdate_combout"
+    Info (17048): Logic cell "W164_ISEProject_hcc_372_BallUpdate_combout"
+    Info (17048): Logic cell "W163_ISEProject_hcc_372_BallUpdate_combout"
+    Info (17048): Logic cell "W162_ISEProject_hcc_372_BallUpdate_combout"
+    Info (17048): Logic cell "W161_ISEProject_hcc_372_BallUpdate_combout"
+    Info (17048): Logic cell "W160_ISEProject_hcc_372_BallUpdate_combout"
+    Info (17048): Logic cell "W112_ISEProject_hcc_372_BallUpdate_combout"
+    Info (17048): Logic cell "W94_ISEProject_hcc_372_BallUpdate_combout"
+    Info (17048): Logic cell "W131_ISEProject_hcc_372_BallUpdate_combout"
+    Info (17048): Logic cell "W132_ISEProject_hcc_372_BallUpdate_combout"
+    Info (17048): Logic cell "W116_ISEProject_hcc_372_BallUpdate_combout"
+    Info (17048): Logic cell "W115_ISEProject_hcc_372_BallUpdate_combout"
+    Info (17048): Logic cell "W114_ISEProject_hcc_372_BallUpdate_combout"
+    Info (17048): Logic cell "W113_ISEProject_hcc_372_BallUpdate_combout"
+    Info (17048): Logic cell "W194_ISEProject_hcc_372_BallUpdate_combout"
+    Info (17048): Logic cell "W193_ISEProject_hcc_372_BallUpdate_combout"
+    Info (17048): Logic cell "W111_ISEProject_hcc_372_BallUpdate_combout"
+    Info (17048): Logic cell "W117_ISEProject_hcc_372_BallUpdate_combout"
+    Info (17048): Logic cell "W2027_ISEProject_hcc_888_VGAoutput_combout"
+    Info (17048): Logic cell "W2002_ISEProject_hcc_906_VGAoutput_combout"
+    Info (17048): Logic cell "W1977_ISEProject_hcc_924_VGAoutput_combout"
+    Info (17048): Logic cell "WG1714_ISEProject_hcc_1100_VGAoutput_combout"
+    Info (17048): Logic cell "WG1703_ISEProject_hcc_1108_VGAoutput_combout"
+    Info (17048): Logic cell "WG1712_ISEProject_hcc_1100_VGAoutput_combout"
+    Info (17048): Logic cell "W1721_ISEProject_hcc_1100_VGAoutput_combout"
+    Info (17048): Logic cell "WG1723_ISEProject_hcc_1100_VGAoutput_combout"
+    Info (17048): Logic cell "WG1722_ISEProject_hcc_1100_VGAoutput_combout"
+    Info (17048): Logic cell "W1362_ISEProject_hcc_1125_VGAoutput_combout"
+    Info (17048): Logic cell "W1361_ISEProject_hcc_1125_VGAoutput_combout"
+    Info (17048): Logic cell "W1360_ISEProject_hcc_1125_VGAoutput_combout"
+    Info (17048): Logic cell "W1359_ISEProject_hcc_1125_VGAoutput_combout"
+    Info (17048): Logic cell "W1358_ISEProject_hcc_1125_VGAoutput_combout"
+    Info (17048): Logic cell "W1377_ISEProject_hcc_1125_VGAoutput_combout"
+    Info (17048): Logic cell "W1400_ISEProject_hcc_1125_VGAoutput_combout"
+    Info (17048): Logic cell "W1399_ISEProject_hcc_1125_VGAoutput_combout"
+    Info (17048): Logic cell "W1398_ISEProject_hcc_1125_VGAoutput_combout"
+    Info (17048): Logic cell "W1397_ISEProject_hcc_1125_VGAoutput_combout"
+    Info (17048): Logic cell "W1396_ISEProject_hcc_1125_VGAoutput_combout"
+    Info (17048): Logic cell "W1415_ISEProject_hcc_1125_VGAoutput_combout"
+    Info (17048): Logic cell "W1438_ISEProject_hcc_1125_VGAoutput_combout"
+    Info (17048): Logic cell "W1437_ISEProject_hcc_1125_VGAoutput_combout"
+    Info (17048): Logic cell "W1436_ISEProject_hcc_1125_VGAoutput_combout"
+    Info (17048): Logic cell "W1435_ISEProject_hcc_1125_VGAoutput_combout"
+    Info (17048): Logic cell "W1434_ISEProject_hcc_1125_VGAoutput_combout"
+    Info (17048): Logic cell "W1453_ISEProject_hcc_1125_VGAoutput_combout"
+    Info (17048): Logic cell "W1476_ISEProject_hcc_1124_VGAoutput_combout"
+    Info (17048): Logic cell "W1475_ISEProject_hcc_1124_VGAoutput_combout"
+    Info (17048): Logic cell "W1474_ISEProject_hcc_1124_VGAoutput_combout"
+    Info (17048): Logic cell "W1473_ISEProject_hcc_1124_VGAoutput_combout"
+    Info (17048): Logic cell "W1472_ISEProject_hcc_1124_VGAoutput_combout"
+    Info (17048): Logic cell "W1491_ISEProject_hcc_1124_VGAoutput_combout"
+    Info (17048): Logic cell "W1514_ISEProject_hcc_1124_VGAoutput_combout"
+    Info (17048): Logic cell "W1513_ISEProject_hcc_1124_VGAoutput_combout"
+    Info (17048): Logic cell "W1512_ISEProject_hcc_1124_VGAoutput_combout"
+    Info (17048): Logic cell "W1511_ISEProject_hcc_1124_VGAoutput_combout"
+    Info (17048): Logic cell "W1510_ISEProject_hcc_1124_VGAoutput_combout"
+    Info (17048): Logic cell "W1529_ISEProject_hcc_1124_VGAoutput_combout"
+    Info (17048): Logic cell "W1552_ISEProject_hcc_1124_VGAoutput_combout"
+    Info (17048): Logic cell "W1551_ISEProject_hcc_1124_VGAoutput_combout"
+    Info (17048): Logic cell "W1550_ISEProject_hcc_1124_VGAoutput_combout"
+    Info (17048): Logic cell "W1549_ISEProject_hcc_1124_VGAoutput_combout"
+    Info (17048): Logic cell "W1548_ISEProject_hcc_1124_VGAoutput_combout"
+    Info (17048): Logic cell "W1567_ISEProject_hcc_1124_VGAoutput_combout"
+    Info (17048): Logic cell "W1590_ISEProject_hcc_1123_VGAoutput_combout"
+    Info (17048): Logic cell "W1589_ISEProject_hcc_1123_VGAoutput_combout"
+    Info (17048): Logic cell "W1588_ISEProject_hcc_1123_VGAoutput_combout"
+    Info (17048): Logic cell "W1587_ISEProject_hcc_1123_VGAoutput_combout"
+    Info (17048): Logic cell "W1586_ISEProject_hcc_1123_VGAoutput_combout"
+    Info (17048): Logic cell "W1605_ISEProject_hcc_1123_VGAoutput_combout"
+    Info (17048): Logic cell "W1628_ISEProject_hcc_1123_VGAoutput_combout"
+    Info (17048): Logic cell "W1627_ISEProject_hcc_1123_VGAoutput_combout"
+    Info (17048): Logic cell "W1626_ISEProject_hcc_1123_VGAoutput_combout"
+    Info (17048): Logic cell "W1625_ISEProject_hcc_1123_VGAoutput_combout"
+    Info (17048): Logic cell "W1624_ISEProject_hcc_1123_VGAoutput_combout"
+    Info (17048): Logic cell "W1643_ISEProject_hcc_1123_VGAoutput_combout"
+    Info (17048): Logic cell "W1666_ISEProject_hcc_1123_VGAoutput_combout"
+    Info (17048): Logic cell "W1665_ISEProject_hcc_1123_VGAoutput_combout"
+    Info (17048): Logic cell "W1664_ISEProject_hcc_1123_VGAoutput_combout"
+    Info (17048): Logic cell "W1663_ISEProject_hcc_1123_VGAoutput_combout"
+    Info (17048): Logic cell "W1662_ISEProject_hcc_1123_VGAoutput_combout"
+    Info (17048): Logic cell "W1681_ISEProject_hcc_1123_VGAoutput_combout"
+    Info (17048): Logic cell "W1363_ISEProject_hcc_1125_VGAoutput_combout"
+    Info (17048): Logic cell "W1401_ISEProject_hcc_1125_VGAoutput_combout"
+    Info (17048): Logic cell "W1286_ISEProject_hcc_1123_VGAoutput_combout"
+    Info (17048): Logic cell "W1439_ISEProject_hcc_1125_VGAoutput_combout"
+    Info (17048): Logic cell "W1477_ISEProject_hcc_1124_VGAoutput_combout"
+    Info (17048): Logic cell "W1294_ISEProject_hcc_1123_VGAoutput_combout"
+    Info (17048): Logic cell "W1515_ISEProject_hcc_1124_VGAoutput_combout"
+    Info (17048): Logic cell "W1553_ISEProject_hcc_1124_VGAoutput_combout"
+    Info (17048): Logic cell "W1302_ISEProject_hcc_1123_VGAoutput_combout"
+    Info (17048): Logic cell "W1591_ISEProject_hcc_1123_VGAoutput_combout"
+    Info (17048): Logic cell "W1629_ISEProject_hcc_1123_VGAoutput_combout"
+    Info (17048): Logic cell "W1310_ISEProject_hcc_1123_VGAoutput_combout"
+    Info (17048): Logic cell "W1667_ISEProject_hcc_1123_VGAoutput_combout"
+    Info (17048): Logic cell "W1338_ISEProject_hcc_1123_VGAoutput_combout"
+    Info (17048): Logic cell "WG1115_ISEProject_hcc_249_BallUpdate_combout"
+    Info (17048): Logic cell "WG1104_ISEProject_hcc_253_BallUpdate_combout"
+    Info (17048): Logic cell "W1058_ISEProject_hcc_261_BallUpdate_combout"
+    Info (17048): Logic cell "WG1064_ISEProject_hcc_261_BallUpdate_combout"
+    Info (17048): Logic cell "WG1036_ISEProject_hcc_269_BallUpdate_combout"
+    Info (17048): Logic cell "WG1047_ISEProject_hcc_265_BallUpdate_combout"
+    Info (17048): Logic cell "WG1095_ISEProject_hcc_257_BallUpdate_combout"
+    Info (17048): Logic cell "WG373_ISEProject_hcc_331_BallUpdate_SeqChain_combout"
+    Info (17048): Logic cell "WG1296_ISEProject_hcc_206_BallUpdate_SeqChain_combout"
+    Info (17048): Logic cell "W865_ISEProject_hcc_284_BallUpdate_combout"
+    Info (17048): Logic cell "WG866_ISEProject_hcc_284_BallUpdate_combout"
+    Info (17048): Logic cell "WG196_ISEProject_hcc_749_MouseFrameUpdate_combout"
+    Info (17048): Logic cell "W620_ISEProject_hcc_887_VGAoutput_combout"
+    Info (17048): Logic cell "W643_ISEProject_hcc_905_VGAoutput_combout"
+    Info (17048): Logic cell "W670_ISEProject_hcc_923_VGAoutput_combout"
+    Info (17048): Logic cell "WG165_ISEProject_hcc_499_SecondBallUpdate_combout"
+    Info (17048): Logic cell "WG165_ISEProject_hcc_629_ThirdBallUpdate_combout"
+    Info (17048): Logic cell "WG157_ISEProject_hcc_747_MouseFrameUpdate_combout"
+    Info (17048): Logic cell "WG155_ISEProject_hcc_747_MouseFrameUpdate_combout"
+    Info (17048): Logic cell "W156_ISEProject_hcc_747_MouseFrameUpdate_combout"
+    Info (17048): Logic cell "WG894_ISEProject_hcc_286_BallUpdate_combout"
+    Info (17048): Logic cell "WG73_ISEProject_hcc_752_MouseFrameUpdate_combout"
+    Info (17048): Logic cell "W893_ISEProject_hcc_286_BallUpdate_combout"
+    Info (17048): Logic cell "WG117_ISEProject_hcc_754_MouseFrameUpdate_combout"
+    Info (17048): Logic cell "WG115_ISEProject_hcc_754_MouseFrameUpdate_combout"
+    Info (17048): Logic cell "W116_ISEProject_hcc_754_MouseFrameUpdate_combout"
+    Info (17048): Logic cell "W1201_ISEProject_hcc_1138_VGAoutput_combout"
+    Info (17048): Logic cell "W1163_ISEProject_hcc_1137_VGAoutput_combout"
+    Info (17048): Logic cell "W1229_ISEProject_hcc_1138_VGAoutput_combout"
+    Info (17048): Logic cell "W197_ISEProject_hcc_749_MouseFrameUpdate_combout"
+    Info (17048): Logic cell "W198_ISEProject_hcc_749_MouseFrameUpdate_combout"
+    Info (17048): Logic cell "W74_ISEProject_hcc_752_MouseFrameUpdate_combout"
+    Info (17048): Logic cell "W75_ISEProject_hcc_752_MouseFrameUpdate_combout"
+    Info (17048): Logic cell "WG18_ISEProject_hcc_761_MouseFrameUpdate_combout"
+    Info (17048): Logic cell "W1_ISEProject_hcc_760_MouseFrameUpdate_combout"
+    Info (17048): Logic cell "W19_ISEProject_hcc_761_MouseFrameUpdate_combout"
+    Info (17048): Logic cell "WG52_ISEProject_hcc_763_MouseFrameUpdate_combout"
+    Info (17048): Logic cell "W53_ISEProject_hcc_763_MouseFrameUpdate_combout"
+    Info (17048): Logic cell "W1284_ISEProject_hcc_220_BallUpdate_combout"
+    Info (17048): Logic cell "W1246_ISEProject_hcc_224_BallUpdate_combout"
+    Info (17048): Logic cell "W428_ISEProject_hcc_335_BallUpdate_combout"
+    Info (17048): Logic cell "WG1285_ISEProject_hcc_220_BallUpdate_combout"
+    Info (17048): Logic cell "WG1247_ISEProject_hcc_224_BallUpdate_combout"
+    Info (17048): Logic cell "WG1283_ISEProject_hcc_220_BallUpdate_combout"
+    Info (17048): Logic cell "WG1245_ISEProject_hcc_224_BallUpdate_combout"
+    Info (17048): Logic cell "WG1244_ISEProject_hcc_224_BallUpdate_combout"
+    Info (17048): Logic cell "WG1282_ISEProject_hcc_220_BallUpdate_combout"
+    Info (17048): Logic cell "WG429_ISEProject_hcc_335_BallUpdate_combout"
+    Info (17048): Logic cell "WG1281_ISEProject_hcc_220_BallUpdate_combout"
+    Info (17048): Logic cell "WG1243_ISEProject_hcc_224_BallUpdate_combout"
+    Info (17048): Logic cell "WG427_ISEProject_hcc_335_BallUpdate_combout"
+    Info (17048): Logic cell "WG1280_ISEProject_hcc_220_BallUpdate_combout"
+    Info (17048): Logic cell "WG1242_ISEProject_hcc_224_BallUpdate_combout"
+    Info (17048): Logic cell "W1170_ISEProject_hcc_233_BallUpdate_combout"
+    Info (17048): Logic cell "W375_ISEProject_hcc_338_BallUpdate_combout"
+    Info (17048): Logic cell "W393_ISEProject_hcc_340_BallUpdate_combout"
+    Info (17048): Logic cell "W1208_ISEProject_hcc_229_BallUpdate_combout"
+    Info (17048): Logic cell "WG1209_ISEProject_hcc_229_BallUpdate_combout"
+    Info (17048): Logic cell "WG1171_ISEProject_hcc_233_BallUpdate_combout"
+    Info (17048): Logic cell "WG1169_ISEProject_hcc_233_BallUpdate_combout"
+    Info (17048): Logic cell "WG1207_ISEProject_hcc_229_BallUpdate_combout"
+    Info (17048): Logic cell "WG1206_ISEProject_hcc_229_BallUpdate_combout"
+    Info (17048): Logic cell "WG1168_ISEProject_hcc_233_BallUpdate_combout"
+    Info (17048): Logic cell "WG376_ISEProject_hcc_338_BallUpdate_combout"
+    Info (17048): Logic cell "WG394_ISEProject_hcc_340_BallUpdate_combout"
+    Info (17048): Logic cell "WG1167_ISEProject_hcc_233_BallUpdate_combout"
+    Info (17048): Logic cell "WG1205_ISEProject_hcc_229_BallUpdate_combout"
+    Info (17048): Logic cell "WG1166_ISEProject_hcc_233_BallUpdate_combout"
+    Info (17048): Logic cell "WG392_ISEProject_hcc_340_BallUpdate_combout"
+    Info (17048): Logic cell "WG1204_ISEProject_hcc_229_BallUpdate_combout"
+    Info (17048): Logic cell "W300_ISEProject_hcc_577_ThirdBallUpdate_ThenDone_combout"
+    Info (17048): Logic cell "WG92_ISEProject_hcc_639_ThirdBallUpdate_SeqChain_combout"
+    Info (17048): Logic cell "W308_ISEProject_hcc_439_SecondBallUpdate_ThenDone_combout"
+    Info (17048): Logic cell "WG98_ISEProject_hcc_510_SecondBallUpdate_SeqChain_combout"
+    Info (17048): Logic cell "W361_ISEProject_hcc_711_MouseFrameUpdate_combout"
+    Info (17048): Logic cell "W334_ISEProject_hcc_711_MouseFrameUpdate_combout"
+    Info (17048): Logic cell "W335_ISEProject_hcc_711_MouseFrameUpdate_combout"
+    Info (17048): Logic cell "W333_ISEProject_hcc_711_MouseFrameUpdate_combout"
+    Info (17048): Logic cell "W308_ISEProject_hcc_713_MouseFrameUpdate_combout"
+    Info (17048): Logic cell "W282_ISEProject_hcc_713_MouseFrameUpdate_combout"
+    Info (17048): Logic cell "W283_ISEProject_hcc_713_MouseFrameUpdate_combout"
+    Info (17048): Logic cell "WG95_ISEProject_hcc_646_ThirdBallUpdate_combout"
+    Info (17048): Logic cell "WG113_ISEProject_hcc_648_ThirdBallUpdate_combout"
+    Info (17048): Logic cell "WG111_ISEProject_hcc_648_ThirdBallUpdate_combout"
+    Info (17048): Logic cell "W94_ISEProject_hcc_646_ThirdBallUpdate_combout"
+    Info (17048): Logic cell "W112_ISEProject_hcc_648_ThirdBallUpdate_combout"
+    Info (17048): Logic cell "W148_ISEProject_hcc_643_ThirdBallUpdate_combout"
+    Info (17048): Logic cell "WG129_ISEProject_hcc_641_ThirdBallUpdate_combout"
+    Info (17048): Logic cell "WG149_ISEProject_hcc_643_ThirdBallUpdate_combout"
+    Info (17048): Logic cell "WG147_ISEProject_hcc_643_ThirdBallUpdate_combout"
+    Info (17048): Logic cell "W100_ISEProject_hcc_517_SecondBallUpdate_combout"
+    Info (17048): Logic cell "W117_ISEProject_hcc_519_SecondBallUpdate_combout"
+    Info (17048): Logic cell "WG118_ISEProject_hcc_519_SecondBallUpdate_combout"
+    Info (17048): Logic cell "WG101_ISEProject_hcc_517_SecondBallUpdate_combout"
+    Info (17048): Logic cell "WG116_ISEProject_hcc_519_SecondBallUpdate_combout"
+    Info (17048): Logic cell "WG115_ISEProject_hcc_519_SecondBallUpdate_combout"
+    Info (17048): Logic cell "W150_ISEProject_hcc_514_SecondBallUpdate_combout"
+    Info (17048): Logic cell "WG132_ISEProject_hcc_512_SecondBallUpdate_combout"
+    Info (17048): Logic cell "WG151_ISEProject_hcc_514_SecondBallUpdate_combout"
+    Info (17048): Logic cell "WG149_ISEProject_hcc_514_SecondBallUpdate_combout"
+    Info (17048): Logic cell "WG148_ISEProject_hcc_514_SecondBallUpdate_combout"
+    Info (17048): Logic cell "W69_ISEProject_hcc_157_greyScale_combout"
+    Info (17048): Logic cell "W68_ISEProject_hcc_157_greyScale_combout"
+    Info (17048): Logic cell "W86_ISEProject_hcc_157_greyScale_combout"
+    Info (17048): Logic cell "W90_ISEProject_hcc_157_greyScale_combout"
+    Info (17048): Logic cell "W89_ISEProject_hcc_157_greyScale_combout"
+    Info (17048): Logic cell "W88_ISEProject_hcc_157_greyScale_combout"
+    Info (17048): Logic cell "W87_ISEProject_hcc_157_greyScale_combout"
+    Info (17048): Logic cell "W53_ISEProject_hcc_157_greyScale_combout"
+    Info (17048): Logic cell "W112_ISEProject_hcc_157_greyScale_combout"
+    Info (17048): Logic cell "WG52_ISEProject_hcc_157_greyScale_combout"
+    Info (17048): Logic cell "WG51_ISEProject_hcc_157_greyScale_combout"
+    Info (17048): Logic cell "WG67_ISEProject_hcc_157_greyScale_combout"
+    Info (17048): Logic cell "W654_ISEProject_hcc_921_VGAoutput_combout"
+    Info (17048): Logic cell "W655_ISEProject_hcc_921_VGAoutput_combout"
+    Info (17048): Logic cell "W656_ISEProject_hcc_921_VGAoutput_combout"
+    Info (17048): Logic cell "W658_ISEProject_hcc_921_VGAoutput_combout"
+    Info (17048): Logic cell "W657_ISEProject_hcc_921_VGAoutput_combout"
+    Info (17048): Logic cell "W631_ISEProject_hcc_903_VGAoutput_combout"
+    Info (17048): Logic cell "W633_ISEProject_hcc_903_VGAoutput_combout"
+    Info (17048): Logic cell "W632_ISEProject_hcc_903_VGAoutput_combout"
+    Info (17048): Logic cell "W36_ISEProject_hcc_156_greyScale_combout"
+    Info (17048): Logic cell "W50_ISEProject_hcc_156_greyScale_combout"
+    Info (17048): Logic cell "W25_ISEProject_hcc_156_greyScale_combout"
+    Info (17048): Logic cell "W37_ISEProject_hcc_156_greyScale_combout"
+Warning: Design contains 4 input pin(s) that do not drive logic
+    Warning (15610): No output dependent on input pin "PIN_AC19"
+    Warning (15610): No output dependent on input pin "PIN_AD19"
+    Warning (15610): No output dependent on input pin "PIN_N23"
+    Warning (15610): No output dependent on input pin "PIN_P23"
+Info: Implemented 7460 device resources after synthesis - the final resource count might be different
+    Info: Implemented 14 input pins
+    Info: Implemented 125 output pins
+    Info: Implemented 18 bidirectional pins
+    Info: Implemented 7205 logic cells
+    Info: Implemented 78 RAM segments
+    Info: Implemented 20 DSP elements
+Info: Quartus II Analysis & Synthesis was successful. 0 errors, 41 warnings
+    Info: Peak virtual memory: 268 megabytes
+    Info: Processing ended: Fri May 27 12:24:22 2011
+    Info: Elapsed time: 00:00:26
+    Info: Total CPU time (on all processors): 00:00:22
+
+

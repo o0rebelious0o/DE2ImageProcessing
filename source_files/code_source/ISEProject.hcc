@@ -1,0 +1,1298 @@
+//////////////////////////////////
+//                              //
+//   First Year FPGA Project    //
+//                              //
+//  Christophe Wilhelm - cfw10  //
+//                              //
+//    Richard Evans - rce10     //
+//                              //
+//////////////////////////////////
+
+set clock = external "N2";
+
+#include "DE2.hch"
+#include <stdlib.hch>
+
+
+//----------------set of constants that can be changed by the user--------------
+#define secondBallLEVEL 5                           // Level at which the second ball appears
+#define thirdBallLEVEL 10                           // Level at which the third ball appears
+#define Ball1InitialSpeed 3                         // Initial speed of the first ball
+#define Ball2InitialSpeed 3                         // Initial speed of the second ball
+#define Ball3InitialSpeed 3                         // Initial speed of the third ball
+#define BorderChange 15                             // Amount by which the borders change every level
+
+
+//----------------set of constants------------------//
+#define Grey 0b011011111101101111110110111111       // 30 bit grey colour 
+#define MouseWindow_SIZE 30                         // Size of mouse MouseWindow (pixels to all sides of mouse position coordinates)
+#define BallRADIUS 15                               // Radius of the ball (pixels to all sides of ball position coordinates)
+#define lifeRADIUS 30                               // Size of mouse BallWindow (pixels to all sides of life position coordinates)
+#define life1X 200                                  // Horizontal position of the first life
+#define life2X 400                                  // Horizontal position of the second life
+#define life3X 600                                  // Horizontal position of the third life
+#define lifeY 525                                   // Vertical position of the lives (they are all aligned)
+#define edgeDetectionTHRESHOLD 150                  // threshold to decide whether to display edge detection or greyscale
+
+macro expr ImgWidth = 533;                          //set the image width       |
+macro expr ImgHeight = 400;                         //set the image heigth      |NB:these have to be the same as the dimension of the image inputted to flash
+macro expr IndentLeft = 133;                        //set the place of the left edge of the image on the screen
+macro expr RightBoundary = (533 + 134);             //set the place of the right edge of the image on the screen
+macro expr IndentTop = 50;                          //set the place of the top edge of the image on the screen
+macro expr BottomBoundary = (400 + 51);             //set the place of the bottom edge of the image on the screen
+
+//constants given the value of zero to modify bit length of some variables
+unsigned 3 temp3;
+unsigned 2 temp2;
+
+//--------------global game variables-------//
+unsigned 1 gameOver, gameBegin, newHighScore, secondBallOn, thirdBallOn, takeLife, betweenLives;    //boolean valueswhich indicate the state in which the game is in
+unsigned 2 lifeNumber;                      //number of lives left to the payer (initially 3)
+unsigned 4 keyMask;                         //4 bit variable used to know the state of the 4 push buttons on the DE2 board
+unsigned 6 flashCount, HighLevel;           //counter to determine the rate of flashing and variable to store the high level
+unsigned 10 gameWindowXleft, gameWindowXright, gameWindowYtop, gameWindowYbottom;                   //variables to determine the postion of the window in which the ball is bouncing
+unsigned 11 HighScore;                      //variable to store the High score
+unsigned 1 flashColour;                     //boolean that is used to diplay colour when true
+
+//------------set of global counters------------//
+unsigned 6 ballUpdateCounter,levelCounter;      //ballUpdateCounter is used to update the Ball postions every 64 frames in order to slow them down and levelCounter
+unsigned 11 score;                              //
+unsigned 16 gameFlowCounter;                    //counter used for general timing
+    
+// Structure for MouseWindow position
+struct MovingParts
+{
+   unsigned 10 MouseWindowX, MouseWindowY;
+    unsigned 10 MouseWindowEdgeLeft,MouseWindowEdgeRight,MouseWindowEdgeTop,MouseWindowEdgeBottom;
+};
+
+// Structure for the Balls
+struct Ball
+{
+    unsigned 10 BallX, BallY;                                               //coordinates of the ball
+    unsigned 10 BallEdgeLeft,BallEdgeRight,BallEdgeTop,BallEdgeBottom;      //edges of the ball
+    unsigned 10 SpeedX, SpeedY;                                             //speed of the ball in the x and y directions =>gives a speed in 2D
+    unsigned 1 DirectionX, DirectionY;                                      //Direction +ve = 1, -ve = 0
+};
+
+chan <unsigned> SobelFIFO_1 with {fifolength=533};          //FIFO at the end of the first line of the sobel edge detection mask
+chan <unsigned> SobelFIFO_2 with {fifolength=533};          //FIFO at the end of the second line of the sobel edge detection mask 
+chan <unsigned> ColourFIFO_1 with {fifolength=530};         //FIFO at the end of the first line of the colour mask
+chan <unsigned> ColourFIFO_2 with {fifolength=530};         //FIFO at the end of the second line of the colour mask
+unsigned 10 Gpixel;                                         //variable to store the greyscale of a pixel for edge detection
+
+macro proc delayFunction(Ncycles)
+{
+    unsigned 10 counter;
+
+    counter = 0;
+    do
+    {
+        counter++;
+    } while (counter < Ncycles);
+}
+// ---------- Preload a colour image from Flash memory to SRAM --------
+macro proc preLoadColourImg(SRAM,FLASH)
+{
+    unsigned 22 FlashAddress;
+   unsigned 18 SRAMAddress;
+    unsigned 8 red,green,blue;   //RGB colour
+    unsigned 16 pixel;
+    unsigned 10 counter;
+
+    macro expr N=100;
+
+    par
+    {
+        FlashAddress = 0;
+        SRAMAddress =0;
+        counter = 0;
+    }
+
+    do
+    {
+        counter++;
+    }while (counter < 1000);
+
+    do
+    {
+        DE2ReadFLASH(FlashAddress,red,FLASH);
+        delayFunction(N);
+        FlashAddress++;
+        delayFunction(N);
+        DE2ReadFLASH(FlashAddress,green,FLASH);
+        delayFunction(N);
+        FlashAddress++;
+        delayFunction(N);
+        DE2ReadFLASH(FlashAddress,blue,FLASH);
+        delayFunction(N);
+        FlashAddress++;
+        delayFunction(N);
+        
+        pixel = red[7:3]@green[7:2]@blue[7:3];
+
+        DE2WriteSRAM(SRAMAddress,pixel,SRAM);
+        SRAMAddress++;
+
+        delay;
+
+    } while (SRAMAddress < 213200);
+
+    delay;
+}
+
+
+
+//---------------function for finding grayscale intensity of a pixel as a 10bit value
+macro proc greyScale(data)
+{
+    unsigned 8 red, green, blue;
+    unsigned 10 sum;                            
+               
+    par{    
+        red = data[15:11] @ temp3;                              //take the red channel and store it as an 8 bit variable
+        green = data[10:5] @ temp2;                             //take the green channel and store it as an 8 bit variable
+        blue = data[4:0] @ temp3;                               //take the blue channel and store it as an 8 bit variable                                                   
+        sum = adju(red,10) + adju(green,10) + adju(blue,10);    //add all the channels together (adjusted to 10 bits) 
+        Gpixel = (sum/3) + 100;                                 //average it all out (100 is added to brighten up the image)
+    }
+}
+
+
+//---------------update the position of the first ball and the game Window every 64 frames
+macro proc BallUpdate(VideoPtr, MousePtr, BallPtr)
+{
+    do {
+    // Wait until final scan line so this loop will only execute once per frame
+        while( !( (VideoPtr->ScanX==DE2VisibleCols) && (VideoPtr->ScanY==DE2VisibleLines - 1) ) )
+            delay;
+      
+        par{
+            //------push buttons actions--------
+            DE2Key(keyMask);        //put the current state of the push buttons into keyMask
+            //if button 1 & 3 are not pressed wait until one of them is pressed and reinitialise the variables
+            if((keyMask[3] == 0) || (keyMask[0] == 0)){
+                while((keyMask[3] == 0) || (keyMask[0] == 0))
+                    delay;
+                ballUpdateCounter = 0;
+                gameFlowCounter = 1;
+                levelCounter = 1;
+                score = 0;
+            }
+            
+            if(takeLife){
+                if(score < 131){                    //if the player has not reached level 2 before he dies
+                    levelCounter = 1;
+                    score = 0;     
+                    BallPtr->SpeedX = 0;    //|
+                    BallPtr->SpeedY = 0;    //|freeze the ball
+                }
+                else{                               //otherwise normal score decrementation 
+                    score = score - 131;
+                    levelCounter--;
+                }
+                if(levelCounter < secondBallLEVEL)  //make sure the second and third balls are off if needed
+                    secondBallOn = 0;
+                if(levelCounter < thirdBallLEVEL)
+                    thirdBallOn = 0;
+                lifeNumber--;
+                takeLife = 0;               //reset the take a life boolean
+                
+                gameFlowCounter = 1;        //reset the gameFlowCounter
+                
+            }
+            if(ballUpdateCounter == 0){
+                // Update Ball position according to speed and direction
+                par {
+                    if(BallPtr->DirectionX == 1)
+                        BallPtr->BallX = (BallPtr->BallX + BallPtr->SpeedX);
+                    else if(BallPtr->DirectionX == 0)
+                        BallPtr->BallX = (BallPtr->BallX - BallPtr->SpeedX);
+                        
+                    if(BallPtr->DirectionY == 1)
+                        BallPtr->BallY = (BallPtr->BallY + BallPtr->SpeedY);
+                    else if(BallPtr->DirectionY == 0)
+                        BallPtr->BallY = (BallPtr->BallY - BallPtr->SpeedY);
+                }
+                // if the ball hits an edge reposition it at the edge and reverse the speed
+                par {
+                    if( (BallPtr->BallX + BallRADIUS) >= (gameWindowXright) ){
+                        BallPtr->BallX = (gameWindowXright - BallRADIUS - 1);
+                        BallPtr->DirectionX = !(BallPtr->DirectionX);
+                    }
+                    if(BallPtr->BallX - BallRADIUS <= gameWindowXleft){
+                        BallPtr->BallX = BallRADIUS + gameWindowXleft + 1;
+                        BallPtr->DirectionX = !(BallPtr->DirectionX);
+                    }
+                        
+                    if( (BallPtr->BallY + BallRADIUS) >= (gameWindowYbottom)){
+                        BallPtr->BallY = (gameWindowYbottom - BallRADIUS - 1);
+                        BallPtr->DirectionY = !(BallPtr->DirectionY);
+                    }
+                    if((BallPtr->BallY - BallRADIUS) <= gameWindowYtop){
+                        BallPtr->BallY = gameWindowYtop + BallRADIUS + 1;
+                        BallPtr->DirectionY = !(BallPtr->DirectionY);
+                    }
+                }
+                //update edge positions of the Ball Window, to be used in VGAoutput()
+                par {  
+                    BallPtr->BallEdgeLeft = (BallPtr->BallX)-BallRADIUS;
+                    BallPtr->BallEdgeRight = (BallPtr->BallX)+BallRADIUS;
+                    BallPtr->BallEdgeTop = (BallPtr->BallY)-BallRADIUS;
+                    BallPtr->BallEdgeBottom = (BallPtr->BallY)+BallRADIUS;
+                }
+            }
+            
+            if((gameFlowCounter%3000 == 0) && (gameBegin == 1) && (gameOver != 1) && (!betweenLives)){
+                //change the ball speed 'dynamically' every 2 levels and reset it if a new ball is introduced into the game
+                if((!secondBallOn) && (!thirdBallOn) && (levelCounter%2 == 0)){
+                    BallPtr->SpeedX = Ball1InitialSpeed + adju(abs(levelCounter/2),10);
+                    BallPtr->SpeedY = Ball1InitialSpeed + adju(abs(levelCounter/2),10);
+                }
+                if((!secondBallOn) && (!thirdBallOn) && (levelCounter%2 == 1)){
+                    BallPtr->SpeedX = Ball1InitialSpeed + adju(abs((levelCounter - 1)/2),10);
+                    BallPtr->SpeedY = Ball1InitialSpeed + adju(abs((levelCounter - 1)/2),10);
+                }
+                if((secondBallOn) && (!thirdBallOn) && ((levelCounter%secondBallLEVEL)%2 == 0)){
+                    BallPtr->SpeedX = Ball1InitialSpeed + adju(((levelCounter%secondBallLEVEL)/2),10);
+                    BallPtr->SpeedY = Ball1InitialSpeed + adju(((levelCounter%secondBallLEVEL)/2),10);
+                }
+                if((secondBallOn) && (!thirdBallOn) && ((levelCounter%secondBallLEVEL)%2 == 1)){
+                    BallPtr->SpeedX = Ball1InitialSpeed + adju(((levelCounter%secondBallLEVEL - 1)/2),10);
+                    BallPtr->SpeedY = Ball1InitialSpeed + adju(((levelCounter%secondBallLEVEL - 1)/2),10);
+                }
+                if((thirdBallOn) && ((levelCounter%thirdBallLEVEL)%2 == 0)){
+                    BallPtr->SpeedX = Ball1InitialSpeed + adju(((levelCounter%thirdBallLEVEL)/2),10);
+                    BallPtr->SpeedY = Ball1InitialSpeed + adju(((levelCounter%thirdBallLEVEL)/2),10);
+                }
+                if((thirdBallOn) && ((levelCounter%thirdBallLEVEL)%2 == 1)){
+                    BallPtr->SpeedX = Ball1InitialSpeed + adju(((levelCounter%thirdBallLEVEL - 1)/2),10);
+                    BallPtr->SpeedY = Ball1InitialSpeed + adju(((levelCounter%thirdBallLEVEL - 1)/2),10);
+                }
+                // increment level counter every new level
+                if(gameFlowCounter==0)
+                    levelCounter++;
+                //adjust the gameWindow borders 'dynamically' according to the level and the number of balls
+                if(!secondBallOn && !thirdBallOn){
+                    if(gameWindowXleft < (IndentLeft + 1 + ((adju(abs(levelCounter),10))-1)*BorderChange)){
+                        gameWindowXleft = gameWindowXleft + 1;
+                        gameWindowXright = gameWindowXright - 1;
+                        gameWindowYtop = gameWindowYtop + 1;
+                        gameWindowYbottom = gameWindowYbottom - 1;
+                    }
+                    if(gameWindowXleft > (IndentLeft + 1 + ((adju(abs(levelCounter),10))-1)*BorderChange)){
+                        gameWindowXleft = gameWindowXleft - 2;
+                        gameWindowXright = gameWindowXright + 2;
+                        gameWindowYtop = gameWindowYtop - 2;
+                        gameWindowYbottom = gameWindowYbottom + 2;
+                    }
+                }
+                if(secondBallOn && !thirdBallOn){
+                    if(gameWindowXleft < (IndentLeft + 1 + (adju(abs(levelCounter%secondBallLEVEL),10))*BorderChange)){
+                        gameWindowXleft = gameWindowXleft + 1;
+                        gameWindowXright = gameWindowXright - 1;
+                        gameWindowYtop = gameWindowYtop + 1;
+                        gameWindowYbottom = gameWindowYbottom - 1;
+                    }
+                    if(gameWindowXleft > (IndentLeft + 1 + (adju(abs(levelCounter%secondBallLEVEL),10))*BorderChange)){
+                        gameWindowXleft = gameWindowXleft - 2;
+                        gameWindowXright = gameWindowXright + 2;
+                        gameWindowYtop = gameWindowYtop - 2;
+                        gameWindowYbottom = gameWindowYbottom + 2;
+                    }
+                }
+                if(thirdBallOn){
+                    if(gameWindowXleft < (IndentLeft + 1 + (adju(abs(levelCounter%thirdBallLEVEL),10))*BorderChange)){
+                        gameWindowXleft = gameWindowXleft + 1;
+                        gameWindowXright = gameWindowXright - 1;
+                        gameWindowYtop = gameWindowYtop + 1;
+                        gameWindowYbottom = gameWindowYbottom - 1;
+                    }
+                    if(gameWindowXleft > (IndentLeft + 1 + (adju(abs(levelCounter%thirdBallLEVEL),10))*BorderChange)){
+                        gameWindowXleft = gameWindowXleft - 2;
+                        gameWindowXright = gameWindowXright + 2;
+                        gameWindowYtop = gameWindowYtop - 2;
+                        gameWindowYbottom = gameWindowYbottom + 2;
+                    }
+                }
+            }
+            //'randomly' change the ball direction
+            if((BallPtr->SpeedX <= 6) && (gameFlowCounter == 0) && (!betweenLives)){
+                BallPtr->DirectionX = !(BallPtr->DirectionY);
+                BallPtr->DirectionY = !(BallPtr->DirectionX);
+           }
+            else if((BallPtr->SpeedX > 6) ){
+                BallPtr->DirectionX = (BallPtr->DirectionY);
+                BallPtr->DirectionY = !(BallPtr->DirectionX);
+            }
+            
+            if((gameOver == 1) || (betweenLives)){
+                //make the ball move very fast between lives or when the game over (they are not displayed at this time) so that they seem to appear at a random position on the screen when the game starts again
+                par {
+                    if(BallPtr->DirectionX == 1)
+                        BallPtr->BallX = (BallPtr->BallX + 10);
+                    else if(BallPtr->DirectionX == 0)
+                        BallPtr->BallX = (BallPtr->BallX - 10);
+                        
+                    if(BallPtr->DirectionY == 1)
+                        BallPtr->BallY = (BallPtr->BallY + 10);
+                    else if(BallPtr->DirectionY == 0)
+                        BallPtr->BallY = (BallPtr->BallY - 10);
+                }
+                // if the ball hits an edge reposition it at the edge and reverse the speed
+                par {
+                    if( (BallPtr->BallX + BallRADIUS) >= (RightBoundary) ){
+                        BallPtr->BallX = (RightBoundary - BallRADIUS - 1);
+                        BallPtr->DirectionX = !(BallPtr->DirectionX);
+                    }
+                    if(BallPtr->BallX <= BallRADIUS + IndentLeft){
+                        BallPtr->BallX = BallRADIUS + IndentLeft + 1;
+                        BallPtr->DirectionX = !(BallPtr->DirectionX);
+                    }
+                        
+                    if( (BallPtr->BallY + BallRADIUS) >= (BottomBoundary)){
+                        BallPtr->BallY = (BottomBoundary - BallRADIUS - 1);
+                        BallPtr->DirectionY = !(BallPtr->DirectionY);
+                    }
+                    if((BallPtr->BallY - BallRADIUS)<= IndentTop){
+                        BallPtr->BallY = IndentTop + BallRADIUS + 1;
+                        BallPtr->DirectionY = !(BallPtr->DirectionY);
+                    }
+                }
+                //update edge positions of Ball, to be used in VGAoutput()
+                par {  
+                    BallPtr->BallEdgeLeft = (BallPtr->BallX)-BallRADIUS;
+                    BallPtr->BallEdgeRight = (BallPtr->BallX)+BallRADIUS;
+                    BallPtr->BallEdgeTop = (BallPtr->BallY)-BallRADIUS;
+                    BallPtr->BallEdgeBottom = (BallPtr->BallY)+BallRADIUS;
+                }
+            }
+        }
+        if((gameBegin) && (!betweenLives)){                                     //if game is running
+            if(gameFlowCounter%500 == 0)        //increment the score every time the game flow counter reaches a multiple of 500
+                score++;
+            //freeze the ball when a second or third ball is added
+            if((levelCounter%secondBallLEVEL == 0) && (!secondBallOn)){
+                secondBallOn = 1;
+                BallPtr->SpeedX = 0;
+                BallPtr->SpeedY = 0;
+            }
+            if((levelCounter%thirdBallLEVEL == 0) && (!thirdBallOn)){
+                thirdBallOn = 1;
+                BallPtr->SpeedX = 0;
+                BallPtr->SpeedY = 0;
+            }
+            //update counters
+            ballUpdateCounter++;
+            gameFlowCounter++;
+            
+            //display the score and level on the seven segment displays
+            DE2Set7SegDigit(5,adju(abs((levelCounter/10)%10),4));
+            DE2Set7SegDigit(4,adju(levelCounter%10,4));
+            DE2Set7SegDigit(3,adju(abs((score/1000)%10),4));
+            DE2Set7SegDigit(2,adju(abs((score/100)%10),4));
+            DE2Set7SegDigit(1,adju(abs((score/10)%10),4));
+            DE2Set7SegDigit(0,adju(abs(score%10),4));
+        }
+        else if((gameBegin == 0) && (gameOver == 0)){
+            score = HighScore;              //|
+            levelCounter = HighLevel;       //|set the score and levelCounter to HighScore and HighLevel in order for them to be displayed on the seven segments
+        }
+        //reset the counters when the game is over
+        else{
+            ballUpdateCounter = 0;
+            gameFlowCounter = 1;
+        }
+        //set the high score if need be and reinitialise flashCount
+        if((gameOver == 1) && (score > HighScore)){
+            HighScore = score;
+            HighLevel = levelCounter;
+            while(gameOver == 1)
+                newHighScore = 1;
+            flashCount = 0;
+        }
+        // if the right mouse button is pressed while the game is in 'stantby' mode reinitialise and freeze the ball
+        if((MousePtr->RightButton == 1) && (gameOver == 0) && (gameBegin == 0)){
+            score = 0;
+            levelCounter = 1;
+            gameFlowCounter = 1;
+            BallPtr->SpeedX = 0;
+            BallPtr->SpeedY = 0;
+            secondBallOn = 0;
+            thirdBallOn = 0;
+        }
+    }while (1);
+}
+//---------------update the position of the second ball every 64 frames
+macro proc SecondBallUpdate(VideoPtr, BallPtr)
+{
+        
+    do {
+    // Wait until final scan line so this loop will only execute once per frame
+        while( !( (VideoPtr->ScanX==DE2VisibleCols) && (VideoPtr->ScanY==DE2VisibleLines - 1) ) )
+            delay;
+      
+        par{
+            if(ballUpdateCounter == 0){
+                // Update Ball position according to speed and direction
+                if(gameFlowCounter%2 == 0){
+                    par {
+                        if(BallPtr->DirectionX == 1)
+                            BallPtr->BallX = (BallPtr->BallX + BallPtr->SpeedX);
+                        else if(BallPtr->DirectionX == 0)
+                            BallPtr->BallX = (BallPtr->BallX - BallPtr->SpeedX);
+                            
+                        if(BallPtr->DirectionY == 1)
+                            BallPtr->BallY = (BallPtr->BallY + BallPtr->SpeedY);
+                        else if(BallPtr->DirectionY == 0)
+                            BallPtr->BallY = (BallPtr->BallY - BallPtr->SpeedY);
+                    }
+                }
+                // if the ball hits an edge reposition it at the edge and reverse the speed
+                par {
+                   if( (BallPtr->BallX + BallRADIUS) >= (gameWindowXright) ){
+                        BallPtr->BallX = (gameWindowXright - BallRADIUS - 1);
+                        BallPtr->DirectionX = !(BallPtr->DirectionX);
+                    }
+                    if(BallPtr->BallX - BallRADIUS <= gameWindowXleft){
+                        BallPtr->BallX = BallRADIUS + gameWindowXleft + 1;
+                        BallPtr->DirectionX = !(BallPtr->DirectionX);
+                    }
+                        
+                    if( (BallPtr->BallY + BallRADIUS) >= (gameWindowYbottom)){
+                        BallPtr->BallY = (gameWindowYbottom - BallRADIUS - 1);
+                        BallPtr->DirectionY = !(BallPtr->DirectionY);
+                    }
+                    if((BallPtr->BallY - BallRADIUS) <= gameWindowYtop){
+                        BallPtr->BallY = gameWindowYtop + BallRADIUS + 1;
+                        BallPtr->DirectionY = !(BallPtr->DirectionY);
+                    }
+                }
+                //update edge positions of the Ball Window, to be used in VGAoutput()
+                par { 
+                    BallPtr->BallEdgeLeft = (BallPtr->BallX)-BallRADIUS;
+                    BallPtr->BallEdgeRight = (BallPtr->BallX)+BallRADIUS;
+                    BallPtr->BallEdgeTop = (BallPtr->BallY)-BallRADIUS;
+                    BallPtr->BallEdgeBottom = (BallPtr->BallY)+BallRADIUS;
+                }
+            }
+             if((gameFlowCounter%3000 == 0) && (gameBegin == 1) && (gameOver != 1) && (!betweenLives)){
+                 //change the ball speed 'dynamically' every 2 levels and reset it if a new ball is introduced into the game
+                    if((secondBallOn) && (!thirdBallOn) && ((levelCounter%secondBallLEVEL)%2 == 0)){
+                        BallPtr->SpeedX = Ball2InitialSpeed + adju(((levelCounter%secondBallLEVEL)/2),10);
+                        BallPtr->SpeedY = Ball2InitialSpeed + adju(((levelCounter%secondBallLEVEL)/2),10);
+                    }
+                    if((secondBallOn) && (!thirdBallOn) && ((levelCounter%secondBallLEVEL)%2 == 1)){
+                        BallPtr->SpeedX = Ball2InitialSpeed + adju((((levelCounter%secondBallLEVEL) - 1)/2),10);
+                        BallPtr->SpeedY = Ball2InitialSpeed + adju((((levelCounter%secondBallLEVEL) - 1)/2),10);
+                   }
+                    if((thirdBallOn) && ((levelCounter%thirdBallLEVEL)%2 == 0)){
+                        BallPtr->SpeedX = Ball2InitialSpeed + adju(((levelCounter%thirdBallLEVEL)/2),10);
+                        BallPtr->SpeedY = Ball2InitialSpeed + adju(((levelCounter%thirdBallLEVEL)/2),10);
+                    }
+                    if((thirdBallOn) && ((levelCounter%thirdBallLEVEL)%2 == 1)){
+                        BallPtr->SpeedX = Ball2InitialSpeed + adju((((levelCounter%thirdBallLEVEL) - 1)/2),10);
+                        BallPtr->SpeedY = Ball2InitialSpeed + adju((((levelCounter%thirdBallLEVEL) - 1)/2),10);
+                    }
+            }
+            //'randomly' change the ball direction
+            if((BallPtr->SpeedX <= 6) && (gameFlowCounter == 0) && (!betweenLives)){
+                BallPtr->DirectionX = !(BallPtr->DirectionY);
+                BallPtr->DirectionY = !(BallPtr->DirectionX);
+            }
+            else if((BallPtr->SpeedX > 6) && (!betweenLives)){
+                BallPtr->DirectionX = (BallPtr->DirectionY);
+                BallPtr->DirectionY = !(BallPtr->DirectionX);
+            }
+
+            if((gameOver == 1) || (betweenLives)){
+                //make the ball move very fast between lives or when the game over (they are not displayed at this time) so that they seem to appear at a random position on the screen when the game starts again
+                par {
+                    if(BallPtr->DirectionX == 1)
+                        BallPtr->BallX = (BallPtr->BallX + 12);
+                    else if(BallPtr->DirectionX == 0)
+                        BallPtr->BallX = (BallPtr->BallX - 12);
+                        
+                    if(BallPtr->DirectionY == 1)
+                        BallPtr->BallY = (BallPtr->BallY + 12);
+                    else if(BallPtr->DirectionY == 0)
+                        BallPtr->BallY = (BallPtr->BallY - 12);
+                }
+                // if the ball hits an edge reposition it at the edge and reverse the speed
+                par {
+                    if( (BallPtr->BallX + BallRADIUS) >= (RightBoundary) ){
+                        BallPtr->BallX = (RightBoundary - BallRADIUS - 1);
+                        BallPtr->DirectionX = !(BallPtr->DirectionX);
+                    }
+                    if(BallPtr->BallX <= BallRADIUS + IndentLeft){
+                        BallPtr->BallX = BallRADIUS + IndentLeft + 1;
+                        BallPtr->DirectionX = !(BallPtr->DirectionX);
+                    }
+                        
+                    if( (BallPtr->BallY + BallRADIUS) >= (BottomBoundary)){
+                        BallPtr->BallY = (BottomBoundary - BallRADIUS - 1);
+                        BallPtr->DirectionY = !(BallPtr->DirectionY);
+                    }
+                    if((BallPtr->BallY - BallRADIUS)<= IndentTop){
+                        BallPtr->BallY = IndentTop + BallRADIUS + 1;
+                        BallPtr->DirectionY = !(BallPtr->DirectionY);
+                    }
+                }
+                //update edge positions of Ball, to be used in VGAoutput()
+                par {
+                    BallPtr->BallEdgeLeft = (BallPtr->BallX)-BallRADIUS;
+                    BallPtr->BallEdgeRight = (BallPtr->BallX)+BallRADIUS;
+                    BallPtr->BallEdgeTop = (BallPtr->BallY)-BallRADIUS;
+                    BallPtr->BallEdgeBottom = (BallPtr->BallY)+BallRADIUS;
+                }
+            }
+        }
+        //freeze the ball when it is added and when the third ball is added
+        if((gameBegin == 1) && (!betweenLives)){
+            if((gameFlowCounter == 1) && (levelCounter%secondBallLEVEL == 0) && (secondBallOn)){
+                BallPtr->SpeedX = 0;
+                BallPtr->SpeedY = 0;
+            }
+            if((gameFlowCounter == 1) && (levelCounter%thirdBallLEVEL == 0) && (thirdBallOn)){
+                BallPtr->SpeedX = 0;
+                BallPtr->SpeedY = 0;
+            }
+        }
+    }while (1);
+}
+
+
+//---------------update the position of the third ball every 64 frames
+macro proc ThirdBallUpdate(VideoPtr, BallPtr)
+{
+    do {
+    // Wait until final scan line so this loop will only execute once per frame
+        while( !( (VideoPtr->ScanX==DE2VisibleCols) && (VideoPtr->ScanY==DE2VisibleLines - 1) ) )
+            delay;
+      
+        par{
+            if(ballUpdateCounter == 0){
+                // Update Ball position according to speed and direction
+                if(gameFlowCounter%2 == 0){
+                    par {
+                        if(BallPtr->DirectionX == 1)
+                            BallPtr->BallX = (BallPtr->BallX + BallPtr->SpeedX);
+                        else if(BallPtr->DirectionX == 0)
+                            BallPtr->BallX = (BallPtr->BallX - BallPtr->SpeedX);
+                            
+                        if(BallPtr->DirectionY == 1)
+                            BallPtr->BallY = (BallPtr->BallY + BallPtr->SpeedY);
+                        else if(BallPtr->DirectionY == 0)
+                            BallPtr->BallY = (BallPtr->BallY - BallPtr->SpeedY);
+                    }
+                }
+                // if the ball hits an edge reposition it at the edge and reverse the speed
+                par {
+                    if( (BallPtr->BallX + BallRADIUS) >= (gameWindowXright) ){
+                        BallPtr->BallX = (gameWindowXright - BallRADIUS - 1);
+                        BallPtr->DirectionX = !(BallPtr->DirectionX);
+                    }
+                    if(BallPtr->BallX - BallRADIUS <= gameWindowXleft){
+                        BallPtr->BallX = BallRADIUS + gameWindowXleft + 1;
+                        BallPtr->DirectionX = !(BallPtr->DirectionX);
+                    }
+                        
+                    if( (BallPtr->BallY + BallRADIUS) >= (gameWindowYbottom)){
+                        BallPtr->BallY = (gameWindowYbottom - BallRADIUS - 1);
+                        BallPtr->DirectionY = !(BallPtr->DirectionY);
+                    }
+                    if((BallPtr->BallY - BallRADIUS) <= gameWindowYtop){
+                        BallPtr->BallY = gameWindowYtop + BallRADIUS + 1;
+                        BallPtr->DirectionY = !(BallPtr->DirectionY);
+                    }
+                }
+                //update edge positions of the Ball Window, to be used in VGAoutput()
+                par {  
+                    BallPtr->BallEdgeLeft = (BallPtr->BallX)-BallRADIUS;
+                    BallPtr->BallEdgeRight = (BallPtr->BallX)+BallRADIUS;
+                    BallPtr->BallEdgeTop = (BallPtr->BallY)-BallRADIUS;
+                    BallPtr->BallEdgeBottom = (BallPtr->BallY)+BallRADIUS;
+                }
+            }
+             if((gameFlowCounter%3000 == 0) && (gameBegin == 1) && (gameOver != 1) && (!betweenLives)){
+                 //change the ball speed 'dynamically' every 2 levels and reset it if a new ball is introduced into the game
+                    if((thirdBallOn) && (adju(abs(levelCounter%thirdBallLEVEL),10)%2 == 0)){
+                        BallPtr->SpeedX = Ball3InitialSpeed + (adju((levelCounter%thirdBallLEVEL),10)/2);
+                        BallPtr->SpeedY = Ball3InitialSpeed + (adju((levelCounter%thirdBallLEVEL),10)/2);
+                    }
+                    if((thirdBallOn) && (adju(abs(levelCounter%thirdBallLEVEL),10)%2 == 1)){
+                        BallPtr->SpeedX = Ball3InitialSpeed + (adju((levelCounter%thirdBallLEVEL - 1),10)/2);
+                        BallPtr->SpeedY = Ball3InitialSpeed + (adju((levelCounter%thirdBallLEVEL - 1),10)/2);
+                    }
+            }
+            //'randomly' change the ball direction
+            if((BallPtr->SpeedX <= 6) && (gameFlowCounter == 0) && (!betweenLives)){
+                BallPtr->DirectionX = !(BallPtr->DirectionY);
+                BallPtr->DirectionY = !(BallPtr->DirectionX);
+            }
+            else if((BallPtr->SpeedX > 6) && (!betweenLives)){
+                BallPtr->DirectionX = (BallPtr->DirectionY);
+                BallPtr->DirectionY = !(BallPtr->DirectionX);
+            }
+            if((gameOver == 1) || (betweenLives)){
+                //make the ball move very fast between lives or when the game over (they are not displayed at this time) so that they seem to appear at a random position on the screen when the game starts again
+                par {
+                    if(BallPtr->DirectionX == 1)
+                        BallPtr->BallX = (BallPtr->BallX + 14);
+                    else if(BallPtr->DirectionX == 0)
+                        BallPtr->BallX = (BallPtr->BallX - 14);
+                        
+                    if(BallPtr->DirectionY == 1)
+                        BallPtr->BallY = (BallPtr->BallY + 14);
+                    else if(BallPtr->DirectionY == 0)
+                        BallPtr->BallY = (BallPtr->BallY - 14);
+                }
+                // if the ball hits an edge reposition it at the edge and reverse the speed
+                par {
+                    if( (BallPtr->BallX + BallRADIUS) >= (RightBoundary) ){
+                        BallPtr->BallX = (RightBoundary - BallRADIUS - 1);
+                        BallPtr->DirectionX = !(BallPtr->DirectionX);
+                    }
+                    if(BallPtr->BallX <= BallRADIUS + IndentLeft){
+                        BallPtr->BallX = BallRADIUS + IndentLeft + 1;
+                        BallPtr->DirectionX = !(BallPtr->DirectionX);
+                    }
+                        
+                    if( (BallPtr->BallY + BallRADIUS) >= (BottomBoundary)){
+                        BallPtr->BallY = (BottomBoundary - BallRADIUS - 1);
+                        BallPtr->DirectionY = !(BallPtr->DirectionY);
+                    }
+                    if((BallPtr->BallY - BallRADIUS)<= IndentTop){
+                        BallPtr->BallY = IndentTop + BallRADIUS + 1;
+                        BallPtr->DirectionY = !(BallPtr->DirectionY);
+                    }
+                }
+                //update edge positions of Ball, to be used in VGAoutput()
+                par {
+                    BallPtr->BallEdgeLeft = (BallPtr->BallX)-BallRADIUS;
+                    BallPtr->BallEdgeRight = (BallPtr->BallX)+BallRADIUS;
+                    BallPtr->BallEdgeTop = (BallPtr->BallY)-BallRADIUS;
+                    BallPtr->BallEdgeBottom = (BallPtr->BallY)+BallRADIUS;
+                }
+            }
+        }
+        //freeze the ball when it is added and when the third ball is added
+        if((gameBegin == 1) && (!betweenLives)){
+            if((gameFlowCounter == 1) && (adju((levelCounter%secondBallLEVEL),10) == 0) && (secondBallOn)){
+                BallPtr->SpeedX = 0;
+                BallPtr->SpeedY = 0;
+            }
+            if((gameFlowCounter == 1) && (adju((levelCounter%thirdBallLEVEL),10) == 0) && (thirdBallOn)){
+                BallPtr->SpeedX = 0;
+                BallPtr->SpeedY = 0;
+            }
+        }
+    }while (1);
+}
+
+
+//---------------update mouse window every frame
+macro proc MouseFrameUpdate(VideoPtr, MousePtr, MouseWindowPtr)
+{
+
+  do {
+        // Wait until final scan line so this loop will only execute once per frame
+        while( !( (VideoPtr->ScanX==DE2VisibleCols) &&
+            (VideoPtr->ScanY==DE2VisibleLines - 1) ) )
+        delay;
+
+        seq {
+            par {
+                //update the counter for flashing and the boolean
+                if(flashCount == 0)
+                    flashColour = !(flashColour);
+                flashCount++;
+                // Read mouse position
+                if((IndentLeft <= (MousePtr->PointerX - MouseWindow_SIZE)) && ((MousePtr->PointerX + MouseWindow_SIZE) <=  RightBoundary))
+                    MouseWindowPtr->MouseWindowX = MousePtr->PointerX;
+                if((IndentTop <= (MousePtr->PointerY - MouseWindow_SIZE)) && ((MousePtr->PointerY + MouseWindow_SIZE) <=  BottomBoundary))
+                    MouseWindowPtr->MouseWindowY = MousePtr->PointerY;
+                
+                //reset between lives boolean in order to resume game when the right mouse button is released
+                if((MousePtr->RightButton == 1) && (betweenLives)){
+                    while(MousePtr->RightButton == 1)
+                        delay;
+                    betweenLives = 0;
+                }
+                //set variables after 'standby' state when the mouse button is released
+                if((MousePtr->RightButton == 1) && (gameOver == 0) && (gameBegin == 0)){
+                    while(MousePtr->RightButton == 1)
+                        delay;
+                    gameBegin = 1;
+                    gameOver = 0;
+                    newHighScore = 0;
+                }
+                //if not in game and the right mouse button is released set variables and reset the game window
+                if((MousePtr->RightButton == 1) && (gameOver == 1) && (gameBegin == 1 || gameBegin == 0)){
+                    while(MousePtr->RightButton == 1)
+                        delay;
+                    
+                    gameBegin = 0;
+                    gameOver = 0;
+                    lifeNumber = 3;
+                    //reset the game window
+                    gameWindowXleft = IndentLeft + 1;
+                    gameWindowXright = RightBoundary - 1;
+                    gameWindowYtop = IndentTop + 1;
+                    gameWindowYbottom = BottomBoundary - 1;
+                }
+            }
+            //Dont let the mouse window go over the edges
+            par {
+                if( MouseWindowPtr->MouseWindowX > (gameWindowXright-MouseWindow_SIZE) )
+                    MouseWindowPtr->MouseWindowX = (gameWindowXright - MouseWindow_SIZE -1);
+                else if( MouseWindowPtr->MouseWindowX < gameWindowXleft + MouseWindow_SIZE)
+                    MouseWindowPtr->MouseWindowX = (gameWindowXleft + MouseWindow_SIZE +1);
+                
+                if( MouseWindowPtr->MouseWindowY <= (gameWindowYtop + MouseWindow_SIZE) )
+                    MouseWindowPtr->MouseWindowY = (gameWindowYtop + MouseWindow_SIZE + 1);
+                else if(MouseWindowPtr->MouseWindowY >= gameWindowYbottom - MouseWindow_SIZE)
+                    MouseWindowPtr->MouseWindowY = (gameWindowYbottom - MouseWindow_SIZE - 1);
+            }
+        }
+        //update edge positions of MouseWindow, to be used in VGAoutput()
+        par {  
+            MouseWindowPtr->MouseWindowEdgeLeft = (MouseWindowPtr->MouseWindowX)-MouseWindow_SIZE;
+            MouseWindowPtr->MouseWindowEdgeRight = (MouseWindowPtr->MouseWindowX)+MouseWindow_SIZE;
+            MouseWindowPtr->MouseWindowEdgeTop = (MouseWindowPtr->MouseWindowY)-MouseWindow_SIZE;
+            MouseWindowPtr->MouseWindowEdgeBottom = (MouseWindowPtr->MouseWindowY)+MouseWindow_SIZE;
+        }
+    }while (1);
+}
+
+// ------------------ VGA Output -----------------
+macro proc VGAoutput(VideoPtr,SRAM, MouseWindowPtr, MousePtr, BallPtr, Ball2Ptr, Ball3Ptr)
+{
+    macro expr sx = VideoPtr->ScanX;
+    macro expr sy = VideoPtr->ScanY;
+    
+    //boolean values that define where the scan pointer is
+    unsigned int 1 InMouseWindowX,InMouseWindowY, InBall, InBallX ,InBallY, InBall2, InBallX2, InBallY2, InBall3, InBallX3, InBallY3 ,inLifeX[3], inLifeY[3], inLife[3], inGameWindowX, inGameWindowY;
+    unsigned 5 temp5;       //5bit null value to combine with other variables to meke them the desired size
+    //10bit value, Convolution mask for Sobel edge detection, edges deteced horizontally, edges deteced vertically, combination of horizontal and vertical edges, blurred pixel
+    unsigned 10 temp10, SED[3][3], edgex, edgey, globalEdge, blurPix;
+    //variables for sotring the computations in order to draw the balls as cirles
+    unsigned 10 CircleX, CircleY, total, CircleX2, CircleY2, total2, CircleX3, CircleY3, total3;
+    //colour convolution mask, data read from the SRAM, arrays of variables used ot draw the life circles
+    unsigned 16 colour[3][6], data, lifeCircleX[3], lifeCircleY[3], lifeTotal[3];
+    unsigned 18 address;        //address to be read from SRAM
+    
+    //initialise variables
+    par
+    {
+        address = 0;
+        temp5 = 0;
+        temp10 = 50;
+    }
+
+    DE2ReadSRAM(address,data,SRAM);     //read the first element of the SRAM
+    
+    do
+    {
+        VideoPtr->Output = 128;
+    }while ( (sy < DE2VisibleLines) && (sx < DE2VisibleCols) );     //ouput a shade of blue when the scan pointer is not yet on the visible screen
+    
+    do{
+        par{
+            //reset all th variables when the 4th push button is released (after being pushed)
+            if(keyMask[3] == 0){
+                while(keyMask[3] == 0){
+                    DE2Key(keyMask);
+                    delay;
+                }
+                HighScore = 0;
+                flashCount = 0;
+                newHighScore = 0;
+                HighLevel = 1;
+                gameOver = 0;
+                gameBegin = 0;
+                lifeNumber = 3;
+                betweenLives = 0;
+                
+                BallPtr->BallX = 250;
+                BallPtr->BallY = 250;
+                BallPtr->DirectionX = 1;
+                BallPtr->DirectionY = 0;
+                
+                secondBallOn = 0;
+                Ball2Ptr->BallX = 450;
+                Ball2Ptr->BallY = 350;
+                Ball2Ptr->DirectionX = 1;
+                Ball2Ptr->DirectionY = 1;
+                
+                thirdBallOn = 0;
+                Ball3Ptr->BallX = 450;
+                Ball3Ptr->BallY = 350;
+                Ball3Ptr->DirectionX = 1;
+                Ball3Ptr->DirectionY = 1;
+                
+                gameWindowXleft = IndentLeft + 1;
+                gameWindowXright = RightBoundary - 1;
+                gameWindowYtop = IndentTop + 1;
+                gameWindowYbottom = BottomBoundary - 1;
+            }
+            //reset the variables but not the high score when the 1st button is released (after being pushed)
+            if (keyMask[0] == 0){
+                while(keyMask[0] == 0){
+                    DE2Key(keyMask);
+                    delay;
+                }
+                flashCount = 0;
+                gameOver = 0;
+                gameBegin = 0;
+                lifeNumber = 3;
+                betweenLives = 0;
+                
+                BallPtr->BallX = 250;
+                BallPtr->BallY = 250;
+                BallPtr->DirectionX = 1;
+                BallPtr->DirectionY = 0;
+                
+                secondBallOn = 0;
+                Ball2Ptr->BallX = 450;
+                Ball2Ptr->BallY = 350;
+                Ball2Ptr->DirectionX = 1;
+                Ball2Ptr->DirectionY = 1;
+                
+                thirdBallOn = 0;
+                Ball3Ptr->BallX = 450;
+                Ball3Ptr->BallY = 350;
+                Ball3Ptr->DirectionX = 1;
+                Ball3Ptr->DirectionY = 1;
+                
+                gameWindowXleft = IndentLeft + 1;
+                gameWindowXright = RightBoundary - 1;
+                gameWindowYtop = IndentTop + 1;
+                gameWindowYbottom = BottomBoundary - 1;
+            }
+            
+            //set the boolean to know if the scan pointer is in the life circle
+            if( sx == life1X - lifeRADIUS)
+                inLifeX[0] = 1;
+            if( sx == (life1X + lifeRADIUS + 3))
+                inLifeX[0] = 0;
+            if( sy == lifeY - lifeRADIUS)
+                inLifeY[0] = 1;
+            if( sy == lifeY + lifeRADIUS)
+                inLifeY[0] = 0;
+            
+            //draw the circle using a circle equation
+            lifeCircleX[0] = adju((sx - life1X)*(sx - life1X),16);
+            lifeCircleY[0] = adju((sy - lifeY)*(sy - lifeY),16);
+            lifeTotal[0] = (lifeCircleX[0] + lifeCircleY[0]);
+            if ((lifeTotal[0] <= (lifeRADIUS*lifeRADIUS)) && (inLifeX[0]) && (inLifeY[0]))
+                inLife[0] = 1;
+           else
+                inLife[0] = 0;
+            
+            //set the boolean to know if the scan pointer is in the life circle
+            if( sx == life2X - lifeRADIUS)
+                inLifeX[1] = 1;
+            if( sx == (life2X + lifeRADIUS + 3))
+                inLifeX[1] = 0;
+            if( sy == lifeY - lifeRADIUS)
+                inLifeY[1] = 1;
+            if( sy == lifeY + lifeRADIUS)
+                inLifeY[1] = 0;
+            //draw the circle using a circle equation        
+            lifeCircleX[1] = adju((sx - life2X)*(sx - life2X),16);
+            lifeCircleY[1] = adju((sy - lifeY)*(sy - lifeY),16);
+            lifeTotal[1] = (lifeCircleX[1] + lifeCircleY[1]);
+            if ((lifeTotal[1] <= (lifeRADIUS*lifeRADIUS)) && (inLifeX[1]) && (inLifeY[1]))
+                inLife[1] = 1;
+            else
+                inLife[1] = 0;
+            
+            //set the boolean to know if the scan pointer is in the life circle
+            if( sx == life3X - lifeRADIUS)
+                inLifeX[2] = 1;
+            if( sx == (life3X + lifeRADIUS + 3))
+                inLifeX[2] = 0;
+            if( sy == lifeY - lifeRADIUS)
+                inLifeY[2] = 1;
+            if( sy == lifeY + lifeRADIUS)
+                inLifeY[2] = 0;
+            //draw the circle using a circle equation        
+            lifeCircleX[2] = adju((sx - life3X)*(sx - life3X),16);
+            lifeCircleY[2] = adju((sy - lifeY)*(sy - lifeY),16);
+            lifeTotal[2] = (lifeCircleX[2] + lifeCircleY[2]);
+            if ((lifeTotal[2] <= (lifeRADIUS*lifeRADIUS)) && (inLifeX[2]) && (inLifeY[2]))
+                inLife[2] = 1;
+            else
+                inLife[2] = 0;
+            
+            //output green in the life circle (or grey if the player does not have the life any more)
+            if(inLife[0]){
+                if(lifeNumber >=1)
+                    VideoPtr->Output = 0x00FF00@temp3@temp3;
+                else
+                    VideoPtr->Output = Grey;
+;
+            }
+            if(inLife[1]){
+                if(lifeNumber >=2)
+                    VideoPtr->Output = 0x00FF00@temp3@temp3;
+                else
+                    VideoPtr->Output = Grey;
+            }
+            if(inLife[2]){
+                if(lifeNumber >=3)
+                    VideoPtr->Output = 0x00FF00@temp3@temp3;
+                else
+                    VideoPtr->Output = Grey;
+           }
+            
+            // This executes in ONE CLOCK, so it sets the colour for EVERY pixel
+            if ( (sx > IndentLeft) && (sx < RightBoundary) && (sy > IndentTop) && (sy < BottomBoundary) ){
+                par{
+                    //set the boolean to know if the scan pointer is in the mouse Window
+                   if( sx == MouseWindowPtr->MouseWindowEdgeLeft)
+                        InMouseWindowX = 1;
+                    if( sx == MouseWindowPtr->MouseWindowEdgeRight)
+                       InMouseWindowX = 0;
+                    if( sy == MouseWindowPtr->MouseWindowEdgeTop)
+                        InMouseWindowY = 1;
+                    if( sy == MouseWindowPtr->MouseWindowEdgeBottom)
+                        InMouseWindowY = 0;
+                    //set the boolean to know if the scan pointer is in the 1st ball
+                    if( sx == BallPtr->BallEdgeLeft)
+                        InBallX = 1;
+                    if( sx == (BallPtr->BallEdgeRight + 1))
+                        InBallX = 0;
+                    if( sy == BallPtr->BallEdgeTop)
+                        InBallY = 1;
+                    if( sy == BallPtr->BallEdgeBottom)
+                        InBallY = 0;
+                    
+                    //draw the circle using the circle equation
+                    CircleX = (sx - BallPtr->BallX)*(sx - BallPtr->BallX);
+                    CircleY = (sy - BallPtr->BallY)*(sy - BallPtr->BallY);
+                    total = (CircleX + CircleY);
+                    if ((total <= (BallRADIUS*BallRADIUS)) && (InBallX) && (InBallY))
+                        InBall = 1;
+                    else
+                        InBall = 0;
+                    
+                    //set the boolean to know if the scan pointer is in the 1st ball
+                    if( sx == Ball2Ptr->BallEdgeLeft)
+                        InBallX2 = 1;
+                    if( sx == (Ball2Ptr->BallEdgeRight + 1))
+                        InBallX2 = 0;
+                    if( sy == Ball2Ptr->BallEdgeTop)
+                        InBallY2 = 1;
+                    if( sy == Ball2Ptr->BallEdgeBottom)
+                        InBallY2 = 0;
+                    //draw the circle using the circle equation
+                    CircleX2 = (sx - Ball2Ptr->BallX)*(sx - Ball2Ptr->BallX);
+                    CircleY2 = (sy - Ball2Ptr->BallY)*(sy - Ball2Ptr->BallY);
+                    total2 = (CircleX2 + CircleY2);
+                    if ((total2 <= (BallRADIUS*BallRADIUS)) && (InBallX2) && (InBallY2))
+                        InBall2 = 1;
+                    else
+                        InBall2 = 0;
+                    
+                    //set the boolean to know if the scan pointer is in the 1st ball
+                    if( sx == Ball3Ptr->BallEdgeLeft)
+                        InBallX3 = 1;
+                    if( sx == (Ball3Ptr->BallEdgeRight + 1))
+                        InBallX3 = 0;
+                    if( sy == Ball3Ptr->BallEdgeTop)
+                        InBallY3 = 1;
+                    if( sy == Ball3Ptr->BallEdgeBottom)
+                        InBallY3 = 0;
+                    //draw the circle using the circle equation
+                    CircleX3 = (sx - Ball3Ptr->BallX)*(sx - Ball3Ptr->BallX);
+                    CircleY3 = (sy - Ball3Ptr->BallY)*(sy - Ball3Ptr->BallY);
+                    total3 = (CircleX3 + CircleY3);
+                    if ((total3 <= (BallRADIUS*BallRADIUS)) && (InBallX3) && (InBallY3))
+                        InBall3 = 1;
+                    else
+                        InBall3 = 0;
+                    
+                    //set the boolean to know if the scan pointer is in the game window
+                    if( sx == gameWindowXleft)
+                        inGameWindowX = 1;
+                    if( sx == gameWindowXright)
+                        inGameWindowX = 0;
+                    if( sy == gameWindowYtop)
+                        inGameWindowY = 1;
+                    if( sy == gameWindowYbottom)
+                       inGameWindowY = 0;
+                    
+                    //if the mouse window hits a ball and the player is on his last life reset the different variables and game window
+                    if ((!betweenLives) && (InMouseWindowX) && (InMouseWindowY) && 
+                                (((InBall) && (BallPtr->SpeedX != 0)) || ((InBall2) && (secondBallOn) && (Ball2Ptr->SpeedX != 0))|| ((InBall3) && (thirdBallOn) && (Ball3Ptr->SpeedX !=0)))
+                                && (gameBegin == 1) && (lifeNumber == 1)){
+                        gameOver = 1;
+                        gameBegin = 0;
+                        lifeNumber = 0;
+                        secondBallOn = 0;
+                        thirdBallOn = 0;
+                        
+                        gameWindowXleft = IndentLeft + 1;
+                        gameWindowXright = RightBoundary - 1;
+                        gameWindowYtop = IndentTop + 1;
+                        gameWindowYbottom = BottomBoundary - 1;
+                    }
+                    //if the mouse window hits a ball and the player is not on his last life set the appropriate variables and freeze the balls
+                    if ((!betweenLives) && (InMouseWindowX) && (InMouseWindowY) &&
+                            (((InBall) && (BallPtr->SpeedX != 0)) || ((InBall2) && (secondBallOn) && (Ball2Ptr->SpeedX != 0)) || ((InBall3) && (thirdBallOn) && (Ball3Ptr->SpeedX !=0)))
+                            && (gameBegin == 1) && (lifeNumber > 1)){
+                       takeLife = 1;
+                        betweenLives = 1;
+                        
+                        BallPtr->SpeedX = 0;
+                        BallPtr->SpeedY = 0;
+                        Ball2Ptr->SpeedX = 0;
+                        Ball2Ptr->SpeedY = 0;
+                        Ball3Ptr->SpeedX = 0;
+                        Ball3Ptr->SpeedY = 0;
+                    }
+                    
+                    DE2ReadSRAM(address,data,SRAM);         //read data from the SRAM
+                    
+                    greyScale(data);                        //grey scale the data (the global variable Gpixel will be modified as a result)
+                    
+                    SED[0][0] = Gpixel;          //load greyscaled pixels into mask
+                    SED[0][1] = SED [0][0];
+                    SED[0][2] = SED [0][1];
+                    SobelFIFO_1 ! SED[0][2];
+                    SobelFIFO_1 ? SED[1][0];
+                    SED[1][1] = SED [1][0];
+                    SED[1][2] = SED[1][1];
+                    SobelFIFO_2 ! SED[1][2];
+                    SobelFIFO_2 ? SED[2][0];
+                    SED[2][1] = SED[2][0];
+                    SED[2][2] = SED[2][1];
+
+                    colour[0][0] = data;             //load data into mask
+                    colour[0][1] = colour [0][0];
+                    colour[0][2] = colour [0][1];
+                    colour[0][3] = colour [0][2];
+                    colour[0][4] = colour [0][3];
+                    colour[0][5] = colour [0][4];
+                    ColourFIFO_1 ! colour[0][5];
+                    ColourFIFO_1 ? colour[1][0];
+                    colour[1][1] = colour [1][0];
+                    colour[1][2] = colour[1][1];
+                    colour[1][3] = colour [1][2];
+                    colour[1][4] = colour [1][3];
+                    colour[1][5] = colour [1][4];
+                    ColourFIFO_2 ! colour[1][5];
+                    ColourFIFO_2 ? colour[2][0];
+                    colour[2][1] = colour[2][0];
+                    colour[2][2] = colour[2][1];
+                    colour[2][3] = colour [2][2];
+                    colour[2][4] = colour [2][3];
+                    colour[2][5] = colour [2][4];
+                    
+                    //flash red filter if the game is over and no new high score has been set
+                    if ((gameOver == 1) && (newHighScore == 0))
+                    {
+                        if((flashColour == 1))
+                            VideoPtr->Output = colour[1][5][15:11] @ temp5 @ colour[1][5][10:5] @ temp5<-4 @colour[1][5][4:0] @ temp5;
+                        else
+                            VideoPtr->Output = (adju(colour[1][5][15:11] @ temp3, 10) + 500) @ temp10 @ temp10;
+                    }
+                    //flash green filter if the game is over and a new high score has been set
+                    else if((gameOver == 1) && (newHighScore == 1))
+                    {
+                        if((flashColour == 1))
+                            VideoPtr->Output = colour[1][5][15:11] @ temp5 @ colour[1][5][10:5] @ temp5<-4 @colour[1][5][4:0] @ temp5;
+                        else
+                            VideoPtr->Output = temp10 @ (adju(colour[1][5][10:5] @ temp2, 10) + 500) @ temp10;
+                    }
+                    //display white inside the balls
+                    else if (((InBall) || ((InBall2) && (secondBallOn)) || ((InBall3) && (thirdBallOn))) && (gameBegin == 1) && (!betweenLives))
+                    {
+                        par
+                        {
+                            VideoPtr->Output = 0xFFFFFF@temp3@temp3;
+                        }
+                    }
+                    //compute and displayed the blurred red channel black and white inside the mouse window
+                    else if ((InMouseWindowX) && (InMouseWindowY))
+                    {
+                        par
+                        {
+                            blurPix = abs(((colour[0][3][15:11] @ temp5)/9) + ((colour[0][4][15:11] @ temp5)/9) + ((colour[0][5][15:11] @ temp5)/9)
+                                        + ((colour[1][3][15:11] @ temp5)/9) + ((colour[1][4][15:11] @ temp5)/9) + ((colour[1][5][15:11] @ temp5)/9)
+                                        + ((colour[2][3][15:11] @ temp5)/9) + ((colour[2][4][15:11] @ temp5)/9) + ((colour[2][5][15:11] @ temp5)/9));
+                            VideoPtr->Output = blurPix @ blurPix @ blurPix;
+                        }
+                    }
+                    //display the colour image if the left mouse button is pressed and the game is in 'standby' mode
+                    else if(MousePtr->LeftButton == 1 && gameBegin != 1)
+                        VideoPtr->Output = colour[1][5][15:11] @ temp5 @ colour[1][5][10:5] @ temp5<-4 @colour[1][5][4:0] @ temp5;
+                    else
+                    {
+                        par
+                        {
+                            //compute the sobel edge detection
+                            edgex = abs(- SED[0][0] + SED[0][2] - 2*SED[1][0] + 2*SED[1][2] - SED[2][0] + SED[2][2]);       //horizontal edge detection
+                            edgey = abs(- SED[0][0] - 2*SED[0][1] - SED[0][2] + SED[2][0] + 2*SED[2][1] + SED[2][2]);       //vertical edge detection
+                            globalEdge = (edgex)+ (edgey);                                                                  //combination of horizontal and vertial edge detection
+                            
+                            //if the second ball is on but not the second one and the game is playing
+                            if((secondBallOn && !thirdBallOn && gameBegin) || ((!gameBegin) && (!gameOver))){
+                                //diplay grey scale cominated with edge detection when in the game window
+                                if((inGameWindowX == 1) && (inGameWindowY == 1)){
+                                    if ((globalEdge > edgeDetectionTHRESHOLD))
+                                        VideoPtr->Output = globalEdge @ globalEdge @ globalEdge;
+                                    else
+                                        VideoPtr->Output = SED[1][1] @ SED[1][1] @ SED[1][1];
+                                }
+                                //otherwise display the colour image
+                                else
+                                    VideoPtr->Output = colour[1][5][15:11] @ temp5 @ colour[1][5][10:5] @ temp5<-4 @colour[1][5][4:0] @ temp5;
+                            }
+                            //if the first ball is on and not the second or if the third ball is on and the game is palying
+                            if(((!secondBallOn) && (gameBegin)) || ((thirdBallOn) && (gameBegin))){
+                                //display the colour image in the game window
+                                if((inGameWindowX == 1) && (inGameWindowY == 1)){                                        
+                                    VideoPtr->Output = colour[1][5][15:11] @ temp5 @ colour[1][5][10:5] @ temp5<-4 @colour[1][5][4:0] @ temp5;
+                                }
+                                //otherwise diplay grey scale cominated with edge detection when in the game window
+                                else if ((globalEdge > edgeDetectionTHRESHOLD))
+                                    VideoPtr->Output = globalEdge @ globalEdge @ globalEdge;
+                                else
+                                    VideoPtr->Output = SED[1][1] @ SED[1][1] @ SED[1][1];
+                            }
+                        }
+                    }                
+                    address ++;         //increment the adress to be read from teh SRAM
+                }
+            }
+            else
+            {
+                par
+                {
+                    if ((sx == 1) && (sy == DE2VisibleLines))
+                    {
+                        par
+                        {
+                            address = 0;
+                            VideoPtr->Output = 255;
+                        }
+                    }
+                    else
+                    {
+                        delay;
+                    }
+
+                    if ( (sx == DE2VisibleCols) && (sy == DE2VisibleLines) )
+                    {
+                        par
+                        {
+                            DE2ReadSRAM(address,data,SRAM);
+                            VideoPtr->Output = 255;
+                        }
+                    }
+                    else
+                    {
+                        delay;
+                    }
+                }
+
+            }
+        }
+    } while (1);
+}
+
+
+
+
+
+
+//---------------------------- MAIN PROGRAM ------------------------
+void main(void)
+{
+    DE2SRAM SRAM;
+    DE2FLASH FLASH;
+    DE2_PS2_MOUSE Mouse;
+    DE2_VGA_DRIVER Video;
+       
+    unsigned 8 data;
+    unsigned 22 ImgAddr;
+    unsigned 16 i;
+    
+    struct MovingParts MouseWindow;
+    struct Ball theBall, theBall2, theBall3;
+    
+    //------------initialisation of variables and FIFOs-----------
+    temp3 = 0;
+    temp2 = 0;
+        
+    for (i=1;i<533;i++) {   //initialise fifos to 0
+        SobelFIFO_1 ! 0;
+        SobelFIFO_2 ! 0;
+    }
+    
+    for (i=1;i<530;i++) {   //initialise fifos to 0
+        ColourFIFO_1 ! 0;
+        ColourFIFO_2 ! 0;
+    }
+    
+    par{
+        ballUpdateCounter = 0;
+        gameFlowCounter = 1;
+        levelCounter = 1;
+        score = 0;
+        
+        flashCount = 0;
+        newHighScore = 0;
+        HighLevel = 1;
+        gameOver = 0;
+        gameBegin = 0;
+        lifeNumber = 3;
+        betweenLives = 0;
+        
+        theBall.BallX = 250;
+        theBall.BallY = 250;
+        theBall.DirectionX = 1;
+        theBall.DirectionY = 0;
+        
+        secondBallOn = 0;
+        theBall2.BallX = 450;
+        theBall2.BallY = 350;
+        theBall2.DirectionX = 1;
+        theBall2.DirectionY = 1;
+        
+        thirdBallOn = 0;
+        theBall3.BallX = 450;
+        theBall3.BallY = 350;
+        theBall3.DirectionX = 1;
+        theBall3.DirectionY = 1;
+        
+        gameWindowXleft = IndentLeft + 1;
+        gameWindowXright = RightBoundary - 1;
+        gameWindowYtop = IndentTop + 1;
+        gameWindowYbottom = BottomBoundary - 1;
+    }
+    
+    //---------call the various functions once all variables have been initialised and created
+    par {
+        DE2SRAMDriver(&SRAM);               //dirver for the sram
+        DE2FLASHDriver(&FLASH);             //driver for the flash
+        DE2VideoDriver800x600(&Video);      //driver for an 800*600 VGA output
+        
+        MouseFrameUpdate(&Video, &Mouse, &MouseWindow);             //update mouse window window every frame
+        DE2PS2MouseDriver(&Mouse);          //mouse driver
+                                
+        seq
+        {
+            preLoadColourImg(&SRAM,&FLASH);
+            par{
+                BallUpdate(&Video, &Mouse, &theBall);               //update the position of the first ball and the game Window every 64 frames
+                SecondBallUpdate(&Video, &theBall2);                //update the position of the second ball every 64 frames
+                ThirdBallUpdate(&Video, &theBall3);                 //update the position of the third ball every 64 frames
+                VGAoutput(&Video,&SRAM, &MouseWindow, &Mouse, &theBall, &theBall2, &theBall3);      //Output to the screen
+            }
+        }
+    }
+}

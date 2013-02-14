@@ -1,0 +1,9 @@
+
+State Machine - |ISEProject|MOUSE:B5_de2_hcc_371_DE2PS2MouseDriver_ps2|mouse_state
+Name mouse_state.input_packets mouse_state.wait_cmd_ack mouse_state.wait_output_ready mouse_state.load_command2 mouse_state.load_command mouse_state.inhibit_trans 
+mouse_state.inhibit_trans 0 0 0 0 0 0 
+mouse_state.load_command 0 0 0 0 1 1 
+mouse_state.load_command2 0 0 0 1 0 1 
+mouse_state.wait_output_ready 0 0 1 0 0 1 
+mouse_state.wait_cmd_ack 0 1 0 0 0 1 
+mouse_state.input_packets 1 0 0 0 0 1 
